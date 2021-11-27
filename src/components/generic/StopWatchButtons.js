@@ -1,9 +1,10 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "./Button";
 import styled from "styled-components";
-import {CountDownContext, CountDownTabataContext, StopContext} from "../../mycontext/MyContexts";
-import {myColors} from "../../utils/helpers";
-import {ThemeContext} from "../../mycontext/MyThemeContexts";
+import { StopWatchContext } from "../../mycontext/MyContexts";
+//import {myColors} from "../../utils/helpers";
+import { ThemeContext } from "../../mycontext/MyThemeContexts";
+import myColors from "../../utils/helpers";
 
 
 const Container = styled.div`
@@ -41,7 +42,7 @@ export const StopWatchButtons = () => {
         onstart,
         setOnStart,
         setFastForward,
-    } = useContext(StopContext)
+    } = useContext(StopWatchContext)
     // set the interval initial values
     const [intervalId, setIntervalId] = useState(0);
 
@@ -135,7 +136,7 @@ export const StopWatchButtonsCountDown = () => {
 
         setFastForward,
 
-    } = useContext(CountDownContext);
+    } = useContext(StopWatchContext);
     //Get the values from the theme context
     const {roundedbuttons, setCounterDisplay} = React.useContext(ThemeContext)
     const [intervalId, setIntervalId] = useState(0);
@@ -312,7 +313,7 @@ export const StopWatchButtonsCountDownTabata = () => {
         setHoursRest,
 
         setFastForward,
-    } = useContext(CountDownTabataContext);
+    } = useContext(StopWatchContext);
     const {roundedbuttons, setCounterDisplay} = React.useContext(ThemeContext)
 //--------------Save Previous values ---------------------------
     const [previousseconds, setPreviousSeconds] = useState(0);

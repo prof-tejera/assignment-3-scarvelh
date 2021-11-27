@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import useInterval from "@use-it/interval";
 
 const Counter = ({ delay = 1000 }) => {

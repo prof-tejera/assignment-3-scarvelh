@@ -1,10 +1,12 @@
-import React, {useContext} from "react";
-import {CountDownContext, CountDownTabataContext, StopContext} from "../../mycontext/MyContexts";
-import {convertToSeconds, myColors, secondsToTime} from "../../utils/helpers";
-import {ThemeContext} from "../../mycontext/MyThemeContexts";
-import styled, {keyframes} from "styled-components";
+import React, { useContext } from "react";
+import { convertToSeconds, myColors, secondsToTime } from "../../utils/helpers";
+import { StopWatchContext } from "../../mycontext/MyContexts";
 
-let timerFormat = {
+import { ThemeContext } from "../../mycontext/MyThemeContexts";
+import styled, { keyframes } from "styled-components";
+
+
+const timerFormat = {
     margin: "20px",
     display: "flex",
     //height: "12%",
@@ -12,7 +14,7 @@ let timerFormat = {
     alignItems: "center",
     height: "55px",
     width: "200px",
-    backgroundColor: myColors["eggshell-white"],
+    backgroundColor: "eggshell-white",
     //backgroundColor: 	"#7CFC00",
     fontSize: "45px",
     borderRadius: "20%",
@@ -40,7 +42,7 @@ const AnimatedComponent = styled.div`
 ///===================================================StopWatch Timer Display=================================================
 export function StopWatchTimerDisplay() {
     // get information from context
-    const {seconds, fastforward} = useContext(StopContext);
+    const {seconds, fastforward} = useContext(StopWatchContext);
     // get information from context
     let {counterdisplay} = React.useContext(ThemeContext)
     // convert the time  to second, minutes and hours
@@ -97,7 +99,7 @@ export function StopWatchTimerDisplayCountDown() {
 
         fastforward,
 
-    } = useContext(CountDownContext);
+    } = useContext(StopWatchContext);
     // get display theme from theme context
     let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
     // convert hour + minutes + seconds
@@ -162,7 +164,7 @@ export function StopWatchTimerDisplayTabataCountDown() {
 
         fastforward,
 
-    } = useContext(CountDownTabataContext);
+    } = useContext(StopWatchContext);
     // get information from theme context
     let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
     // convert hour+minutes+ seconds  to seconds

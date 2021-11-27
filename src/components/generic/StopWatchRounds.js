@@ -1,5 +1,5 @@
-import {CountDownContext, CountDownTabataContext} from "../../mycontext/MyContexts";
-import React, {useContext} from "react";
+import { StopWatchContext } from "../../mycontext/MyContexts";
+import React, { useContext } from "react";
 
 /**
  * Let the user know the round that they are on
@@ -14,7 +14,7 @@ function StopWatchRounds() {
         repeat,
         setRepeat,
         originalrepeat,
- } = useContext(CountDownContext)
+ } = useContext(StopWatchContext)
     // had some sync issues this fixes it.
     if (repeat <= 0) {
         repeat = 0;
@@ -51,7 +51,7 @@ export function StopWatchRoundsTabata() {
 
         workoutperiod,
 
-    } = useContext(CountDownTabataContext)
+    } = useContext(StopWatchContext)
     // had some sync issues this fixes it.
     if (repeat <= 0) {
         repeat = 0;

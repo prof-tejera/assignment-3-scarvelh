@@ -1,10 +1,11 @@
 import React from "react";
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 
 import DocumentationView from "./views/DocumentationView";
-import TimersView from "./views/TimersView";
 import AddView from "./views/AddView";
+import { StopWatchDisplayTypes } from "./views/TimersView_New";
+
 const Container = styled.div`
   background: #f0f6fb;
   height: 100vh;
@@ -29,15 +30,16 @@ function App() {
           </ul>
         </nav>
         <Switch>
+          <Route path="/add">
+            <AddView />
+          </Route>
           <Route path="/docs">
             <DocumentationView />
           </Route>
           <Route path="/">
-            <TimersView />
+            <StopWatchDisplayTypes />
           </Route>
-          <Route path="/add">
-            <AddView />
-          </Route>
+
         </Switch>
       </Router>
     </Container>

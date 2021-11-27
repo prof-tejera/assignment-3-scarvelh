@@ -1,10 +1,10 @@
 import React from "react";
-import {StopWatchTimerDisplayCountDown} from "../generic/TimerDisplay";
-import {StopWatchButtonsCountDown} from "../generic/StopWatchButtons";
-import {Container} from "../../utils/helpers";
+import { StopWatchTimerDisplayCountDown } from "../generic/TimerDisplay";
+import { StopWatchButtonsCountDown } from "../generic/StopWatchButtons";
+import { Container } from "../../utils/helpers";
 import StopWatchBodyXY from "../generic/StopWatchBodyXY";
-import {CountDownProvider} from "../../mycontext/MyContexts";
-import {ThemeContext, ThemeProvider} from "../../mycontext/MyThemeContexts";
+import { StopWatchContext } from "../../mycontext/MyContexts";
+import { ThemeContext, ThemeProvider } from "../../mycontext/MyThemeContexts";
 import StopWatchRounds from "../generic/StopWatchRounds";
 
 
@@ -22,7 +22,7 @@ const ButtonPosition = {
 function App() {
     const {themexy} = React.useContext(ThemeContext)
     return (
-        <CountDownProvider>
+        <StopWatchContext>
             <ThemeProvider>
                 <Container style={themexy}>
 
@@ -35,7 +35,7 @@ function App() {
                     </div>
                 </Container>
             </ThemeProvider>
-        </CountDownProvider>
+        </StopWatchContext>
     );
 }
 

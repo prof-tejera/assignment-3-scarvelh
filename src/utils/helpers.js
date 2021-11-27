@@ -4,23 +4,35 @@
 
 // Move to utils after
 import styled from "styled-components";
+import Stopwatch from "../components/timers/Stopwatch";
+import Countdown from "../components/timers/Countdown";
+import XY from "../components/timers/XY";
+import Tabata from "../components/timers/Tabata";
+import React from "react";
+
+export const myColors = {
+  "yellow-green": "#43a876",
+  "orange-yellow": "#f5bd1f",
+  "eggshell-white": "#FAF9F6",
+  "resting": "#40E0D0"
+};
 
 export function convertToSeconds(hours, minutes, seconds) {
- // Calculated the number of seconds
+  // Calculated the number of seconds
   let calculated_seconds = Math.floor(seconds);
   // Calulate the number of minutes
   let calculated_minutes = Math.floor((minutes * 60));
   // Calculate the number of hours
-  let calulated_hours = Math.floor((hours * 60 * 60))
+  let calulated_hours = Math.floor((hours * 60 * 60));
   // add hour+ minutes + seconds together
-  let total_seconds = Math.floor((calculated_seconds + calculated_minutes + calulated_hours))
- // return total number of seconds
+  let total_seconds = Math.floor((calculated_seconds + calculated_minutes + calulated_hours));
+  // return total number of seconds
   return total_seconds;
 }
 
 // build component Container for 'StopWatch' 'CountDown' and 'XY' types of stop watches
 export const Container = styled.div`
-  width: auto; 
+  width: auto;
   //width:400px;
   height: auto;
   border-radius: 20%;
@@ -50,8 +62,7 @@ export const Container = styled.div`
 `;
 // Originally from from https://www.py4u.net/discuss/283439 made a few modifications
 //  calculate the number of hours, minutes, and second from input of seconds
-export function secondsToTime(secs)
-{
+export function secondsToTime(secs) {
   var hours = Math.floor(secs / (60 * 60));
 
   var divisor_for_minutes = secs % (60 * 60);
@@ -79,8 +90,24 @@ export function secondsToTime(secs)
  * @type {{resting: string, "yellow-green": string, "orange-yellow": string, "eggshell-white": string}}
  */
 
-export const myColors = {"yellow-green" : "#43a876",
-"orange-yellow": "#f5bd1f",
-"eggshell-white": "#FAF9F6",
-"resting": "#40E0D0"
-};
+
+
+export const different_timers = [
+  {
+    title: "Stopwatch",
+    C: <Stopwatch />,
+    customStyling: { backgroundColor: "#add8e6", alignItems: "center", cursor: "pointer",width:"100px" }
+  },
+  {
+    title: "Countdown",
+    C: <Countdown />,
+    customStyling: { backgroundColor: "#ffffe0", alignItems: "center", cursor: "pointer" }
+  },
+  { title: "XY", C: <XY />, customStyling: { backgroundColor: "#20b2aa", alignItems: "center", cursor: "pointer" } },
+  {
+    title: "Tabata",
+    C: <Tabata />,
+    customStyling: { backgroundColor: "#FF7F7F", alignItems: "center", justifyItems: "center", cursor: "pointer" }
+  }
+];
+export default myColors;

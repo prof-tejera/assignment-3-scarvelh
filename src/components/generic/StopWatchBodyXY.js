@@ -1,8 +1,10 @@
-import {customStyleInput} from "../timers/Countdown";
-import {CountDownContext} from "../../mycontext/MyContexts";
-import React, {useContext} from "react";
-import {myColors} from "../../utils/helpers";
-import {ThemeContext} from "../../mycontext/MyThemeContexts";
+import { customStyleInput } from "../timers/Countdown";
+import { StopWatchContext } from "../../mycontext/MyContexts";
+import React, { useContext } from "react";
+//import {myColors} from "../../utils/helpers";
+import { ThemeContext } from "../../mycontext/MyThemeContexts";
+import { myColors } from "../../utils/helpers";
+
 
 const hoursInput = React.createRef();
 const minutesInput = React.createRef();
@@ -22,7 +24,7 @@ const StopWatchBodyXY = () => {
         setOriginalMinutes,
         setOriginalRepeat,
 
-    } = useContext(CountDownContext)
+    } = useContext(StopWatchContext)
     // get values from them context
     const {setCounterDisplay} = React.useContext(ThemeContext);
     // reset the selected values

@@ -1,7 +1,9 @@
-import React, {useState} from "react";
-import {myColors} from "../utils/helpers";
-// styling for thje different stop watches
-const themes = {
+import React, { useState } from "react";
+import myColors from "../utils/helpers";
+// styling for the different stop watches
+
+
+export const themes = {
     customStylingStopWatch: {backgroundColor: "#add8e6", alignItems: "center", cursor: "pointer" },
 
     customStylingCountDown: {backgroundColor: "#ffffe0", alignItems: "center", cursor: "pointer"},
@@ -11,7 +13,7 @@ const themes = {
     counterDisplay: {backgroundColor: myColors["eggshell-white"]},
 
 }
-const initialState = {
+export const initialState = {
 
     themestopwatch: themes.customStylingStopWatch,
     themecountdown: themes.customStylingCountDown,
@@ -21,10 +23,10 @@ const initialState = {
     counterdisplay: themes.counterDisplay,
 }
 // create theme context
-const ThemeContext = React.createContext(initialState);
+export const ThemeContext = React.createContext(initialState);
 
 // create theme providers
-function ThemeProvider({children}) {
+export function ThemeProvider({children}) {
     const [themestopwatch, setThemeStopWatch] = useState(themes.customStylingStopWatch);
     const [themecountdown, setThemeCountDown] = useState(themes.customStylingCountDown);
     const [themexy, setThemeXY] = useState(themes.customStylingXY);
@@ -53,4 +55,5 @@ function ThemeProvider({children}) {
 
 }
 
-export {ThemeProvider, ThemeContext}
+//export {ThemeProvider, ThemeContext}
+ //export default ThemeProvider;

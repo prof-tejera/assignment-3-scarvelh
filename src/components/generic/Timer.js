@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
@@ -20,18 +20,21 @@ const Container = styled.div`
 class Timer extends Component {
 
   render() {
-    return (
-      <Container onClick={() => this.props.onClick(this.props.value)} style={this.props.style}>
-        {this.props.value}
-      </Container>
-    );
-  }
+
+      return (
+        <Container onClick={() => this.props.onClick(this.props.value)} style={this.props.style}>
+          {this.props.value}
+        </Container>
+      );
+    }
+
 }
 
 Timer.propTypes = {
 
   style: PropTypes.object,
-  onClick: PropTypes.func,
+  //onClick: PropTypes.func,
+  onClick: PropTypes.object,
   props:PropTypes.object,
 
 };

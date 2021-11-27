@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DocumentComponent from "../components/documentation/DocumentComponent";
 import StopWatchButtons from "../components/generic/StopWatchButtons";
-import {StopWatchTimerDisplay} from "../components/generic/TimerDisplay";
+import { StopWatchTimerDisplay } from "../components/generic/TimerDisplay";
 import Button from "../components/generic/Button";
 
 const Container = styled.div`
