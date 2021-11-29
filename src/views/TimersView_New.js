@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
@@ -49,72 +49,74 @@ const timers = [
   //{ title: "Tabata", C: <Tabata />, customStyling: { backgroundColor: "#FF7F7F", alignItems: "center",justifyItems: "center", cursor:"pointer"} }
 ];
 
-const HandleTimerClick=(timerType) => {
+  const HandleTimerClick = (timerType) => {
 
-  const { stopwatchtype, setStopwatchtype } = useContext(StopWatchContext);
+    const { stopwatchtype, setStopwatchtype } = useContext(StopWatchContext);
 
-  setStopwatchtype(() => timerType);
-console.log(timerType)
-  // });
-};
+    setStopwatchtype(() => timerType);
+    console.log(timerType);
+  };
+    // });
 
 
-export const StopWatchDisplayTypes = () => {
+
+
+  export const StopWatchDisplayTypes = () => {
 //export const TimersView_New = () => {
-  const {
+    const {
 
-    stopwatchtype,
+      stopwatchtype,
 
-    setStopwatchtype
-  } = useContext(StopWatchContext);
-
-
-  let selectedTimerType;
+      setStopwatchtype
+    } = useContext(StopWatchContext);
 
 
-  switch (stopwatchtype) {
-    case "Stopwatch":
-      selectedTimerType = <Stopwatch style={timers[0].customStyling} />;
-      break;
-    case "Countdown":
-      selectedTimerType = <Countdown style={timers[1].customStyling} />;
-      break;
-    case "XY":
-      selectedTimerType = <XY style={timers[2].customStyling} />;
-      break;
-    case "Tabata":
-      selectedTimerType = <Tabata style={timers[3].customStyling} />;
-      break;
-
-    default:
+    let selectedTimerType;
 
 
-  }
+    switch (stopwatchtype) {
+      case "Stopwatch":
+        selectedTimerType = <Stopwatch style={timers[0].customStyling} />;
+        break;
+      case "Countdown":
+        selectedTimerType = <Countdown style={timers[1].customStyling} />;
+        break;
+      case "XY":
+        selectedTimerType = <XY style={timers[2].customStyling} />;
+        break;
+      case "Tabata":
+        selectedTimerType = <Tabata style={timers[3].customStyling} />;
+        break;
+
+      default:
 
 
-  return (
-    <Container>
-      <div style={AlignGrid}>
-        {timers.map((timer) => (
-          <Timer title={timer.title} onClick={HandleTimerClick(timer.title)}
+    }
 
 
+    return (
+      <Container>
+        <div style={AlignGrid}>
+          {timers.map((timer) => (
+            <Timer title={timer.title} onClick={
+              HandleTimerClick(timer.title)
+            }
 
 
-                 value={timer.title} style={timer.customStyling}
-                 key={timer.title}>
-            <TimerTitle>{timer.title}</TimerTitle>
-            {timer.C}
-          </Timer>
-        ))}
-      </div>
-      {selectedTimerType}
+                   value={timer.title} style={timer.customStyling}
+                   key={timer.title}>
+              <TimerTitle>{timer.title}</TimerTitle>
+              {timer.C}
+            </Timer>
+          ))}
+        </div>
+        {selectedTimerType}
 
-    </Container>
-  );
+      </Container>
+    );
 
-};
+  };
 //}
 //export default TimersView_New;
 
-export default StopWatchDisplayTypes;
+  export default StopWatchDisplayTypes;

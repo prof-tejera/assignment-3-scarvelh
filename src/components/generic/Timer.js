@@ -17,25 +17,15 @@ const Container = styled.div`
 
 `;
 
-class Timer extends Component {
+const Timer = (props) =>{
 
-  render() {
 
-      return (
-        <Container onClick={() => this.props.onClick(this.props.value)} style={this.props.style}>
-          {this.props.value}
-        </Container>
-      );
-    }
+  return (
+    <Container onClick={() => props.onClick(props.value)} style={props.style}>
+      {props.value}
+    </Container>
+  );
 
 }
 
-Timer.propTypes = {
-
-  style: PropTypes.object,
-  //onClick: PropTypes.func,
-  onClick: PropTypes.object,
-  props:PropTypes.object,
-
-};
 export default Timer;
