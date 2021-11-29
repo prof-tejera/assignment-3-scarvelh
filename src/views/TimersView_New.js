@@ -49,7 +49,7 @@ const timers = [
   //{ title: "Tabata", C: <Tabata />, customStyling: { backgroundColor: "#FF7F7F", alignItems: "center",justifyItems: "center", cursor:"pointer"} }
 ];
 
-  const HandleTimerClick = (timerType) => {
+ export const HandleTimerClick = (timerType) => {
 
     const { stopwatchtype, setStopwatchtype } = useContext(StopWatchContext);
 

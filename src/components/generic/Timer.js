@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 const Container = styled.div`
   display: flex;
@@ -21,11 +20,17 @@ const Timer = (props) =>{
 
 
   return (
-    <Container onClick={() => props.onClick(props.value)} style={props.style}>
+    <Container  onClick={() => props.onClick(props.value)} style={props.style}>
       {props.value}
     </Container>
   );
 
 }
+Timer.defaultProps = {
+  //dishes: [],
+  onClick: () => { console.log("iiii")},
+};
+
+
 
 export default Timer;
