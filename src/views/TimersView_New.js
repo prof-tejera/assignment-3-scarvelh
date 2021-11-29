@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
@@ -7,6 +7,7 @@ import Timer from "../components/generic/Timer";
 import TimerTitle from "../components/generic/TimerTitle";
 import styled from "styled-components";
 import { StopWatchContext } from "../mycontext/MyContexts";
+import { useUpdateContext } from "../hooks/StopWatchDropdown";
 
 const Container = styled.div`
   background-color: #C0C0C0;
@@ -50,26 +51,26 @@ const timers = [
 ];
 
  export const HandleTimerClick = (timerType) => {
+  //// useCallback(() => {
+     //const { setStopwatchtype } = useContext(StopWatchContext);
 
-    const { stopwatchtype, setStopwatchtype } = useContext(StopWatchContext);
+      //setStopwatchtype(() => timerType);
 
-    setStopwatchtype(() => timerType);
-    console.log(timerType);
-  };
-    // });
+  //const[stopwatchlabel,setStopwatchlabel] = useUpdateContext(timerType)
+     console.log("Handler" + timerType);
+  // });
 
-
-
+ }
 
   export const StopWatchDisplayTypes = () => {
 //export const TimersView_New = () => {
-    const {
+   let {
 
       stopwatchtype,
 
-      setStopwatchtype
-    } = useContext(StopWatchContext);
 
+    } = useContext(StopWatchContext);
+    //stopwatchtype = "Stopwatch"
 
     let selectedTimerType;
 
@@ -92,6 +93,8 @@ const timers = [
 
 
     }
+    const { setStopwatchtype } = useContext(StopWatchContext);
+
 
 
     return (
@@ -99,7 +102,11 @@ const timers = [
         <div style={AlignGrid}>
           {timers.map((timer) => (
             <Timer title={timer.title} onClick={
-              HandleTimerClick(timer.title)
+              () => {
+                HandleTimerClick(timer.title)
+                //setStopwatchtype(() => timer.title);
+              }
+
             }
 
 

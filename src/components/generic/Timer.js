@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { StopWatchContext } from "../../mycontext/MyContexts";
 
 const Container = styled.div`
   display: flex;
@@ -17,10 +18,16 @@ const Container = styled.div`
 `;
 
 const Timer = (props) =>{
-
+  const { setStopwatchtype } = useContext(StopWatchContext);
 
   return (
-    <Container  onClick={() => props.onClick(props.value)} style={props.style}>
+    <Container  onClick={() => {props.onClick(props.value)
+    console.log(props.value)
+
+
+      setStopwatchtype(() => props.value);
+
+    }} style={props.style}>
       {props.value}
     </Container>
   );
@@ -28,7 +35,7 @@ const Timer = (props) =>{
 }
 Timer.defaultProps = {
   //dishes: [],
-  onClick: () => { console.log("iiii")},
+  onClick: () => { },
 };
 
 
