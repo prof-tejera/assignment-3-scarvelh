@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
@@ -28,13 +28,6 @@ const AlignGrid = {
 };
 
 
-//kind of contextType) {
-//    console.log("Adding" + kind.mins);
-// }
-// function;
-
-// App() {
-
 const timers = [
   {
     title: "Stopwatch",
@@ -49,47 +42,31 @@ const timers = [
   //{ title: "Tabata", C: <Tabata />, customStyling: { backgroundColor: "#FF7F7F", alignItems: "center",justifyItems: "center", cursor:"pointer"} }
 ];
 
-/*export const HandleTimerClick = (timerType) => {
-
-  const { setStopwatchtype } = useContext(StopWatchContext);
-
-  setStopwatchtype(() => timerType);
-
-
-  console.log("Handler" + timerType);
-
-
-};*/
-
 
 export const StopWatchDisplayTypes = () => {
- // const [state, setState] = useState("");
+
   const [type, setType] = useState("");
 
-//export const TimersView_New = () => {
+
   const {
-    stopwatchtype,
+
     setStopwatchtype
 
   } = useContext(StopWatchContext);
 
   //stopwatchtype = "Stopwatch"
   function HandleTimerClick(timerType) {
-//    const { setStopwatchtype } = useContext(StopWatchContext);
+
 
     setStopwatchtype(() => timerType);
-//stopwatchtype = timerType;timer
+
     console.log("Handler" + timerType);
-    //setState(() => timerType);
-    setType(()=> timerType)
+
+    setType(() => timerType);
 
   }
 
-
   let selectedTimerType;
-  //const { setStopwatchtype } = useContext(StopWatchContext);
-  //return (
-  // switch (stopwatchtype) {
   switch (type) {
     case "Stopwatch":
       selectedTimerType = <Stopwatch style={timers[0].customStyling} />;
@@ -106,10 +83,7 @@ export const StopWatchDisplayTypes = () => {
 
     default:
 
-
   }
-  //const { setStopwatchtype } = useContext(StopWatchContext);
-
 
   return (
     <Container>
@@ -118,12 +92,8 @@ export const StopWatchDisplayTypes = () => {
           <Timer title={timer.title} onClick={
             () => {
               HandleTimerClick(timer.title);
-              //  setStopwatchtype(() => timer.title);
             }
-            //  setStopwatchtype(() => timer.title)
           }
-
-
                  value={timer.title} style={timer.customStyling}
                  key={timer.title}>
             <TimerTitle>{timer.title}</TimerTitle>
@@ -137,7 +107,5 @@ export const StopWatchDisplayTypes = () => {
   );
 
 };
-//}
-//export default TimersView_New;
 
-export default StopWatchDisplayTypes;
+
