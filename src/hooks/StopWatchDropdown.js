@@ -22,10 +22,7 @@ const useDropdown = (label, stopwatchoptions, defaultstate) => {
   return [state, DropDownStopWatch, setState];
 };
 
-export const useUpdateContext = (label) =>{
-  const[stopwatchlabel, setStopwatchlabel] = useState(label)
-  return[stopwatchlabel,setStopwatchlabel]
-}
+
 
 
 

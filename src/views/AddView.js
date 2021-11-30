@@ -2,10 +2,7 @@ import React from "react";
 import useDropdown from "../hooks/StopWatchDropdown";
 
 import { Container, different_timers } from "../utils/helpers";
-import Stopwatch from "../components/timers/Stopwatch";
-import Countdown from "../components/timers/Countdown";
-import XY from "../components/timers/XY";
-import Tabata from "../components/timers/Tabata";
+
 import { ThemeProvider } from "../mycontext/MyThemeContexts";
 import StopWatchBodyCountDown from "../components/generic/StopWatchBodyCountDown";
 import StopWatchAddButtonConfiguration from "../components/generic/StopWatchAddButtonConfiguration";

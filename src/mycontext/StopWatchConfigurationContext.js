@@ -18,3 +18,4 @@ export function ConfigurationProvider({ children }) {
 
     }}>{children}</ConfigurationContext.Provider>;
 }
+ export default ConfigurationProvider;
