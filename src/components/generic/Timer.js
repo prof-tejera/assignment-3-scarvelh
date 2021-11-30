@@ -22,10 +22,10 @@ const Timer = (props) =>{
 
   return (
     <Container  onClick={() => {props.onClick(props.value)
-    console.log(props.value)
+    console.log("Timer" + props.value)
 
 
-      setStopwatchtype(() => props.value);
+     // setStopwatchtype(() => props.value);
 
     }} style={props.style}>
       {props.value}

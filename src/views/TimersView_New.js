@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
@@ -7,7 +7,6 @@ import Timer from "../components/generic/Timer";
 import TimerTitle from "../components/generic/TimerTitle";
 import styled from "styled-components";
 import { StopWatchContext } from "../mycontext/MyContexts";
-import { useUpdateContext } from "../hooks/StopWatchDropdown";
 
 const Container = styled.div`
   background-color: #C0C0C0;
@@ -50,80 +49,95 @@ const timers = [
   //{ title: "Tabata", C: <Tabata />, customStyling: { backgroundColor: "#FF7F7F", alignItems: "center",justifyItems: "center", cursor:"pointer"} }
 ];
 
- export const HandleTimerClick = (timerType) => {
-  //// useCallback(() => {
-     //const { setStopwatchtype } = useContext(StopWatchContext);
+/*export const HandleTimerClick = (timerType) => {
 
-      //setStopwatchtype(() => timerType);
+  const { setStopwatchtype } = useContext(StopWatchContext);
 
-  //const[stopwatchlabel,setStopwatchlabel] = useUpdateContext(timerType)
-     console.log("Handler" + timerType);
-  // });
+  setStopwatchtype(() => timerType);
 
- }
 
-  export const StopWatchDisplayTypes = () => {
+  console.log("Handler" + timerType);
+
+
+};*/
+
+
+export const StopWatchDisplayTypes = () => {
+ // const [state, setState] = useState("");
+  const [type, setType] = useState("");
+
 //export const TimersView_New = () => {
-   let {
+  const {
+    stopwatchtype,
+    setStopwatchtype
 
-      stopwatchtype,
+  } = useContext(StopWatchContext);
 
+  //stopwatchtype = "Stopwatch"
+  function HandleTimerClick(timerType) {
+//    const { setStopwatchtype } = useContext(StopWatchContext);
 
-    } = useContext(StopWatchContext);
-    //stopwatchtype = "Stopwatch"
+    setStopwatchtype(() => timerType);
+//stopwatchtype = timerType;timer
+    console.log("Handler" + timerType);
+    //setState(() => timerType);
+    setType(()=> timerType)
 
-    let selectedTimerType;
-
-
-    switch (stopwatchtype) {
-      case "Stopwatch":
-        selectedTimerType = <Stopwatch style={timers[0].customStyling} />;
-        break;
-      case "Countdown":
-        selectedTimerType = <Countdown style={timers[1].customStyling} />;
-        break;
-      case "XY":
-        selectedTimerType = <XY style={timers[2].customStyling} />;
-        break;
-      case "Tabata":
-        selectedTimerType = <Tabata style={timers[3].customStyling} />;
-        break;
-
-      default:
+  }
 
 
-    }
-    const { setStopwatchtype } = useContext(StopWatchContext);
+  let selectedTimerType;
+  //const { setStopwatchtype } = useContext(StopWatchContext);
+  //return (
+  // switch (stopwatchtype) {
+  switch (type) {
+    case "Stopwatch":
+      selectedTimerType = <Stopwatch style={timers[0].customStyling} />;
+      break;
+    case "Countdown":
+      selectedTimerType = <Countdown style={timers[1].customStyling} />;
+      break;
+    case "XY":
+      selectedTimerType = <XY style={timers[2].customStyling} />;
+      break;
+    case "Tabata":
+      selectedTimerType = <Tabata style={timers[3].customStyling} />;
+      break;
+
+    default:
 
 
+  }
+  //const { setStopwatchtype } = useContext(StopWatchContext);
 
-    return (
-      <Container>
-        <div style={AlignGrid}>
-          {timers.map((timer) => (
-            <Timer title={timer.title} onClick={
-              () => {
-                HandleTimerClick(timer.title)
-                //setStopwatchtype(() => timer.title);
-              }
 
+  return (
+    <Container>
+      <div style={AlignGrid}>
+        {timers.map((timer) => (
+          <Timer title={timer.title} onClick={
+            () => {
+              HandleTimerClick(timer.title);
+              //  setStopwatchtype(() => timer.title);
             }
+            //  setStopwatchtype(() => timer.title)
+          }
 
 
-                   value={timer.title} style={timer.customStyling}
-                   key={timer.title}>
-              <TimerTitle>{timer.title}</TimerTitle>
-              {timer.C}
-            </Timer>
-          ))}
-        </div>
-        {selectedTimerType}
+                 value={timer.title} style={timer.customStyling}
+                 key={timer.title}>
+            <TimerTitle>{timer.title}</TimerTitle>
+            {timer.C}
+          </Timer>
+        ))}
+      </div>
+      {selectedTimerType}
 
-      </Container>
-    );
+    </Container>
+  );
 
-  };
+};
 //}
 //export default TimersView_New;
 
-  export default StopWatchDisplayTypes;
+export default StopWatchDisplayTypes;
