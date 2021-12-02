@@ -11,6 +11,7 @@ import StopWatchBodyXY from "../components/generic/StopWatchBodyXY";
 import StopWatchBodyTabata from "../components/generic/StopWatchBodyTabata";
 import StopWatchTimerDisplay from "../components/generic/TimerDisplay";
 import { ConfigurationProvider } from "../mycontext/StopWatchConfigurationContext";
+import StopWatchBodyRegular from "../components/generic/StopWatchBodyRegular";
 
 const stopwatch_types = ["Stopwatch", "Countdown", "XY", "Tabata"];
 const ButtonPosition = {
@@ -37,7 +38,7 @@ const AddView = () => {
 
   switch (stopwatch) {
     case "Stopwatch":
-      selectedTimerType = <StopWatchTimerDisplay style={different_timers[0].customStyling} />;
+      selectedTimerType = <StopWatchBodyRegular style={different_timers[0].customStyling} />;
       break;
     case "Countdown":
       selectedTimerType = <StopWatchBodyCountDown style={different_timers[1].customStyling} />;
@@ -55,9 +56,7 @@ const AddView = () => {
   }
 
   return (
-    <ConfigurationProvider>
-    <StopWatchContext>
-      <ThemeProvider>
+
         <Container  style={backColor}>
           <StopWatchDropdown />
           <div style={ButtonPosition}>
@@ -65,9 +64,7 @@ const AddView = () => {
           </div>
           <StopWatchAddButtonConfiguration />
         </Container>
-      </ThemeProvider>
-    </StopWatchContext>
-    </ConfigurationProvider>
+
   );
 };
 

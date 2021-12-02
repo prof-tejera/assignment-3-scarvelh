@@ -23,7 +23,4 @@ const useDropdown = (label, stopwatchoptions, defaultstate) => {
 };
 
 
-
-
-
 export default useDropdown;
