@@ -7,6 +7,7 @@ import Timer from "../components/generic/Timer";
 import TimerTitle from "../components/generic/TimerTitle";
 import styled from "styled-components";
 import { StopWatchContext } from "../mycontext/MyContexts";
+import { ConfigurationContext } from "../mycontext/StopWatchConfigurationContext";
 
 const Container = styled.div`
   background-color: #C0C0C0;
@@ -65,6 +66,9 @@ export const StopWatchDisplayTypes = () => {
     setType(() => timerType);
 
   }
+
+  const { stop_watch, setStop_watch } = React.useContext(ConfigurationContext)
+
 
   let selectedTimerType;
   switch (type) {

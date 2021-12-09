@@ -9,6 +9,7 @@ import StopWatchBodyTabata from "../components/generic/StopWatchBodyTabata";
 import StopWatchBodyRegular from "../components/generic/StopWatchBodyRegular";
 import StopWatchProvider from "../mycontext/MyContexts";
 import ConfigurationProvider from "../mycontext/StopWatchConfigurationContext";
+import StopWatchList from "../components/generic/StopWatchList";
 
 const stopwatch_types = ["Stopwatch", "Countdown", "XY", "Tabata"];
 const ButtonPosition = {
@@ -28,6 +29,7 @@ export const backColor = {
   boxShadow: "inset 0 3px 6px rgba(0, 0, 0, 0.16), 0 4px 6px rgba(0, 0, 0, 0.45)"
 };
 const AddView = () => {
+  //const saved_type = localStorage.getItem("stop_type");
   const [stopwatch, StopWatchDropdown] = useDropdown("Stopwatch Configuration", stopwatch_types, true);
   console.log("xxx" + stopwatch);
   let selectedTimerType;
@@ -60,7 +62,11 @@ const AddView = () => {
           <div style={ButtonPosition}>
             {selectedTimerType}
           </div>
+          <p />
           <StopWatchAddButtonConfiguration />
+          <p>Selected Timer Types</p>
+          < hr />
+          <StopWatchList />
         </Container>
       </ConfigurationProvider>
     </StopWatchProvider>

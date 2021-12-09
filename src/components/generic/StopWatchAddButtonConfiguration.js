@@ -25,13 +25,14 @@ const StopWatchAddButtonConfiguration = () => {
 
     originalrepeat
   } = useContext(StopWatchContext);
-console.log("ttt");
+  console.log("ttt");
   return (
 
     <>
       <div style={positionButtons}>
         <Button text={"Add"} onClick={() => {
-          const newStopWatch = { stop_watch, originalhours, originalminutes, originalseconds, originalrepeat };
+          const saved_type = localStorage.getItem("stop_type");
+          const newStopWatch = { saved_type, originalhours, originalminutes, originalseconds, originalrepeat };
           setStop_watch(() => newStopWatch);
           console.log("fff");
         }
