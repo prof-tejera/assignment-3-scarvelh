@@ -8,7 +8,9 @@ const useDropdown = (label, stopwatchoptions, defaultstate) => {
       <select
         id={label}
         value={state}
-        onChange={e => setState(e.target.value)}
+        onChange={e => {setState(e.target.value);
+          localStorage.setItem("stop_type", e.target.value);
+        }}
         disabled={!stopwatchoptions.length}
 
 
@@ -21,9 +23,6 @@ const useDropdown = (label, stopwatchoptions, defaultstate) => {
   );
   return [state, DropDownStopWatch, setState];
 };
-
-
-
 
 
 export default useDropdown;

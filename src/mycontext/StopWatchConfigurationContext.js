@@ -5,8 +5,7 @@ export const ConfigurationContext = React.createContext({
 
   stopwatches: [],
   addStopWatchType: (name, hrs, mins, secs,rounds) => {
-  //addStopWatchType: (name) => {
-  }
+  },
 });
 
 export function ConfigurationProvider({ children }) {
@@ -16,6 +15,8 @@ export function ConfigurationProvider({ children }) {
     value={{
       stop_watch,
       setStop_watch,
-    }}>{children}</ConfigurationContext.Provider>;
+
+   }}>{children}</ConfigurationContext.Provider>;
+ //   }}></ConfigurationContext.Provider>;
 }
  export default ConfigurationProvider;
