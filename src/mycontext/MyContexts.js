@@ -61,8 +61,8 @@ export const TimerContext = React.createContext({
 
     },
 
-    setTimers (){
-     // back implemeation
+    setTimers: () => {
+     // back implementation
     },
     addTimer: (config) => {
       const timers = [...timers, config];
