@@ -17,7 +17,8 @@ const positionButtons = {
 
 };
 const StopWatchAddButtonConfiguration = () => {
-  const { stop_watch, setStop_watch } = React.useContext(ConfigurationContext);
+  const { stopwatch, setStopwatch, addStopWatchType } = React.useContext(ConfigurationContext);
+  // const context = React.useContext(ConfigurationContext);
   const {
     originalseconds,
     originalminutes,
@@ -33,7 +34,13 @@ const StopWatchAddButtonConfiguration = () => {
         <Button text={"Add"} onClick={() => {
           const saved_type = localStorage.getItem("stop_type");
           const newStopWatch = { saved_type, originalhours, originalminutes, originalseconds, originalrepeat };
-          setStop_watch(() => newStopWatch);
+          //const newStopWatch = { saved_type, originalhours, originalminutes, originalseconds, originalrepeat };
+         /* const addStopWatchType = (saved_type,originalhours,originalminutes,originalseconds,originalrepeat) => {
+           const newStopWatch = { saved_type, originalhours, originalminutes, originalseconds, originalrepeat };
+            setStop_watch(prevStop => [...prevStop, { saved_type, originalhours, originalminutes, originalseconds, originalrepeat}]);
+          };*/
+          setStopwatch(() => newStopWatch);
+
           console.log("fff");
         }
         }

@@ -9,12 +9,13 @@ export const ConfigurationContext = React.createContext({
 });
 
 export function ConfigurationProvider({ children }) {
-  const [stop_watch, setStop_watch] = React.useState([]);
-
+  const [stopwatch, setStopwatch] = React.useState([]);
+  const [addstopwatchtype,addStopWatchType] = React.useState(0)
   return <ConfigurationContext.Provider
     value={{
-      stop_watch,
-      setStop_watch,
+      stopwatch,
+      setStopwatch,
+      addStopWatchType,
 
    }}>{children}</ConfigurationContext.Provider>;
  //   }}></ConfigurationContext.Provider>;

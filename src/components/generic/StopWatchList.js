@@ -2,7 +2,8 @@ import React from "react";
 import { ConfigurationContext } from "../../mycontext/StopWatchConfigurationContext";
 
 const StopWatchList = (props) => {
-  const context = React.useContext(ConfigurationContext);
+  //const context = React.useContext(ConfigurationContext);
+  const { stopwatch, setStopwatch } = React.useContext(ConfigurationContext);
   return (
     <table className="stopwat-list">
       <thead>
@@ -13,12 +14,21 @@ const StopWatchList = (props) => {
 
       </thead>
       <tbody>
-      {context.stopwatches.map(({stop, i}) => (
-        <tr key={stop.name}>
-          <td>{stop.name}</td>
 
-        </tr>
-      ))}
+
+
+         <tr >
+         <td>{stopwatch.saved_type}</td>
+
+         </tr>
+
+
+
+
+
+
+
+
       </tbody>
     </table>
   );
