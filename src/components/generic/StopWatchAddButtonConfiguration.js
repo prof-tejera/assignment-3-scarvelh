@@ -1,7 +1,7 @@
 import Button from "./Button";
 import React, { useContext } from "react";
 import { ConfigurationContext } from "../../mycontext/StopWatchConfigurationContext";
-import { StopWatchContext } from "../../mycontext/MyContexts";
+import { TimerContext } from "../../mycontext/MyContexts";
 
 const positionButtons = {
   display: "flex",
@@ -24,8 +24,10 @@ const StopWatchAddButtonConfiguration = () => {
     originalminutes,
     originalhours,
 
-    originalrepeat
-  } = useContext(StopWatchContext);
+    originalrepeat,
+
+    setTimers,
+  } = useContext(TimerContext);
   console.log("ttt");
   return (
 
@@ -40,7 +42,7 @@ const StopWatchAddButtonConfiguration = () => {
             setStop_watch(prevStop => [...prevStop, { saved_type, originalhours, originalminutes, originalseconds, originalrepeat}]);
           };*/
           setStopwatch(() => newStopWatch);
-
+          setTimers(()=>newStopWatch)
           console.log("fff");
         }
         }

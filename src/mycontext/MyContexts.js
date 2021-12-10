@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // Create Context
 
 //*********************************** Generic StopWatch context ********************************************************
-export const StopWatchContext = React.createContext({
+export const TimerContext = React.createContext({
     hours: 0,
     minutes: 0,
     seconds: 0,
@@ -24,6 +24,7 @@ export const StopWatchContext = React.createContext({
     workoutperiod: "Workout",
     fastforward: false,
     stopwatchtype: "",
+    timers: [],
     setSeconds: () => {
     },
     setMinutes: () => {
@@ -58,7 +59,22 @@ export const StopWatchContext = React.createContext({
     },
     setStopwatchtype: () => {
 
+    },
+
+    setTimers (){
+     // back implemeation
+    },
+    addTimer: (config) => {
+      const timers = [...timers, config];
+      setTimers(timers);
+
+    },
+    removeTimer: (index) => {
+      timers.splice(index, 1);
+      setTimers(timers);
     }
+
+
   }
 );
 
@@ -87,7 +103,9 @@ export function StopWatchProvider({ children }) {
   const [workoutperiod, setWorkOutPeriod] = useState("Workout");
   const [fastforward, setFastForward] = useState(false);
   const [stopwatchtype, setStopwatchtype] = useState("");
-  return <StopWatchContext.Provider
+  const [timers, setTimers] = useState([]);
+
+  return <TimerContext.Provider
     value={{
       hours,
       setHours,
@@ -126,12 +144,17 @@ export function StopWatchProvider({ children }) {
       fastforward,
       setFastForward,
       setStopwatchtype,
-      stopwatchtype
+      stopwatchtype,
+      timers,
+      setTimers,
+      addTimer,
+      removeTimer,
 
-    }}>{children}</StopWatchContext.Provider>;
+
+    }}>{children}</TimerContext.Provider>;
 }
 
-//export default CountProvider;
+
 
 
 export default StopWatchProvider;

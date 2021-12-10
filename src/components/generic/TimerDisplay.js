@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { convertToSeconds, myColors, secondsToTime } from "../../utils/helpers";
-import { StopWatchContext } from "../../mycontext/MyContexts";
+import { TimerContext } from "../../mycontext/MyContexts";
 
 import { ThemeContext } from "../../mycontext/MyThemeContexts";
 import styled, { keyframes } from "styled-components";
@@ -42,7 +42,7 @@ const AnimatedComponent = styled.div`
 ///===================================================StopWatch Timer Display=================================================
 export function StopWatchTimerDisplay() {
     // get information from context
-    const {seconds, fastforward} = useContext(StopWatchContext);
+    const {seconds, fastforward} = useContext(TimerContext);
     // get information from context
     let {counterdisplay} = React.useContext(ThemeContext)
     // convert the time  to second, minutes and hours
@@ -99,7 +99,7 @@ export function StopWatchTimerDisplayCountDown() {
 
         fastforward,
 
-    } = useContext(StopWatchContext);
+    } = useContext(TimerContext);
     // get display theme from theme context
     let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
     // convert hour + minutes + seconds
@@ -164,7 +164,7 @@ export function StopWatchTimerDisplayTabataCountDown() {
 
         fastforward,
 
-    } = useContext(StopWatchContext);
+    } = useContext(TimerContext);
     // get information from theme context
     let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
     // convert hour+minutes+ seconds  to seconds

@@ -6,7 +6,7 @@ import Tabata from "../components/timers/Tabata";
 import Timer from "../components/generic/Timer";
 import TimerTitle from "../components/generic/TimerTitle";
 import styled from "styled-components";
-import { StopWatchContext } from "../mycontext/MyContexts";
+import { TimerContext } from "../mycontext/MyContexts";
 import { ConfigurationContext } from "../mycontext/StopWatchConfigurationContext";
 
 const Container = styled.div`
@@ -53,7 +53,7 @@ export const StopWatchDisplayTypes = () => {
 
     setStopwatchtype
 
-  } = useContext(StopWatchContext);
+  } = useContext(TimerContext);
 
   //stopwatchtype = "Stopwatch"
   function HandleTimerClick(timerType) {

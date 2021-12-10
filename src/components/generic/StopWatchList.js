@@ -1,9 +1,11 @@
 import React from "react";
-import { ConfigurationContext } from "../../mycontext/StopWatchConfigurationContext";
+import { TimerContext } from "../../mycontext/MyContexts";
 
 const StopWatchList = (props) => {
   //const context = React.useContext(ConfigurationContext);
-  const { stopwatch, setStopwatch } = React.useContext(ConfigurationContext);
+//  const [ stopwatch, setStopwatch ] = React.useContext(ConfigurationContext);
+
+  const [timers] = React.useContext(TimerContext);
   return (
     <table className="stopwat-list">
       <thead>
@@ -18,7 +20,7 @@ const StopWatchList = (props) => {
 
 
          <tr >
-         <td>{stopwatch.saved_type}</td>
+         <td>{timers}</td>
 
          </tr>
 

@@ -1,6 +1,6 @@
 import { customStyleInput } from "../timers/Countdown";
 import React, { useContext } from "react";
-import { StopWatchContext } from "../../mycontext/MyContexts";
+import { TimerContext } from "../../mycontext/MyContexts";
 
 
 const AlignGrid = {
@@ -40,7 +40,7 @@ export const StopWatchBodyTabata = () => {
         setOriginalMinutesRest,
         setOriginalRepeat,
 
-    } = useContext(StopWatchContext)
+    } = useContext(TimerContext)
 
 
 // return the body of the Stop watch Tabata body

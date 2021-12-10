@@ -1,4 +1,4 @@
-import { StopWatchContext } from "../../mycontext/MyContexts";
+import { TimerContext } from "../../mycontext/MyContexts";
 import React, { useContext } from "react";
 
 /**
@@ -14,7 +14,7 @@ function StopWatchRounds() {
         repeat,
         setRepeat,
         originalrepeat,
- } = useContext(StopWatchContext)
+ } = useContext(TimerContext)
     // had some sync issues this fixes it.
     if (repeat <= 0) {
         repeat = 0;
@@ -51,7 +51,7 @@ export function StopWatchRoundsTabata() {
 
         workoutperiod,
 
-    } = useContext(StopWatchContext)
+    } = useContext(TimerContext)
     // had some sync issues this fixes it.
     if (repeat <= 0) {
         repeat = 0;
