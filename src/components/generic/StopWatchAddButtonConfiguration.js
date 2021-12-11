@@ -1,6 +1,5 @@
 import Button from "./Button";
 import React, { useContext } from "react";
-import { ConfigurationContext } from "../../mycontext/StopWatchConfigurationContext";
 import { TimerContext } from "../../mycontext/MyContexts";
 
 const positionButtons = {
@@ -17,36 +16,36 @@ const positionButtons = {
 
 };
 const StopWatchAddButtonConfiguration = () => {
-  const { stopwatch, setStopwatch, addStopWatchType } = React.useContext(ConfigurationContext);
-  // const context = React.useContext(ConfigurationContext);
+
   const {
     originalseconds,
     originalminutes,
     originalhours,
-
     originalrepeat,
-
+    timers,
     setTimers,
+    addTimer
   } = useContext(TimerContext);
   console.log("ttt");
+
+
   return (
+
 
     <>
       <div style={positionButtons}>
         <Button text={"Add"} onClick={() => {
+
+          ///******************************************************
           const saved_type = localStorage.getItem("stop_type");
-          const newStopWatch = { saved_type, originalhours, originalminutes, originalseconds, originalrepeat };
-          //const newStopWatch = { saved_type, originalhours, originalminutes, originalseconds, originalrepeat };
-         /* const addStopWatchType = (saved_type,originalhours,originalminutes,originalseconds,originalrepeat) => {
-           const newStopWatch = { saved_type, originalhours, originalminutes, originalseconds, originalrepeat };
-            setStop_watch(prevStop => [...prevStop, { saved_type, originalhours, originalminutes, originalseconds, originalrepeat}]);
-          };*/
-          setStopwatch(() => newStopWatch);
-          setTimers(()=>newStopWatch)
-          console.log("fff");
+
+         // addTimers({ saved_type, originalhours, originalminutes, originalseconds, originalrepeat });
+          addTimer({type:saved_type, originalhours, originalminutes, originalseconds, originalrepeat });
+          //***********************************************************
+
+
         }
-        }
-                disabled={true} />
+        } disabled={true} />
       </div>
     </>
   );

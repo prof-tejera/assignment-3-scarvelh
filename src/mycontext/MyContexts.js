@@ -4,79 +4,7 @@ import React, { useState } from "react";
 // Create Context
 
 //*********************************** Generic StopWatch context ********************************************************
-export const TimerContext = React.createContext({
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    hoursrest: 0,
-    minutesrest: 0,
-    secondsrest: 0,
-    orginalhours: 0,
-    orginalminutes: 0,
-    originalseconds: 0,
-    // rest  timer
-    orginalhoursrest: 0,
-    orginalminutesrest: 0,
-    originalsecondsrest: 0,
-    onstart: false,
-    repeat: 1,
-    reset: false,
-    workoutperiod: "Workout",
-    fastforward: false,
-    stopwatchtype: "",
-    timers: [],
-    setSeconds: () => {
-    },
-    setMinutes: () => {
-    },
-    setHours: () => {
-    },
-    setOnStart: () => {
-    },
-    setRepeat: () => {
-    },
-    setReset: () => {
-    },
-    setOriginalSeconds: () => {
-    },
-    setOriginalMinutes: () => {
-    },
-    setOriginalHours: () => {
-    },
-    // rest timer
-    setOriginalSecondsRest: () => {
-    },
-    setOriginalMinutesRest: () => {
-    },
-    setOriginalHoursRest: () => {
-    },
-    setWorkOutPeriod: () => {
-    },
-    setOriginalReapeat: () => {
-    },
-    setFastForward: () => {
-
-    },
-    setStopwatchtype: () => {
-
-    },
-
-    setTimers: () => {
-     // back implementation
-    },
-    addTimer: (config) => {
-      const timers = [...timers, config];
-      setTimers(timers);
-
-    },
-    removeTimer: (index) => {
-      timers.splice(index, 1);
-      setTimers(timers);
-    }
-
-
-  }
-);
+export const TimerContext = React.createContext({});
 
 // create context for stopwatches
 export function StopWatchProvider({ children }) {
@@ -104,6 +32,15 @@ export function StopWatchProvider({ children }) {
   const [fastforward, setFastForward] = useState(false);
   const [stopwatchtype, setStopwatchtype] = useState("");
   const [timers, setTimers] = useState([]);
+  const addTimer = (config) => {
+    const timers1 = [...timers, config];
+    setTimers(timers1);
+  };
+
+  const removeTimer = (index) => {
+    timers.splice(index, 1);
+    setTimers(timers);
+  };
 
   return <TimerContext.Provider
     value={{
@@ -153,9 +90,6 @@ export function StopWatchProvider({ children }) {
 
     }}>{children}</TimerContext.Provider>;
 }
-
-
-
 
 export default StopWatchProvider;
 
