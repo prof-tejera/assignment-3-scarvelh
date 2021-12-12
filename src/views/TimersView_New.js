@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
@@ -6,8 +6,7 @@ import Tabata from "../components/timers/Tabata";
 import Timer from "../components/generic/Timer";
 import TimerTitle from "../components/generic/TimerTitle";
 import styled from "styled-components";
-import { TimerContext } from "../mycontext/MyContexts";
-import { ConfigurationContext } from "../mycontext/StopWatchConfigurationContext";
+import { StopWatchProvider, TimerContext } from "../mycontext/MyContexts";
 
 const Container = styled.div`
   background-color: #C0C0C0;
@@ -29,7 +28,7 @@ const AlignGrid = {
 };
 
 
-const timers = [
+const timers1 = [
   {
     title: "Stopwatch",
     C: <Stopwatch />,
@@ -42,7 +41,7 @@ const timers = [
   }
   //{ title: "Tabata", C: <Tabata />, customStyling: { backgroundColor: "#FF7F7F", alignItems: "center",justifyItems: "center", cursor:"pointer"} }
 ];
-
+const create_timers = [];
 
 export const StopWatchDisplayTypes = () => {
 
@@ -50,10 +49,28 @@ export const StopWatchDisplayTypes = () => {
 
 
   const {
-
+    timers,
     setStopwatchtype
 
   } = useContext(TimerContext);
+
+  //***********************************************************
+  //const context = React.useContext(TimerContext);
+  useEffect(() => {
+    if (timers) {
+      timers.map((type, i) => {
+        let n = new Map();
+
+        n.set("title", type.type);
+        n.set("C", "<CountDown />");
+        n.set("customStyling", "{ backgroundColor: \"#ffffe0\", alignItems: \"center\", cursor: \"pointer\" }");
+        create_timers.push(n);
+
+      });
+    }
+  });
+  // **********************************************************
+
 
   //stopwatchtype = "Stopwatch"
   function HandleTimerClick(timerType) {
@@ -67,7 +84,7 @@ export const StopWatchDisplayTypes = () => {
 
   }
 
-  const { stop_watch, setStop_watch } = React.useContext(ConfigurationContext)
+  const { stop_watch, setStop_watch } = React.useContext(TimerContext);
 
 
   let selectedTimerType;
@@ -90,24 +107,26 @@ export const StopWatchDisplayTypes = () => {
   }
 
   return (
-    <Container>
-      <div style={AlignGrid}>
-        {timers.map((timer) => (
-          <Timer title={timer.title} onClick={
-            () => {
-              HandleTimerClick(timer.title);
+    <StopWatchProvider>
+      <Container>
+        <div style={AlignGrid}>
+          {create_timers.map((timer) => (
+            <Timer title={timer.title} onClick={
+              () => {
+                HandleTimerClick(timer.title);
+              }
             }
-          }
-                 value={timer.title} style={timer.customStyling}
-                 key={timer.title}>
-            <TimerTitle>{timer.title}</TimerTitle>
-            {timer.C}
-          </Timer>
-        ))}
-      </div>
-      {selectedTimerType}
+                   value={timer.title} style={timer.customStyling}
+                   key={timer.title}>
+              <TimerTitle>{timer.title}</TimerTitle>
+              {timer.C}
+            </Timer>
+          ))}
+        </div>
+        {selectedTimerType}
 
-    </Container>
+      </Container>
+    </StopWatchProvider>
   );
 
 };

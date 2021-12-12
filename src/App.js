@@ -14,35 +14,37 @@ const Container = styled.div`
 
 function App() {
   return (
-    <Container>
-      <Router>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Timers</Link>
-            </li>
-            <li>
-              <Link to="/docs">Documentation</Link>
-            </li>
-            <li>
-              <Link to="/add">Add/Configuration</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/add">
-            <AddView />
-          </Route>
-          <Route path="/docs">
-            <DocumentationView />
-          </Route>
-          <Route path="/">
-            <StopWatchDisplayTypes />
-          </Route>
 
-        </Switch>
-      </Router>
-    </Container>
+      <Container>
+        <Router>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Timers</Link>
+              </li>
+              <li>
+                <Link to="/docs">Documentation</Link>
+              </li>
+              <li>
+                <Link to="/add">Add/Configuration</Link>
+              </li>
+            </ul>
+          </nav>
+          <Switch>
+            <Route path="/add">
+              <AddView />
+            </Route>
+            <Route path="/docs">
+              <DocumentationView />
+            </Route>
+            <Route path="/">
+              <StopWatchDisplayTypes />
+            </Route>
+
+          </Switch>
+        </Router>
+      </Container>
+
   );
 }
 
