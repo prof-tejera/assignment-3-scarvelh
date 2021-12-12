@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import DocumentationView from "./views/DocumentationView";
 import AddView from "./views/AddView";
-import { StopWatchDisplayTypes } from "./views/TimersView_New";
 import { DisplayTimersView } from "./views/DisplayTimersView";
 
 const Container = styled.div`

@@ -6,7 +6,7 @@ import Tabata from "../components/timers/Tabata";
 import Timer from "../components/generic/Timer";
 import TimerTitle from "../components/generic/TimerTitle";
 import styled from "styled-components";
-import { StopWatchProvider, TimerContext } from "../mycontext/MyContexts";
+import { TimerContext } from "../mycontext/MyContexts";
 
 const Container = styled.div`
   background-color: #C0C0C0;
@@ -57,7 +57,7 @@ export const StopWatchDisplayTypes = () => {
   //***********************************************************
   const context = React.useContext(TimerContext);
   useEffect(() => {
-    if (context.timers) {
+   // if (context.timers) {
       context.timers.map((type, i) => {
         let n = new Map();
 
@@ -67,7 +67,7 @@ export const StopWatchDisplayTypes = () => {
         create_timers.push(n);
 
       });
-    }
+    //}
   });
   // **********************************************************
 
@@ -107,28 +107,29 @@ export const StopWatchDisplayTypes = () => {
   }
 
   return (
-    <StopWatchProvider>
-      <Container>
-        <div style={AlignGrid}>
-          {create_timers.map((timer) => (
-            <Timer title={timer.title} onClick={
-              () => {
-                HandleTimerClick(timer.title);
-              }
-            }
-                   value={timer.title} style={timer.customStyling}
-                   key={timer.title}>
-              <TimerTitle>{timer.title}</TimerTitle>
-              {timer.C}
-            </Timer>
-          ))}
-        </div>
-        {selectedTimerType}
 
-      </Container>
-    </StopWatchProvider>
+    <Container>
+      <div style={AlignGrid}>
+        {create_timers.map((timer) => (
+          <Timer title={timer.title} onClick={
+            () => {
+              HandleTimerClick(timer.title);
+            }
+          }
+                 value={timer.title} style={timer.customStyling}
+                 key={timer.title}>
+            <TimerTitle>{timer.title}</TimerTitle>
+            {timer.C}
+          </Timer>
+        ))}
+      </div>
+      {selectedTimerType}
+
+    </Container>
+
   );
 
 };
 
 
+export default  StopWatchDisplayTypes;
