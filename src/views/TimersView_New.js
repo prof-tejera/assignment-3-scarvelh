@@ -55,10 +55,10 @@ export const StopWatchDisplayTypes = () => {
   } = useContext(TimerContext);
 
   //***********************************************************
-  //const context = React.useContext(TimerContext);
+  const context = React.useContext(TimerContext);
   useEffect(() => {
-    if (timers) {
-      timers.map((type, i) => {
+    if (context.timers) {
+      context.timers.map((type, i) => {
         let n = new Map();
 
         n.set("title", type.type);
