@@ -55,7 +55,7 @@ const AddView = () => {
   }
 
   return (
-    <StopWatchProvider>
+
       <ConfigurationProvider>
         <Container style={backColor}>
           <StopWatchDropdown />
@@ -69,7 +69,7 @@ const AddView = () => {
           <StopWatchList />
         </Container>
       </ConfigurationProvider>
-    </StopWatchProvider>
+
   );
 };
 

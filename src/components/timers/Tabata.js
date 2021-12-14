@@ -54,7 +54,7 @@ const ButtonPosition = {
 function App() {
     const {themetabata} = React.useContext(ThemeContext)
     return (
-        <StopWatchProvider>
+
             <ThemeProvider>
                 <Container style={themetabata}>
                     <StopWatchTimerDisplayTabataCountDown/>
@@ -66,7 +66,7 @@ function App() {
                     </div>
                 </Container>
             </ThemeProvider>
-        </StopWatchProvider>
+
     );
 }
 

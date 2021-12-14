@@ -14,16 +14,16 @@ const Container = styled.div`
 `;
 // align text in a grid
 const positionButtons = {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "10rem",
-    borderRadius: "20%",
-    alignItems: "center",
-    //padding: "40px",
-    //float: "right",
-    fontSize: "20px",
-    paddingLeft: "5px",
-    justifyItems: "center"
+  display: "flex",
+  justifyContent: "space-between",
+  width: "10rem",
+  borderRadius: "20%",
+  alignItems: "center",
+  //padding: "40px",
+  //float: "right",
+  fontSize: "20px",
+  paddingLeft: "5px",
+  justifyItems: "center"
 
 };
 //==============================Stop Watch Timer========================================================================
@@ -33,78 +33,126 @@ const positionButtons = {
  * @constructor
  */
 export const StopWatchButtons = () => {
-    // get the theme from the theme context
-    const {roundedbuttons, setCounterDisplay} = React.useContext(ThemeContext)
-    // get the stopwatch provider context
-    const {
+  // get the theme from the theme context
+  const { roundedbuttons, setCounterDisplay } = React.useContext(ThemeContext);
+  // get the stopwatch provider context
+  const {
+    seconds,
+    setSeconds,
+    minutes,
+    setMinutes,
+    hours,
+    setHours,
+    onstart,
+    setOnStart,
 
-        setSeconds,
-        onstart,
-        setOnStart,
-        setFastForward,
-    } = useContext(TimerContext)
-    // set the interval initial values
-    const [intervalId, setIntervalId] = useState(0);
+    setReset,
+    repeat,
+    setRepeat,
+    // setSeconds,
+    //onstart,
+    //setOnStart,
+    setFastForward,
+    originalseconds,
+    originalminutes,
+    originalhours,
+    currentbuttonindex,
+    timers,
+    originalrepeat,
+    setCurrentButtonIndex
 
-    return (
+  } = useContext(TimerContext);
+  // set the interval initial values
+  const [intervalId, setIntervalId] = useState(0);
 
-        <Container>
-            <div style={positionButtons}>
-                <Button text={"Done"} onClick={() => {
-                    // The 'Done" button handle the fast forward feature
-                    setSeconds(() => 0);
-                    setOnStart(() => true);
-                    setFastForward(() => true);
-                    clearInterval(intervalId);
-                    setIntervalId(() => null);
-                    setOnStart(() => false)
-                }
-                }
-                        disabled={true} style={roundedbuttons}/>
-                <Button text={"Start"} onClick={() => {
+  useEffect(() => {
 
-                    setFastForward(() => false);
-                    // start timer if it not already started
-                    if (!onstart) {
-                        setIntervalId(setInterval(() => {
-                            setSeconds(seconds => seconds + 1)
-                        }, 1000))
-                        setOnStart(() => true)
-                        //change the color of the display
-                        setCounterDisplay(() => myColors["yellow-green"])
-                    }
+    if (hours >= timers[currentbuttonindex].originalhours && minutes >= timers[currentbuttonindex].originalminutes && seconds >= timers[currentbuttonindex].originalseconds && onstart && intervalId !== null) {
 
 
-                }
-                }
-                        style={roundedbuttons}
-                        disabled={true} id="idStopWatchButton"/>
-                <Button text={"Stop"} onClick={() => {
-                    clearInterval(intervalId);
-
-                    setOnStart(() => false)
-                    setCounterDisplay(() => myColors["orange-yellow"])
-                    // change the start button to "resume" to continue after a pause
-                    let changeText = document.getElementById('idStopWatchButton')
-                    changeText.innerHTML = "Resume "
+      //setSeconds(() => 0);
+      //setMinutes(() => 0);
+      //setHours(() => 0);
+      clearInterval(intervalId);
+      setOnStart(() => true);
 
 
-                }} style={roundedbuttons}/>
-                <Button text={"Reset"} onClick={() => {
-                    // reset everything back to it original values
-                    clearInterval(intervalId);
-                    setSeconds(() => 0);
+    }
 
-                    setOnStart(() => false)
-                    setCounterDisplay(() => myColors["eggshell-white"])
-                    let changeText = document.getElementById('idStopWatchButton');
-                    changeText.innerHTML = "Start";
-                }} style={roundedbuttons}/>
-            </div>
-        </Container>
-    );
+    // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
+    if (((hours === timers[currentbuttonindex].originalhours && minutes === timers[currentbuttonindex].originalminutes && seconds === timers[currentbuttonindex].originalseconds) && onstart && intervalId !== null)) {
 
-}
+      /// removeTimer(0);
+      if (timers.length > 1) {
+        setCurrentButtonIndex((currentbuttonindex) => currentbuttonindex + 1);
+        setOnStart(() => false);
+      }
+    }
+  });
+
+
+  return (
+
+    <Container>
+      <div style={positionButtons}>
+        <Button text={"Done"} onClick={() => {
+          // The 'Done" button handle the fast forward feature
+          setSeconds(() => 0);
+          setOnStart(() => true);
+          setFastForward(() => true);
+          clearInterval(intervalId);
+          setIntervalId(() => null);
+          setOnStart(() => false);
+        }
+        }
+                disabled={true} style={roundedbuttons} />
+        <Button text={"Start"} onClick={() => {
+
+          setFastForward(() => false);
+          // start timer if it not already started
+          if (!onstart) {
+            setIntervalId(setInterval(() => {
+              setSeconds(seconds => seconds + 1);
+            }, 1000));
+            setSeconds(() => 0);
+            setHours(() => 0);
+            setMinutes(() => 0);
+            setOnStart(() => true);
+            //change the color of the display
+            setCounterDisplay(() => myColors["yellow-green"]);
+          }
+
+
+        }
+        }
+                style={roundedbuttons}
+                disabled={true} id="idStopWatchButton" />
+        <Button text={"Stop"} onClick={() => {
+          clearInterval(intervalId);
+
+          setOnStart(() => false);
+          setCounterDisplay(() => myColors["orange-yellow"]);
+          // change the start button to "resume" to continue after a pause
+          let changeText = document.getElementById("idStopWatchButton");
+          changeText.innerHTML = "Resume ";
+
+
+        }} style={roundedbuttons} />
+        <Button text={"Reset"} onClick={() => {
+          // reset everything back to it original values
+          clearInterval(intervalId);
+          setSeconds(() => 0);
+
+          setOnStart(() => false);
+          setCounterDisplay(() => myColors["eggshell-white"]);
+          let changeText = document.getElementById("idStopWatchButton");
+          changeText.innerHTML = "Start";
+        }} style={roundedbuttons} />
+      </div>
+    </Container>
+  );
+
+};
 //===============================CountDown and XY Timers=====================================================================================
 /**
  * The Functional Component handles 2 of the stop watches
@@ -115,366 +163,366 @@ export const StopWatchButtons = () => {
 
 export const StopWatchButtonsCountDown = () => {
 // get vales from CountDown Context
-    const {
-        seconds,
-        setSeconds,
-        minutes,
-        setMinutes,
-        hours,
-        setHours,
-        onstart,
-        setOnStart,
+  const {
+    seconds,
+    setSeconds,
+    minutes,
+    setMinutes,
+    hours,
+    setHours,
+    onstart,
+    setOnStart,
 
-        setReset,
-        repeat,
-        setRepeat,
-        originalseconds,
-        originalminutes,
-        originalhours,
+    setReset,
+    repeat,
+    setRepeat,
+    originalseconds,
+    originalminutes,
+    originalhours,
+    removeTimer,
+    originalrepeat,
 
-        originalrepeat,
+    setFastForward,
+    timers,
+    currentbuttonindex,
+    setCurrentButtonIndex
+  } = useContext(TimerContext);
+  //Get the values from the theme context
+  const { roundedbuttons, setCounterDisplay } = React.useContext(ThemeContext);
+  const [intervalId, setIntervalId] = useState(0);
+  //--------------Save Previous values ---------------------------
+  const [previousseconds, setPreviousSeconds] = useState(0);
+  const [previousminutes, setPreviousMintues] = useState(0);
+  const [previoushours, setPreviousHours] = useState(0);
+  // handle when the stop button have been pressed
+  const [paused, setPaused] = useState(false);
 
-        setFastForward,
+  useEffect(() => {
 
-    } = useContext(TimerContext);
-    //Get the values from the theme context
-    const {roundedbuttons, setCounterDisplay} = React.useContext(ThemeContext)
-    const [intervalId, setIntervalId] = useState(0);
-    //--------------Save Previous values ---------------------------
-    const [previousseconds, setPreviousSeconds] = useState(0);
-    const [previousminutes, setPreviousMintues] = useState(0);
-    const [previoushours, setPreviousHours] = useState(0);
-    // handle when the stop button have been pressed
-    const [paused, setPaused] = useState(false)
-
-    useEffect(() => {
-
-        if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && originalrepeat > repeat) {
+    if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && originalrepeat > repeat) {
 
 
-            setSeconds(() => originalseconds);
-            setMinutes(() => originalminutes);
-            setHours(() => originalhours);
+      setSeconds(() => timers[currentbuttonindex].originalseconds);
+      setMinutes(() => timers[currentbuttonindex].originalminutes);
+      setHours(() => timers[currentbuttonindex].originalhours);
 
-            setOnStart(() => true);
-            // the repeat variable handles the number of rounds
-            setRepeat(() => repeat + 1);
-        }
+      setOnStart(() => true);
+      //if(timers)
+      // the repeat variable handles the number of rounds
 
-        // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
-        if (((hours === 0 && minutes === 0 && seconds === 0) && onstart && intervalId !== null && repeat >= originalrepeat)) {
-            // pause timer for the seconds
-            clearInterval(intervalId);
+      // setRepeat(() => repeat + 1);
+    }
 
-            setInterval(() => null);
-            setOnStart(() => false);
-            setSeconds(() => 0);
-            setOnStart(() => true);
-            setFastForward(() => true);
-            setOnStart(() => false)
-        }
-    });
+    // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
+    if (((hours === 0 && minutes === 0 && seconds === 0) && onstart && intervalId !== null && repeat >= originalrepeat)) {
+
+      /// removeTimer(0);
+      if (timers.length > 1) {
+        setCurrentButtonIndex((currentbuttonindex) => currentbuttonindex + 1);
+      }
+    }
+  });
 
 // return vales to render
-    return (
+  return (
 
 
-        <Container>
-            <div style={positionButtons}>
-                <Button text={"Done"} onClick={() => {
-                    // Fast Forward Feature
-                    setSeconds(() => 0);
-                    setOnStart(() => true);
-                    setFastForward(() => true);
-                    clearInterval(intervalId);
-                    setIntervalId(() => null);
-                    setOnStart(() => false)
+    <Container>
+      <div style={positionButtons}>
+        <Button text={"Done"} onClick={() => {
+          // Fast Forward Feature
+          setSeconds(() => 0);
+          setOnStart(() => true);
+          setFastForward(() => true);
+          clearInterval(intervalId);
+          setIntervalId(() => null);
+          setOnStart(() => false);
 
 
-                }
-                }
-                        disabled={true} style={roundedbuttons}/>
+        }
+        }
+                disabled={true} style={roundedbuttons} />
 
-                <Button text={"Start"} onClick={() => {
-                    setFastForward(() => false);
-                    // if the stop watch is pauses get the values of the seconds minutes hours from the previous seconds
-                    if (paused) {
-                        setSeconds(() => previousseconds);
-                        setHours(() => previoushours);
-                        setMinutes(() => previousminutes);
-                        // get the value from the original number of second minutes and seconds
-                    } else {
-                        setSeconds(() => originalseconds);
-                        setHours(() => originalhours);
-                        setMinutes(() => originalminutes);
-
-
-                    }
-                    setRepeat(() => 0);
-                    // if the start button is not click start the timer
-                    if (!onstart) {
-
-                        // start interval timer
-                        setIntervalId(setInterval(() => {
-                            setSeconds(seconds => seconds - 1)
-
-                        }, 1000))
-                        setOnStart(() => true);
-                        setReset(() => false);
-                        // change counter display color
-                        setCounterDisplay(() => myColors["yellow-green"]);
-
-                    }
+        <Button text={"Start"} onClick={() => {
+          setFastForward(() => false);
+          // if the stop watch is pauses get the values of the seconds minutes hours from the previous seconds
+          if (paused) {
+            setSeconds(() => previousseconds);
+            setHours(() => previoushours);
+            setMinutes(() => previousminutes);
+            // get the value from the original number of second minutes and seconds
+          } else {
+            setSeconds(() => timers[currentbuttonindex].originalseconds);
+            setHours(() => timers[currentbuttonindex].originalhours);
+            setMinutes(() => timers[currentbuttonindex].originalminutes);
 
 
-                }
-                }
-                        disabled={true} style={roundedbuttons} id="sButton"/>
+          }
+          setRepeat(() => 0);
+          // if the start button is not click start the timer
+          if (!onstart) {
 
-                <Button text={"Stop"} onClick={() => {
-                    // when "stop button is press pause the stopwatch
-                    setPaused(() => true);
-                    // save the current hours minutes and seconds
-                    setPreviousSeconds(() => seconds);
-                    setPreviousMintues(() => minutes);
-                    setPreviousHours(() => hours);
-                    // pause or stop timer
-                    clearInterval(intervalId);
+            // start interval timer
+            setIntervalId(setInterval(() => {
+              setSeconds(seconds => seconds - 1);
 
-                    setOnStart(() => false)
-                    // change the display color
-                    setCounterDisplay(() => myColors["orange-yellow"])
-                    // change "Start" button to "Resume"
-                    let changeText = document.getElementById('sButton')
-                    changeText.innerHTML = "Resume "
+            }, 1000));
+            setOnStart(() => true);
+            setReset(() => false);
+            // change counter display color
+            setCounterDisplay(() => myColors["yellow-green"]);
 
-                }} style={roundedbuttons}/>
-
-                <Button text={"Reset"} onClick={() => {
-                    // Put everything back to it original values
-                    setFastForward(() => false);
-                    clearInterval(intervalId);
-                    // reset to the original values
-                    setSeconds(() => originalseconds);
-                    setHours(() => originalhours);
-                    setMinutes(() => originalminutes);
-                    setInterval(() => null);
-                    setOnStart(() => false);
-                    setReset(() => true);
-                    setCounterDisplay(() => myColors["eggshell-white"]);
-                    let changeText = document.getElementById('sButton');
-                    changeText.innerHTML = "Start";
-                    setRepeat(() => 0);
-                    setPaused(() => false)
-                }} style={roundedbuttons}/>
-            </div>
+          }
 
 
-        </Container>
+        }
+        }
+                disabled={true} style={roundedbuttons} id="sButton" />
+
+        <Button text={"Stop"} onClick={() => {
+          // when "stop button is press pause the stopwatch
+          setPaused(() => true);
+          // save the current hours minutes and seconds
+          setPreviousSeconds(() => seconds);
+          setPreviousMintues(() => minutes);
+          setPreviousHours(() => hours);
+          // pause or stop timer
+          clearInterval(intervalId);
+
+          setOnStart(() => false);
+          // change the display color
+          setCounterDisplay(() => myColors["orange-yellow"]);
+          // change "Start" button to "Resume"
+          let changeText = document.getElementById("sButton");
+          changeText.innerHTML = "Resume ";
+
+        }} style={roundedbuttons} />
+
+        <Button text={"Reset"} onClick={() => {
+          // Put everything back to it original values
+          setFastForward(() => false);
+          clearInterval(intervalId);
+          // reset to the original values
+          setSeconds(() => originalseconds);
+          setHours(() => originalhours);
+          setMinutes(() => originalminutes);
+          setInterval(() => null);
+          setOnStart(() => false);
+          setReset(() => true);
+          setCounterDisplay(() => myColors["eggshell-white"]);
+          let changeText = document.getElementById("sButton");
+          changeText.innerHTML = "Start";
+          setRepeat(() => 0);
+          setPaused(() => false);
+        }} style={roundedbuttons} />
+      </div>
 
 
-    );
+    </Container>
 
-}
+
+  );
+
+};
 // ========================================== Tabata Buttons countdown =====================================
 
 export const StopWatchButtonsCountDownTabata = () => {
 
-    const {
-        seconds,
-        setSeconds,
-        minutes,
-        setMinutes,
-        hours,
-        setHours,
-        onstart,
-        setOnStart,
+  const {
+    seconds,
+    setSeconds,
+    minutes,
+    setMinutes,
+    hours,
+    setHours,
+    onstart,
+    setOnStart,
 
-        setReset,
-        repeat,
-        setRepeat,
-        originalseconds,
+    setReset,
+    repeat,
+    setRepeat,
+    originalseconds,
 
-        originalminutes,
+    originalminutes,
 
-        originalhours,
+    originalhours,
 
-        setWorkOutPeriod,
-        workoutperiod,
-        originalsecondsrest,
-        originalminutesrest,
-        originalhoursrest,
-        //setReset,
+    setWorkOutPeriod,
+    workoutperiod,
+    originalsecondsrest,
+    originalminutesrest,
+    originalhoursrest,
+    //setReset,
 
-        originalrepeat,
+    originalrepeat,
 
-        setSecondsRest,
-        setMinutesRest,
-        setHoursRest,
+    setSecondsRest,
+    setMinutesRest,
+    setHoursRest,
 
-        setFastForward,
-    } = useContext(TimerContext);
-    const {roundedbuttons, setCounterDisplay} = React.useContext(ThemeContext)
+    setFastForward
+  } = useContext(TimerContext);
+  const { roundedbuttons, setCounterDisplay } = React.useContext(ThemeContext);
 //--------------Save Previous values ---------------------------
-    const [previousseconds, setPreviousSeconds] = useState(0);
-    const [previousminutes, setPreviousMintues] = useState(0);
-    const [previoushours, setPreviousHours] = useState(0);
-    const [paused, setPaused] = useState(false)
-    const [intervalId, setIntervalId] = useState(0);
-    const toddleworkout = workoutperiod === "Workout" ? "Resting" : "Workout";
+  const [previousseconds, setPreviousSeconds] = useState(0);
+  const [previousminutes, setPreviousMintues] = useState(0);
+  const [previoushours, setPreviousHours] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [intervalId, setIntervalId] = useState(0);
+  const toddleworkout = workoutperiod === "Workout" ? "Resting" : "Workout";
 
-    useEffect(() => {
-        if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && originalrepeat > repeat) {
-
-
-            if (toddleworkout === "Resting") {
-                setSeconds(() => parseInt(originalsecondsrest));
-                setMinutes(() => parseInt(originalminutesrest));
-                setHours(() => parseInt(originalhoursrest));
-                setWorkOutPeriod(() => "Resting")
+  useEffect(() => {
+    if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && originalrepeat > repeat) {
 
 
-            }
+      if (toddleworkout === "Resting") {
+        setSeconds(() => parseInt(originalsecondsrest));
+        setMinutes(() => parseInt(originalminutesrest));
+        setHours(() => parseInt(originalhoursrest));
+        setWorkOutPeriod(() => "Resting");
 
 
-            if (toddleworkout === "Workout") {
-                setSeconds(() => parseInt(originalseconds));
-                setMinutes(() => parseInt(originalminutes));
-                setHours(() => parseInt(originalhours));
-                setWorkOutPeriod(() => "Workout")
-                setRepeat(() => repeat + 1);
+      }
 
 
-            }
+      if (toddleworkout === "Workout") {
+        setSeconds(() => parseInt(originalseconds));
+        setMinutes(() => parseInt(originalminutes));
+        setHours(() => parseInt(originalhours));
+        setWorkOutPeriod(() => "Workout");
+        setRepeat(() => repeat + 1);
 
-            setReset(() => false);
+
+      }
+
+      setReset(() => false);
+      setOnStart(() => true);
+
+    }
+  });
+
+
+  useEffect(() => {
+    // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
+    if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= originalrepeat) {
+      clearInterval(intervalId);
+
+      setRepeat(() => 0);
+      setIntervalId(() => null);
+      setOnStart(() => false);
+
+      setReset(() => true);
+      setFastForward(() => true);
+
+
+      setWorkOutPeriod(() => "");
+
+
+    }
+
+  }, [hours, minutes, seconds, onstart, intervalId, repeat, originalrepeat, setRepeat, setOnStart, setReset, setFastForward, setWorkOutPeriod]);
+  useEffect(() => {
+    if (toddleworkout === "Resting" && onstart) {
+      setCounterDisplay(() => myColors["yellow-green"]);
+
+
+    }
+    if (toddleworkout === "Workout" && onstart) {
+      setCounterDisplay(() => myColors["resting"]);
+    }
+  });
+  return (
+
+
+    <Container>
+      <div style={positionButtons}>
+        <Button text={"Done"} onClick={() => {
+          setSeconds(() => 0);
+          setOnStart(() => true);
+          setFastForward(() => true);
+          clearInterval(intervalId);
+          setIntervalId(() => null);
+          setOnStart(() => false);
+
+        }
+        }
+                disabled={true} style={roundedbuttons} />
+
+
+        <Button text={"Start"} onClick={() => {
+          if (paused) {
+            setSeconds(() => previousseconds);
+            setHours(() => previoushours);
+            setMinutes(() => previousminutes);
+          } else {
+            setSeconds(() => originalseconds);
+            setHours(() => originalhours);
+            setMinutes(() => originalminutes);
+          }
+
+          setRepeat(() => 0);
+
+          if (!onstart) {
+
+            console.log(seconds);
+            setIntervalId(setInterval(() => {
+
+
+              setSeconds(seconds => seconds - 1);
+
+
+            }, 1000));
             setOnStart(() => true);
-
-        }
-    });
-
-
-    useEffect(() => {
-        // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
-        if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= originalrepeat) {
-            clearInterval(intervalId);
-
-            setRepeat(() => 0);
-            setIntervalId(() => null);
-            setOnStart(() => false);
-
-            setReset(() => true);
-            setFastForward(() => true);
-
-
-            setWorkOutPeriod(() => "");
-
-
-        }
-
-    }, [hours, minutes, seconds, onstart, intervalId, repeat, originalrepeat, setRepeat, setOnStart, setReset, setFastForward, setWorkOutPeriod]);
-    useEffect(() => {
-        if (toddleworkout === "Resting" && onstart) {
+            setReset(() => false);
             setCounterDisplay(() => myColors["yellow-green"]);
-
-
+          }
         }
-        if (toddleworkout === "Workout" && onstart) {
-            setCounterDisplay(() => myColors["resting"])
         }
-    });
-    return (
+                disabled={true} style={roundedbuttons} id="idStopWatchTabataButton" />
 
+        <Button text={"Stop"} onClick={() => {
 
-        <Container>
-            <div style={positionButtons}>
-                <Button text={"Done"} onClick={() => {
-                    setSeconds(() => 0);
-                    setOnStart(() => true);
-                    setFastForward(() => true);
-                    clearInterval(intervalId);
-                    setIntervalId(() => null);
-                    setOnStart(() => false)
+          // initialize the resting values
 
-                }
-                }
-                        disabled={true} style={roundedbuttons}/>
+          setPaused(() => true);
+          setPreviousSeconds(() => seconds);
+          setPreviousMintues(() => minutes);
+          setPreviousHours(() => hours);
 
+          clearInterval(intervalId);
+          setIntervalId(() => null);
+          setOnStart(() => false);
+          setCounterDisplay(() => myColors["orange-yellow"]);
+          let changeText = document.getElementById("idStopWatchTabataButton");
+          changeText.innerHTML = "Resume ";
+        }} style={roundedbuttons} />
 
-                <Button text={"Start"} onClick={() => {
-                    if (paused) {
-                        setSeconds(() => previousseconds);
-                        setHours(() => previoushours);
-                        setMinutes(() => previousminutes);
-                    } else {
-                        setSeconds(() => originalseconds);
-                        setHours(() => originalhours);
-                        setMinutes(() => originalminutes);
-                    }
+        <Button text={"Reset"} onClick={() => {
 
-                    setRepeat(() => 0);
+          // Put everything back to it original values
+          setFastForward(() => false);
+          clearInterval(intervalId);
 
-                    if (!onstart) {
+          // reset to the original values
+          setSeconds(() => originalseconds);
+          setHours(() => originalhours);
+          setMinutes(() => originalminutes);
+          setInterval(() => null);
+          setSecondsRest(() => originalsecondsrest);
+          setMinutesRest(() => originalminutesrest);
+          setHoursRest(() => originalhoursrest);
 
-                        console.log(seconds);
-                        setIntervalId(setInterval(() => {
-
-
-                            setSeconds(seconds => seconds - 1)
-
-
-                        }, 1000))
-                        setOnStart(() => true);
-                        setReset(() => false);
-                        setCounterDisplay(() => myColors["yellow-green"])
-                    }
-                }
-                }
-                        disabled={true} style={roundedbuttons} id="idStopWatchTabataButton"/>
-
-                <Button text={"Stop"} onClick={() => {
-
-                    // initialize the resting values
-
-                    setPaused(() => true);
-                    setPreviousSeconds(() => seconds);
-                    setPreviousMintues(() => minutes);
-                    setPreviousHours(() => hours);
-
-                    clearInterval(intervalId);
-                    setIntervalId(() => null);
-                    setOnStart(() => false)
-                    setCounterDisplay(() => myColors["orange-yellow"]);
-                    let changeText = document.getElementById('idStopWatchTabataButton')
-                    changeText.innerHTML = "Resume "
-                }} style={roundedbuttons}/>
-
-                <Button text={"Reset"} onClick={() => {
-
-                    // Put everything back to it original values
-                    setFastForward(() => false);
-                    clearInterval(intervalId);
-
-                    // reset to the original values
-                    setSeconds(() => originalseconds);
-                    setHours(() => originalhours);
-                    setMinutes(() => originalminutes);
-                    setInterval(() => null);
-                    setSecondsRest(() => originalsecondsrest);
-                    setMinutesRest(() => originalminutesrest);
-                    setHoursRest(() => originalhoursrest);
-
-                    setOnStart(() => false);
-                    setReset(() => true);
-                    setCounterDisplay(() => myColors["eggshell-white"]);
-                    let changeText = document.getElementById('idStopWatchTabataButton');
-                    changeText.innerHTML = "Start";
-                    setRepeat(() => 1);
-                    setWorkOutPeriod(() => "Workout")
-                    setPaused(() => false)
-                }} style={roundedbuttons}/>
-            </div>
-        </Container>
-    );
-}
+          setOnStart(() => false);
+          setReset(() => true);
+          setCounterDisplay(() => myColors["eggshell-white"]);
+          let changeText = document.getElementById("idStopWatchTabataButton");
+          changeText.innerHTML = "Start";
+          setRepeat(() => 1);
+          setWorkOutPeriod(() => "Workout");
+          setPaused(() => false);
+        }} style={roundedbuttons} />
+      </div>
+    </Container>
+  );
+};
 export default StopWatchButtons;

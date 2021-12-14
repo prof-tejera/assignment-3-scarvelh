@@ -25,8 +25,8 @@ export function StopWatchProvider({ children }) {
 
 
   const [onstart, setOnStart] = useState(false);
-  const [repeat, setRepeat] = useState(1);
-  const [originalrepeat, setOriginalRepeat] = useState(1);
+  const [repeat, setRepeat] = useState(0);
+  const [originalrepeat, setOriginalRepeat] = useState(0);
   const [reset, setReset] = useState(false);
   const [workoutperiod, setWorkOutPeriod] = useState("Workout");
   const [fastforward, setFastForward] = useState(false);
@@ -41,7 +41,7 @@ export function StopWatchProvider({ children }) {
     timers.splice(index, 1);
     setTimers(timers);
   };
-
+  const [currentbuttonindex, setCurrentButtonIndex] = useState(0);
   return <TimerContext.Provider
     value={{
       hours,
@@ -86,7 +86,8 @@ export function StopWatchProvider({ children }) {
       setTimers,
       addTimer,
       removeTimer,
-
+      currentbuttonindex,
+      setCurrentButtonIndex,
 
     }}>{children}</TimerContext.Provider>;
 }

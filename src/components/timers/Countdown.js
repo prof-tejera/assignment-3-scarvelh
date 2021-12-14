@@ -29,17 +29,17 @@ function App() {
 
 
     return (
-        <StopWatchProvider>
+
             <ThemeProvider>
                 <Container style={themecountdown}>
                     <StopWatchTimerDisplayCountDown/>
-                    <StopWatchBodyCountDown/>
+
                     <div style={ButtonPosition}>
                         <StopWatchButtonsCountDown style={ButtonPosition}/>
                     </div>
                 </Container>
             </ThemeProvider>
-        </StopWatchProvider>
+
     );
 }
 

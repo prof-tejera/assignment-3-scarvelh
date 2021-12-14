@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TimerContext } from "../../mycontext/MyContexts";
-
+import styled from 'styled-components';
+const DeleteButton = styled.button`
+  background-color: lightcoral;
+`;
 const StopWatchList = (props) => {
 
 
@@ -17,6 +20,13 @@ const StopWatchList = (props) => {
         <tr key={i.toString()}>
           <td>
             {type.type}
+          </td>
+          <td>
+
+            <button onClick={
+              () => {console.log("Deleting" + i.toString());
+              context.removeTimer({i})
+              }} >Delete</button>
           </td>
         </tr>
       ))

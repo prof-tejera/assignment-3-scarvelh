@@ -27,7 +27,9 @@ const AlignGrid = {
   alignItems: "center"
 };
 
-
+const myStyle = {
+  backgroundColor: "#add8e6", alignItems: "center", cursor: "pointer"
+};
 const timers1 = [
   {
     title: "Stopwatch",
@@ -41,11 +43,11 @@ const timers1 = [
   }
   //{ title: "Tabata", C: <Tabata />, customStyling: { backgroundColor: "#FF7F7F", alignItems: "center",justifyItems: "center", cursor:"pointer"} }
 ];
-const create_timers = [];
+//const create_timers = [];
 
 export const StopWatchDisplayTypes = () => {
-
-  const [type, setType] = useState("");
+  const create_timers = [];
+  const [type, setType] = useState("Stopwatch");
 
 
   const {
@@ -56,19 +58,21 @@ export const StopWatchDisplayTypes = () => {
 
   //***********************************************************
   const context = React.useContext(TimerContext);
-  useEffect(() => {
-   // if (context.timers) {
-      context.timers.map((type, i) => {
-        let n = new Map();
+  //useEffect(() => {
+  // if (context.timers) {
+  context.timers.map((type, i) => {
+    let n = new Map();
 
-        n.set("title", type.type);
-        n.set("C", "<CountDown />");
-        n.set("customStyling", "{ backgroundColor: \"#ffffe0\", alignItems: \"center\", cursor: \"pointer\" }");
-        create_timers.push(n);
+    n.set("title", type.type);
+    n.set("C", <Countdown />);
+    n.set("customStyling", "{ backgroundColor: \"#ffffe0\", alignItems: \"center\", cursor: \"pointer\" }");
+    create_timers.push(n);
+    console.log(create_timers)
+    //create_timers.set(n);
 
-      });
-    //}
   });
+  //}
+  // });
   // **********************************************************
 
 
@@ -88,40 +92,47 @@ export const StopWatchDisplayTypes = () => {
 
 
   let selectedTimerType;
-  switch (type) {
-    case "Stopwatch":
-      selectedTimerType = <Stopwatch style={timers[0].customStyling} />;
-      break;
-    case "Countdown":
-      selectedTimerType = <Countdown style={timers[1].customStyling} />;
-      break;
-    case "XY":
-      selectedTimerType = <XY style={timers[2].customStyling} />;
-      break;
-    case "Tabata":
-      selectedTimerType = <Tabata style={timers[3].customStyling} />;
-      break;
+  if (create_timers.length > 0) {
+    let t = context.timers[0].type;
+    //switch (type) {
+    switch (t) {
+      case "Stopwatch":
+        selectedTimerType = <Stopwatch style={myStyle} />;
+        break;
+      case "Countdown":
+        selectedTimerType = <Countdown style={myStyle} />;
+        break;
+      case "XY":
+        selectedTimerType = <XY style={myStyle} />;
+        break;
+      case "Tabata":
+        selectedTimerType = <Tabata style={myStyle} />;
+        break;
 
-    default:
+      default:
 
+    }
   }
-
   return (
 
     <Container>
       <div style={AlignGrid}>
-        {create_timers.map((timer) => (
-          <Timer title={timer.title} onClick={
+        {create_timers.map((c_timer,i) => (
+          <Timer title={c_timer.get('title')} onClick={
             () => {
-              HandleTimerClick(timer.title);
+              HandleTimerClick(c_timer.get('title'));
             }
           }
-                 value={timer.title} style={timer.customStyling}
-                 key={timer.title}>
-            <TimerTitle>{timer.title}</TimerTitle>
-            {timer.C}
+                 value={c_timer.get('title')} style={c_timer.customStyling}
+                 key={i.toString()}>
+            <TimerTitle>{c_timer.get('title')}</TimerTitle>
+
+            {c_timer.get('C')}
           </Timer>
-        ))}
+
+        ))
+          //cons.log(c_timer.title)
+        }
       </div>
       {selectedTimerType}
 
@@ -132,4 +143,4 @@ export const StopWatchDisplayTypes = () => {
 };
 
 
-export default  StopWatchDisplayTypes;
+export default StopWatchDisplayTypes;

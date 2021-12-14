@@ -22,7 +22,7 @@ const ButtonPosition = {
 function App() {
     const {themexy} = React.useContext(ThemeContext)
     return (
-        <StopWatchProvider>
+
             <ThemeProvider>
                 <Container style={themexy}>
 
@@ -35,7 +35,7 @@ function App() {
                     </div>
                 </Container>
             </ThemeProvider>
-        </StopWatchProvider>
+
     );
 }
 

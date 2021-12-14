@@ -5,11 +5,11 @@ import { StopWatchDisplayTypes } from "./TimersView_New";
 export const DisplayTimersView = () => {
   const [types, setTypes] = useState("");
   return (
-    <StopWatchProvider>
+
       <>
         <StopWatchDisplayTypes />
       </>
-    </StopWatchProvider>
+
   );
 };
 export default DisplayTimersView;

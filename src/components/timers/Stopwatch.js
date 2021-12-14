@@ -19,7 +19,7 @@ function App() {
 
     return (
 
-        <StopWatchProvider>
+
             <ThemeProvider>
                 <Container style={themestopwatch}>
 
@@ -29,7 +29,7 @@ function App() {
                     </div>
                 </Container>
             </ThemeProvider>
-        </StopWatchProvider>
+
     );
 };
 
