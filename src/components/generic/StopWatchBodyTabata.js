@@ -101,7 +101,7 @@ export const StopWatchBodyTabata = () => {
 
                 <div style={AlignGrid}>
                     <p>Repeat number of Times</p>
-                    <input ref={repeatInput} type="number" placeholder={1} name="numTimes"
+                    <input ref={repeatInput} type="number" placeholder={0} name="numTimes"
                            onChange={() => {
 
 

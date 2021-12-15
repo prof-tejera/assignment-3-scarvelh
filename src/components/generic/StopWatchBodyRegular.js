@@ -17,7 +17,8 @@ const StopWatchBodyRegular = () => {
 
         setOriginalMinutes,
         setOriginalSeconds,
-        setOriginalHours
+        setOriginalHours,
+        setOriginalRepeat,
     } = useContext(TimerContext)
 
 
@@ -45,7 +46,7 @@ const StopWatchBodyRegular = () => {
             <input ref={secondsInput} type="number" placeholder={0} name="seconds" onChange={(e) => {
 
                 setOriginalSeconds(originalseconds => secondsInput.current.value);
-
+                setOriginalRepeat(originalrepeat => 0);
             }}
                    min="0" style={customStyleInput}/>
         </>

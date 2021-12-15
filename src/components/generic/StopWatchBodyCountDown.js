@@ -12,44 +12,45 @@ const secondsInput = React.createRef();
  * @constructor
  */
 const StopWatchBodyCountDown = () => {
-    // get the values from countdown provider context
-    const {
+  // get the values from countdown provider context
+  const {
 
-        setOriginalMinutes,
-        setOriginalSeconds,
-        setOriginalHours
-    } = useContext(TimerContext)
+    setOriginalMinutes,
+    setOriginalSeconds,
+    setOriginalHours,
+    setOriginalRepeat
+  } = useContext(TimerContext);
 
 
   // return the values of the body of the CountDown timer
-    return (
+  return (
 
 
-        <>
-            <p>(Hours)</p>
-            <input ref={hoursInput} type="number" placeholder={0} name="hours" onChange={(e) => {
+    <>
+      <p>(Hours)</p>
+      <input ref={hoursInput} type="number" placeholder={0} name="hours" onChange={(e) => {
 
-                setOriginalHours(originalhours => hoursInput.current.value)
-            }}
-                   min="0"
-                   style={customStyleInput}/>
-            <p>(Minutes)</p>
-            <input ref={minutesInput} type="number" placeholder={0} name="minutes" onChange={(e) => {
+        setOriginalHours(originalhours => hoursInput.current.value);
+      }}
+             min="0"
+             style={customStyleInput} />
+      <p>(Minutes)</p>
+      <input ref={minutesInput} type="number" placeholder={0} name="minutes" onChange={(e) => {
 
-                setOriginalMinutes(originalminutes => minutesInput.current.value)
+        setOriginalMinutes(originalminutes => minutesInput.current.value);
 
-            }}
-                   min="0" style={customStyleInput}/>
+      }}
+             min="0" style={customStyleInput} />
 
-            <p>(Seconds)</p>
-            <input ref={secondsInput} type="number" placeholder={0} name="seconds" onChange={(e) => {
+      <p>(Seconds)</p>
+      <input ref={secondsInput} type="number" placeholder={0} name="seconds" onChange={(e) => {
 
-                setOriginalSeconds(originalseconds => secondsInput.current.value);
-
-            }}
-                   min="0" style={customStyleInput}/>
-        </>
-    )
-}
+        setOriginalSeconds(originalseconds => secondsInput.current.value);
+        setOriginalRepeat(originalrepeat => 0);
+      }}
+             min="0" style={customStyleInput} />
+    </>
+  );
+};
 
 export default StopWatchBodyCountDown;

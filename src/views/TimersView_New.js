@@ -59,7 +59,11 @@ const ButtonPosition = {
 };
 const myStyle = {
   backgroundColor: "#add8e6", alignItems: "center", cursor: "pointer"
+
 };
+const activeTimer ={
+  backgroundColor: "lightblue", alignItems: "center", cursor: "pointer"
+}
 const timers1 = [
   {
     title: "Stopwatch",
@@ -82,8 +86,8 @@ export const StopWatchDisplayTypes = () => {
 
   const {
     timers,
-    setStopwatchtype
-
+    setStopwatchtype,
+    currentbuttonindex
   } = useContext(TimerContext);
 
   //***********************************************************
@@ -145,7 +149,7 @@ export const StopWatchDisplayTypes = () => {
   }
   return (
 
-    <Container>
+    <Container >
       <div style={ButtonPosition}>
       <StopWatchButtonsTimers style={ButtonPosition}/>
     </div>
@@ -162,8 +166,11 @@ export const StopWatchDisplayTypes = () => {
           hrs={timers[i].originalhours}
           mins={timers[i].originalminutes}
           secs={timers[i].originalseconds}
+          rounds={timers[i].originalrepeat}
+          style={{
+            backgroundColor: i===currentbuttonindex ? '#958f46': 'lightgrey',
 
-          >
+            }}          >
           <TimerTitle>{c_timer.get("title")}</TimerTitle>
 
         {c_timer.get("C")}

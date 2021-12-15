@@ -88,7 +88,7 @@ export function TimerDisplay() {
   // set values to '0' wired timing issue
   if (!reset && seconds !== 0 && hours !== 0 && minutes !== 0) {
     convertSeconds.seconds = 0;
-    convertSeconds.seconds = 0;
+    convertSeconds.minutes = 0;
     convertSeconds.hours = 0;
   }
   //  change color of timer display

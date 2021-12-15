@@ -118,6 +118,7 @@ export const StopWatchButtonsTimers = () => {
         }
 
       } else {
+        //*******************Run for all other timers  ******************************
         if (!onstart) {
           setSeconds(() => parseInt(timers[currentbuttonindex].originalseconds));
           setMinutes(() => parseInt(timers[currentbuttonindex].originalminutes));
@@ -128,7 +129,7 @@ export const StopWatchButtonsTimers = () => {
 
           setOnStart(() => true);
         }
-        //*******************Run for all other timers  ******************************
+
 
         if (hours >= timers[currentbuttonindex].originalhours && minutes >= timers[currentbuttonindex].originalminutes && seconds >= timers[currentbuttonindex].originalseconds) {
 
@@ -270,7 +271,7 @@ export const StopWatchButtonsTimers = () => {
           // setCounterDisplay(() => myColors["eggshell-white"]);
           let changeText = document.getElementById("idStopWatchTabataButton");
           changeText.innerHTML = "Start";
-          setRepeat(() => 1);
+          setRepeat(() => 0);
           setWorkOutPeriod(() => "Workout");
           setPaused(() => false);
         }} style={roundedbuttons} />
