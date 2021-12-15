@@ -24,7 +24,7 @@ export function StopWatchProvider({ children }) {
   const [originalhoursrest, setOriginalHoursRest] = useState(0);
 
 
-  const [onstart, setOnStart] = useState(true);
+  const [onstart, setOnStart] = useState(false);
   const [repeat, setRepeat] = useState(0);
   const [originalrepeat, setOriginalRepeat] = useState(0);
   const [reset, setReset] = useState(false);

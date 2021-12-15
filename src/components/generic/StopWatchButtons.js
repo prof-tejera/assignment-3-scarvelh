@@ -117,66 +117,86 @@ export const StopWatchButtonsTimers = () => {
           }
         }
 
-      } else {
-        //*******************Run for all other timers  ******************************
+      } else if (timers[currentbuttonindex].type === "Countdown" || timers[currentbuttonindex].type === "XY") {
         if (!onstart) {
-          setSeconds(() => parseInt(timers[currentbuttonindex].originalseconds));
-          setMinutes(() => parseInt(timers[currentbuttonindex].originalminutes));
-          setHours(() => parseInt(timers[currentbuttonindex].originalhours));
-
-          setIntervalId(() => null);
-          //setStartTimer(() => true);
-
+          setSeconds(() => timers[currentbuttonindex].originalseconds);
+          setMinutes(() => timers[currentbuttonindex].originalminutes);
+          setHours(() => timers[currentbuttonindex].originalhours);
           setOnStart(() => true);
         }
 
+        // useEffect(() => {
 
-        if (hours >= timers[currentbuttonindex].originalhours && minutes >= timers[currentbuttonindex].originalminutes && seconds >= timers[currentbuttonindex].originalseconds) {
+        if (onstart && hours >= timers[currentbuttonindex].originalhours && minutes >= timers[currentbuttonindex].originalminutes && seconds >= timers[currentbuttonindex].originalseconds && originalrepeat >= repeat) {
 
+          if (currentbuttonindex < timers.length  && currentbuttonindex !== 0) {
+            setCurrentButtonIndex((currentbuttonindex) => currentbuttonindex + 1);
 
-          if (intervalId === 0) {
-            setStartTimer(() => true);
+            setFastForward(() => true);
           }
 
-          if (timers[currentbuttonindex].type === "Tabata") {
-            if (toddleworkout === "Resting") {
-              setSeconds(() => parseInt(originalsecondsrest));
-              setMinutes(() => parseInt(originalminutesrest));
-              setHours(() => parseInt(originalhoursrest));
-              setWorkOutPeriod(() => "Resting");
-
-
-            }
-
-
-            if (toddleworkout === "Workout") {
-              setSeconds(() => parseInt(timers[currentbuttonindex].originalseconds));
-              setMinutes(() => parseInt(timers[currentbuttonindex].originalminutes));
-              setHours(() => parseInt(timers[currentbuttonindex].originalhours));
-              setWorkOutPeriod(() => "Workout");
-              setRepeat(() => repeat + 1);
-
-
-            }
-
-          }
-          setFastForward(() => true);
         }
-        if (hours === timers[currentbuttonindex].originalhours && minutes === timers[currentbuttonindex].originalminutes && seconds === timers[currentbuttonindex].originalseconds) {
+
+        // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
+        if (hours === 0 && minutes === 0 && seconds === 0 && originalrepeat >= repeat && onstart) {
 
           /// removeTimer(0);
-          if (timers.length > 1) {
-
-            setCurrentButtonIndex((currentbuttonindex) => parseInt(currentbuttonindex + 1));
-            setIntervalId(() => null);
+          if (currentbuttonindex < timers.length ) {
+            setCurrentButtonIndex((currentbuttonindex) => currentbuttonindex + 1);
+            //setIntervalId(() => null);
+            setOnStart(()=>false);
           }
-          setFastForward(() => true);
         }
+        //});
+
+
+      } else if (timers[currentbuttonindex].type === "Tabata") {
+        if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && originalrepeat > repeat) {
+
+
+          if (toddleworkout === "Resting") {
+            setSeconds(() => parseInt(originalsecondsrest));
+            setMinutes(() => parseInt(originalminutesrest));
+            setHours(() => parseInt(originalhoursrest));
+            setWorkOutPeriod(() => "Resting");
+
+
+          }
+
+
+          if (toddleworkout === "Workout") {
+            setSeconds(() => parseInt(originalseconds));
+            setMinutes(() => parseInt(originalminutes));
+            setHours(() => parseInt(originalhours));
+            setWorkOutPeriod(() => "Workout");
+            setRepeat(() => repeat + 1);
+
+
+          }
+
+          setReset(() => false);
+          setOnStart(() => true);
+
+        }
+        // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
+        if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= originalrepeat) {
+          clearInterval(intervalId);
+
+          setRepeat(() => 0);
+          setIntervalId(() => null);
+          setOnStart(() => false);
+
+          setReset(() => true);
+          setFastForward(() => true);
+
+
+          setWorkOutPeriod(() => "");
+
+
+        }
+
       }
-      if (timers.length === currentbuttonindex) {
-        setCurrentButtonIndex((currentbuttonindex) => parseInt(currentbuttonindex + 1));
-        setIntervalId(() => null);
-      }
+
     }
   });
 
