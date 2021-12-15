@@ -1,6 +1,4 @@
-import { StopWatchTimerDisplay } from "../generic/TimerDisplay";
-import StopWatchButtons from "../generic/StopWatchButtons";
-import { StopWatchProvider } from "../../mycontext/MyContexts";
+import { TimerDisplay } from "../generic/TimerDisplay";
 import { ThemeContext, ThemeProvider } from "../../mycontext/MyThemeContexts";
 import React from "react";
 import { Container } from "../../utils/helpers";
@@ -23,10 +21,8 @@ function App() {
             <ThemeProvider>
                 <Container style={themestopwatch}>
 
-                    <StopWatchTimerDisplay/>
-                    <div style={ButtonPosition}>
-                        <StopWatchButtons style={ButtonPosition}/>
-                    </div>
+                    <TimerDisplay/>
+
                 </Container>
             </ThemeProvider>
 

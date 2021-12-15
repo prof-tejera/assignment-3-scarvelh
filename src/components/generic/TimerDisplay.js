@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { convertToSeconds, myColors, secondsToTime } from "../../utils/helpers";
 import { TimerContext } from "../../mycontext/MyContexts";
 
@@ -39,56 +39,9 @@ const AnimatedComponent = styled.div`
 
 `;
 
-///===================================================StopWatch Timer Display=================================================
-export function StopWatchTimerDisplay() {
-  // get information from context
-  const { seconds, fastforward } = useContext(TimerContext);
-  // get information from context
-  let { counterdisplay } = React.useContext(ThemeContext);
-  // convert the time  to second, minutes and hours
-  let convertSeconds = secondsToTime(seconds);
-
-  // change background color
-
-
-  if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
-    // change background
-    let name = document.getElementById("timerID");
-    name.style.backgroundColor = counterdisplay;
-
-  }
-  // change fast forward display to congratulate the display
-  if (fastforward) {
-    return (
-      <AnimatedComponent id="timerID">
-
-        <h1 style={{ color: "red" }}> Congratulations workout completed!</h1>
-
-      </AnimatedComponent>
-    );
-  } else {
-    // return the regular timer display if fast fast forward is not selected
-    return (
-
-      <div style={timerFormat} id="timerID">
-      <span className="hours">
-        {("0" + convertSeconds.hours).slice(-2)}:
-      </span>
-        <span className="minutes">
-        {("0" + convertSeconds.minutes).slice(-2)}:
-      </span>
-        <span className="seconds">
-        {("0" + convertSeconds.seconds).slice(-2)}
-      </span>
-      </div>
-
-
-    );
-  }
-}
 
 ///===================================================CountDown and XY Timer Display=================================================
-export function StopWatchTimerDisplayCountDown() {
+export function TimerDisplay() {
   // get information from context storage
   const {
     hours,
@@ -145,7 +98,7 @@ export function StopWatchTimerDisplayCountDown() {
     name.style.backgroundColor = counterdisplay;
   }
   // change the number display to congratulation
-  if (fastforward && timers.length == 0) {
+  if (fastforward && convertSeconds.seconds === 0 && convertSeconds.minutes === 0 && convertSeconds.seconds === 0 && currentbuttonindex >= timers.length) {
     // ****************Continue to the  next timer *******************
 
     return (
@@ -156,16 +109,7 @@ export function StopWatchTimerDisplayCountDown() {
 
   } else {
 
-    if (timers.length > 1 && !onstart) {
-      //  Display the regular display
-      setSeconds(() => timers[currentbuttonindex].originalseconds);
-      setHours(() => timers[currentbuttonindex].originalhours);
-      setMinutes(() => timers[currentbuttonindex].originalminutes);
-      setFastForward(() => false);
-      //setOnStart(() => false);
-      setReset(() => false);
-      setRepeat(() => 0);
-    }
+
 
     return (
 
@@ -187,7 +131,7 @@ export function StopWatchTimerDisplayCountDown() {
 }
 
 ///===================================================Tabata Timer Display=================================================
-export function StopWatchTimerDisplayTabataCountDown() {
+export function TimerDisplayTabata() {
 // get information from provider context for the Tabata display
   let {
     hours,
@@ -244,4 +188,7 @@ export function StopWatchTimerDisplayTabataCountDown() {
   }
 }
 
-export default StopWatchTimerDisplay;
+
+
+
+export default TimerDisplay;

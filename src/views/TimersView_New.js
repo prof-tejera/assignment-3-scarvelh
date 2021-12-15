@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
@@ -7,6 +7,12 @@ import Timer from "../components/generic/Timer";
 import TimerTitle from "../components/generic/TimerTitle";
 import styled from "styled-components";
 import { TimerContext } from "../mycontext/MyContexts";
+import { convertToSeconds, secondsToTime } from "../utils/helpers";
+import {
+  StopWatchButtonsCountDown,
+  StopWatchButtonsCountDownTabata,
+  StopWatchButtonsTimers
+} from "../components/generic/StopWatchButtons";
 
 const Container = styled.div`
   background-color: #C0C0C0;
@@ -26,7 +32,31 @@ const AlignGrid = {
   margin: "30px",
   alignItems: "center"
 };
+const timerFormat = {
+  margin: "20px",
+  display: "flex",
+  //height: "12%",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "55px",
+  width: "200px",
+  backgroundColor: "eggshell-white",
+  //backgroundColor: 	"#7CFC00",
+  fontSize: "45px",
+  borderRadius: "20%",
+  //make display float right
+  float: "right",
+  border: "1px solid black"
+};
+const ButtonPosition = {
+  /* The size of the buttons passed */
+  fontSize: "20px",
+  alignItems: "right",
+  //border: ".1rem red solid",
+  borderRadius: "20%",
+  float: "left"
 
+};
 const myStyle = {
   backgroundColor: "#add8e6", alignItems: "center", cursor: "pointer"
 };
@@ -67,7 +97,7 @@ export const StopWatchDisplayTypes = () => {
     n.set("C", <Countdown />);
     n.set("customStyling", "{ backgroundColor: \"#ffffe0\", alignItems: \"center\", cursor: \"pointer\" }");
     create_timers.push(n);
-    console.log(create_timers)
+    console.log(create_timers);
     //create_timers.set(n);
 
   });
@@ -116,31 +146,34 @@ export const StopWatchDisplayTypes = () => {
   return (
 
     <Container>
+      <div style={ButtonPosition}>
+      <StopWatchButtonsTimers style={ButtonPosition}/>
+    </div>
       <div style={AlignGrid}>
-        {create_timers.map((c_timer,i) => (
-          <Timer title={c_timer.get('title')} onClick={
-            () => {
-              HandleTimerClick(c_timer.get('title'));
-            }
-          }
-                 value={c_timer.get('title')} style={c_timer.customStyling}
-                 key={i.toString()}>
-            <TimerTitle>{c_timer.get('title')}</TimerTitle>
 
-            {c_timer.get('C')}
+        {create_timers.map((c_timer, i) => (
+          <Timer title={c_timer.get("title") } onClick={
+          () => {
+          HandleTimerClick(c_timer.get("title"));
+        }
+        }
+          value={c_timer.get("title")} style={c_timer.customStyling}
+          key={i.toString()}
+          hrs={timers[i].originalhours}
+          mins={timers[i].originalminutes}
+          secs={timers[i].originalseconds}
+
+          >
+          <TimerTitle>{c_timer.get("title")}</TimerTitle>
+
+        {c_timer.get("C")}
           </Timer>
-
-        ))
-          //cons.log(c_timer.title)
+          ))
         }
       </div>
       {selectedTimerType}
 
     </Container>
-
   );
-
 };
-
-
 export default StopWatchDisplayTypes;

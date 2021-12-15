@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import StopWatchProvider from "../mycontext/MyContexts";
 import { StopWatchDisplayTypes } from "./TimersView_New";
 
 export const DisplayTimersView = () => {

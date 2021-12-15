@@ -24,7 +24,7 @@ export function StopWatchProvider({ children }) {
   const [originalhoursrest, setOriginalHoursRest] = useState(0);
 
 
-  const [onstart, setOnStart] = useState(false);
+  const [onstart, setOnStart] = useState(true);
   const [repeat, setRepeat] = useState(0);
   const [originalrepeat, setOriginalRepeat] = useState(0);
   const [reset, setReset] = useState(false);
@@ -32,6 +32,7 @@ export function StopWatchProvider({ children }) {
   const [fastforward, setFastForward] = useState(false);
   const [stopwatchtype, setStopwatchtype] = useState("");
   const [timers, setTimers] = useState([]);
+  const [starttimer, setStartTimer] = useState(false);
   const addTimer = (config) => {
     const timers1 = [...timers, config];
     setTimers(timers1);
@@ -88,6 +89,8 @@ export function StopWatchProvider({ children }) {
       removeTimer,
       currentbuttonindex,
       setCurrentButtonIndex,
+      starttimer,
+      setStartTimer,
 
     }}>{children}</TimerContext.Provider>;
 }

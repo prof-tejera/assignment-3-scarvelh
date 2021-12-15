@@ -1,12 +1,9 @@
 import React from "react";
-import { StopWatchTimerDisplayTabataCountDown } from "../generic/TimerDisplay";
-import { StopWatchButtonsCountDownTabata } from "../generic/StopWatchButtons";
-
-import { StopWatchProvider } from "../../mycontext/MyContexts";
 import StopWatchBodyTabata from "../generic/StopWatchBodyTabata";
 import { ThemeContext, ThemeProvider } from "../../mycontext/MyThemeContexts";
 import styled from "styled-components";
 import { StopWatchRoundsTabata } from "../generic/StopWatchRounds";
+import { TimerDisplayTabata } from "../generic/TimerDisplay";
 
 const Container = styled.div`
   width: auto;
@@ -57,13 +54,11 @@ function App() {
 
             <ThemeProvider>
                 <Container style={themetabata}>
-                    <StopWatchTimerDisplayTabataCountDown/>
+                    <TimerDisplayTabata/>
                     <StopWatchRoundsTabata/>
                     <hr style={{color: "black"}}/>
                     <StopWatchBodyTabata/>
-                    <div style={ButtonPosition}>
-                        <StopWatchButtonsCountDownTabata/>
-                    </div>
+
                 </Container>
             </ThemeProvider>
 

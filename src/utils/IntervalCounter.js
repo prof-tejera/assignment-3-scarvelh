@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useInterval from "@use-it/interval";
 
 const CounterUp = ({ delay = 1000 }) => {
   const [intervalId, setIntervalId] = useState(0);

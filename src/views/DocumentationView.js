@@ -57,19 +57,7 @@ class Documentation extends React.Component {
               }
             ]}
           />
-          <DocumentComponent
-            title="Stop Watch Display"
-            component={<DisableComponent><StopWatchTimerDisplay hrs={"00"} mins={"00"}
-                                                                secs={"00"} /></DisableComponent>}
-            propDocs={[
-              {
-                prop: "hrs:mins:secs",
-                description: "Show the stop watch display 00:00:00",
-                type: "string",
-                defaultValue: "hrs:mins:secs"
-              }
-            ]}
-          />
+
           <DocumentComponent
             title="Input field 'hours' minutes' 'seconds'"
             component={<DisableComponent><input type="number" min="0" placeholder={0} /></DisableComponent>}

@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { TimerContext } from "../../mycontext/MyContexts";
-import styled from 'styled-components';
+import styled from "styled-components";
+
 const DeleteButton = styled.button`
   background-color: lightcoral;
 `;

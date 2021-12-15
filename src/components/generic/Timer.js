@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { convertToSeconds, secondsToTime } from "../../utils/helpers";
 
 const Container = styled.div`
   display: flex;
@@ -16,27 +17,34 @@ const Container = styled.div`
 
 `;
 
-const Timer = (props) =>{
- // const { setStopwatchtype } = useContext(StopWatchContext);
-
+const Timer = (props) => {
+  // const { setStopwatchtype } = useContext(StopWatchContext);
+  const calcsecs = convertToSeconds(props.hrs, props.mins, props.secs);
+  // convert the number of seconds to  hour and minutes and seconds for the display
+  const convertSeconds = secondsToTime(calcsecs);
   return (
-    <Container  onClick={() => {props.onClick(props.value)
-    console.log("Timer" + props.value)
-
-
-     // setStopwatchtype(() => props.value);
+    <Container onClick={() => {
+      props.onClick(props.value);
 
     }} style={props.style}>
-      {props.value}
+      <div>
+
+        <p>
+          {props.value}
+        </p>
+        <p style={{ color: 'red' }}>
+          {("0" + convertSeconds.hours).slice(-2)}:{("0" + convertSeconds.minutes).slice(-2)}:{("0" + convertSeconds.seconds).slice(-2)}
+        </p>
+      </div>
     </Container>
   );
 
-}
+};
 Timer.defaultProps = {
   //dishes: [],
-  onClick: () => { },
+  onClick: () => {
+  }
 };
-
 
 
 export default Timer;
