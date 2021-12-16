@@ -1,6 +1,5 @@
 import React from "react";
-import StopWatchBodyTabata from "../generic/StopWatchBodyTabata";
-import { ThemeContext, ThemeProvider } from "../../mycontext/MyThemeContexts";
+import { ThemeProvider } from "../../mycontext/MyThemeContexts";
 import styled from "styled-components";
 import { StopWatchRoundsTabata } from "../generic/StopWatchRounds";
 import { TimerDisplayTabata } from "../generic/TimerDisplay";
@@ -37,19 +36,11 @@ const Container = styled.div`
   justify-content: center; /* align items vertically, in this case */
 `;
 
-const ButtonPosition = {
-    /* The size of the buttons passed */
-    fontSize: "20px",
-    alignItems: "right",
-    //border: ".1rem red solid",
-    borderRadius: "20%",
-    float: "left"
 
-};
 
 
 function App() {
-    const {themetabata} = React.useContext(ThemeContext)
+
     return (
 
             <ThemeProvider>

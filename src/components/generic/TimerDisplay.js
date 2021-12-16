@@ -52,22 +52,8 @@ export function TimerDisplay() {
 
     fastforward,
     timers,
-    onstart,
-    setOnStart,
 
-    setReset,
-    repeat,
-    setRepeat,
-    originalseconds,
-    originalminutes,
-    originalhours,
 
-    originalrepeat,
-
-    setFastForward,
-    setSeconds,
-    setHours,
-    setMinutes,
     currentbuttonindex
 
   } = useContext(TimerContext);
@@ -108,7 +94,6 @@ export function TimerDisplay() {
     );
 
   } else {
-
 
 
     return (
@@ -187,8 +172,6 @@ export function TimerDisplayTabata() {
     );
   }
 }
-
-
 
 
 export default TimerDisplay;

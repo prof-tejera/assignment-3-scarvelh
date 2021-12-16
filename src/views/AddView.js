@@ -7,7 +7,7 @@ import StopWatchAddButtonConfiguration from "../components/generic/StopWatchAddB
 import StopWatchBodyXY from "../components/generic/StopWatchBodyXY";
 import StopWatchBodyTabata from "../components/generic/StopWatchBodyTabata";
 import StopWatchBodyRegular from "../components/generic/StopWatchBodyRegular";
-import ConfigurationProvider from "../mycontext/StopWatchConfigurationContext";
+
 import StopWatchList from "../components/generic/StopWatchList";
 
 const stopwatch_types = ["Stopwatch", "Countdown", "XY", "Tabata"];
@@ -57,7 +57,7 @@ const AddView = () => {
 
   return (
 
-      <ConfigurationProvider>
+
         <Container style={backColor}>
           <StopWatchDropdown />
           <div style={ButtonPosition}>
@@ -69,7 +69,7 @@ const AddView = () => {
           < hr />
           <StopWatchList />
         </Container>
-      </ConfigurationProvider>
+
 
   );
 };

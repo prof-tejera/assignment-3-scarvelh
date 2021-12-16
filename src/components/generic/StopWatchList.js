@@ -1,16 +1,13 @@
 import React from "react";
 import { TimerContext } from "../../mycontext/MyContexts";
-import styled from "styled-components";
 
-const DeleteButton = styled.button`
-  background-color: lightcoral;
-`;
+
 const StopWatchList = (props) => {
 
 
   const context = React.useContext(TimerContext);
   return (
-    <table className="stopwat-list">
+    <table className="stopwatch-list">
       <thead>
       <tr>
         <th>StopWatch Type</th>

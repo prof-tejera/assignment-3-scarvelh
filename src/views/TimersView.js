@@ -6,7 +6,7 @@ import Tabata from "../components/timers/Tabata";
 import Timer from "../components/generic/Timer";
 import TimerTitle from "../components/generic/TimerTitle";
 import styled from "styled-components";
-import { ConfigurationContext } from "../mycontext/StopWatchConfigurationContext";
+
 
 const Container = styled.div`
   background-color: #C0C0C0;
