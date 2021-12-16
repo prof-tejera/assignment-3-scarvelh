@@ -26,6 +26,7 @@ export function StopWatchProvider({ children }) {
 
   const [onstart, setOnStart] = useState(false);
   const [repeat, setRepeat] = useState(0);
+
   const [originalrepeat, setOriginalRepeat] = useState(0);
   const [reset, setReset] = useState(false);
   const [workoutperiod, setWorkOutPeriod] = useState("Workout");
@@ -55,6 +56,7 @@ export function StopWatchProvider({ children }) {
       setOnStart,
       repeat,
       setRepeat,
+
       reset,
       setReset,
       originalhours,
