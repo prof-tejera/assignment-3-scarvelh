@@ -225,9 +225,9 @@ export const StopWatchButtonsTimers = () => {
         setIntervalId(setInterval(() => {
 
           if (timers[currentbuttonindex].type === "Stopwatch") {
-            setSeconds(() => parseInt(seconds + 1));
+            setSeconds((seconds) => parseInt(seconds + 1));
           } else {
-            setSeconds(() => parseInt(seconds - 1));
+            setSeconds((seconds) => parseInt(seconds - 1));
           }
           console.log(seconds);
 

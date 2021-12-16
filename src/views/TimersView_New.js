@@ -43,11 +43,9 @@ const myStyle = {
 };
 
 
-
-
 export const StopWatchDisplayTypes = () => {
   const create_timers = [];
-  const [ setType] = useState("Stopwatch");
+  const [setType] = useState("Stopwatch");
 
 
   const {
@@ -60,15 +58,14 @@ export const StopWatchDisplayTypes = () => {
   const context = React.useContext(TimerContext);
   //useEffect(() => {
   // if (context.timers) {
-  context.timers.map((type) => {
+  context.timers.map((type,i) => {
     let n = new Map();
 
     n.set("title", type.type);
     n.set("C", <Countdown />);
     n.set("customStyling", "{ backgroundColor: \"#ffffe0\", alignItems: \"center\", cursor: \"pointer\" }");
     create_timers.push(n);
-
-
+     return n;
 
   });
   //}
@@ -87,8 +84,6 @@ export const StopWatchDisplayTypes = () => {
     setType(() => timerType);
 
   }
-
-
 
 
   let selectedTimerType;
