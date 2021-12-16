@@ -53,11 +53,11 @@ function App() {
     return (
 
             <ThemeProvider>
-                <Container style={themetabata}>
+                <Container >
                     <TimerDisplayTabata/>
                     <StopWatchRoundsTabata/>
                     <hr style={{color: "black"}}/>
-                    <StopWatchBodyTabata/>
+
 
                 </Container>
             </ThemeProvider>

@@ -21,8 +21,10 @@ export const backColor = {
   borderRadius: "15%",
   //fontSize: "15px"
   height: "auto",
+
   backgroundColor: "white",
-  width: "500px",
+  //width: "500px",
+  width: "700px",
   padding: "30px",
   borderStyle: "outset",
   boxShadow: "inset 0 3px 6px rgba(0, 0, 0, 0.16), 0 4px 6px rgba(0, 0, 0, 0.45)"

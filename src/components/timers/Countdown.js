@@ -3,6 +3,7 @@ import { StopWatchTimerDisplayCountDown, TimerDisplay } from "../generic/TimerDi
 import { StopWatchButtonsCountDown } from "../generic/StopWatchButtons";
 import { Container } from "../../utils/helpers";
 import { ThemeContext, ThemeProvider } from "../../mycontext/MyThemeContexts";
+import StopWatchRounds from "../generic/StopWatchRounds";
 
 
 const ButtonPosition = {
@@ -30,7 +31,8 @@ function App() {
     <ThemeProvider>
       <Container style={themecountdown}>
         <TimerDisplay />
-
+        <StopWatchRounds />
+        <hr />
 
       </Container>
     </ThemeProvider>

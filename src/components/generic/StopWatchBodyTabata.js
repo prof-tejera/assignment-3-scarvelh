@@ -1,6 +1,7 @@
 import { customStyleInput } from "../timers/Countdown";
 import React, { useContext } from "react";
 import { TimerContext } from "../../mycontext/MyContexts";
+import { Container } from "../../utils/helpers";
 
 
 const AlignGrid = {
@@ -9,7 +10,7 @@ const AlignGrid = {
     display: "flex",
     //alignItems: "center",
     flexDirection: "column",
-
+     width: "200px",
     justifyContent: "center", /* align items vertically, in this case */
     alignItems: "flex-start",
     marginLeft: "10px",

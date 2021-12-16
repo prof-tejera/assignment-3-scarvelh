@@ -22,7 +22,8 @@ export function StopWatchProvider({ children }) {
   const [originalsecondsrest, setOriginalSecondsRest] = useState(0);
   const [originalminutesrest, setOriginalMinutesRest] = useState(0);
   const [originalhoursrest, setOriginalHoursRest] = useState(0);
-
+  const [workoutcontroller, setWorkoutController] = useState(false);
+  const [restingcontroller, setRestingController] = useState(false);
 
   const [onstart, setOnStart] = useState(false);
   const [repeat, setRepeat] = useState(0);
@@ -93,7 +94,8 @@ export function StopWatchProvider({ children }) {
       setCurrentButtonIndex,
       starttimer,
       setStartTimer,
-
+      workoutcontroller, setWorkoutController,
+      restingcontroller, setRestingController
     }}>{children}</TimerContext.Provider>;
 }
 

@@ -22,7 +22,10 @@ const Timer = (props) => {
   const calcsecs = convertToSeconds(props.hrs, props.mins, props.secs);
   // convert the number of seconds to  hour and minutes and seconds for the display
   const convertSeconds = secondsToTime(calcsecs);
-  const totaltime = (convertToSeconds(props.hrs, props.mins, props.secs) * props.rounds);
+  const combineHours = (parseInt(props.hrs) + parseInt(props.hrsrest));
+  const combineMinutes = (parseInt(props.mins) + parseInt(props.minsrest));
+  const combineSeconds = (parseInt(props.secs) + parseInt(props.secsrest));
+  const totaltime = (convertToSeconds(combineHours,combineMinutes,combineSeconds) * props.rounds);
  let totalSeconds = secondsToTime(totaltime);
   if (totaltime === 0){
     totalSeconds = secondsToTime(calcsecs)

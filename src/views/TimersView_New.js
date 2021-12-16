@@ -61,9 +61,9 @@ const myStyle = {
   backgroundColor: "#add8e6", alignItems: "center", cursor: "pointer"
 
 };
-const activeTimer ={
+const activeTimer = {
   backgroundColor: "lightblue", alignItems: "center", cursor: "pointer"
-}
+};
 const timers1 = [
   {
     title: "Stopwatch",
@@ -149,33 +149,36 @@ export const StopWatchDisplayTypes = () => {
   }
   return (
 
-    <Container >
+    <Container>
       <div style={ButtonPosition}>
-      <StopWatchButtonsTimers style={ButtonPosition}/>
-    </div>
+        <StopWatchButtonsTimers style={ButtonPosition} />
+      </div>
       <div style={AlignGrid}>
 
         {create_timers.map((c_timer, i) => (
-          <Timer title={c_timer.get("title") } onClick={
-          () => {
-          HandleTimerClick(c_timer.get("title"));
-        }
-        }
-          value={c_timer.get("title")} style={c_timer.customStyling}
-          key={i.toString()}
-          hrs={timers[i].originalhours}
-          mins={timers[i].originalminutes}
-          secs={timers[i].originalseconds}
-          rounds={timers[i].originalrepeat}
-          style={{
-            backgroundColor: i===currentbuttonindex ? '#958f46': 'lightgrey',
+          <Timer title={c_timer.get("title")} onClick={
+            () => {
+              HandleTimerClick(c_timer.get("title"));
+            }
+          }
+                 value={c_timer.get("title")} style={c_timer.customStyling}
+                 key={i.toString()}
+                 hrs={timers[i].originalhours}
+                 mins={timers[i].originalminutes}
+                 secs={timers[i].originalseconds}
+                 hrsrest={timers[i].originalhoursrest}
+                 minsrest={timers[i].originalminutesrest}
+                 secsrest={timers[i].originalsecondsrest}
+                 rounds={timers[i].originalrepeat}
+                 style={{
+                   backgroundColor: i === currentbuttonindex ? "#958f46" : "lightgrey"
 
-            }}          >
-          <TimerTitle>{c_timer.get("title")}</TimerTitle>
+                 }}>
+            <TimerTitle>{c_timer.get("title")}</TimerTitle>
 
-        {c_timer.get("C")}
+            {c_timer.get("C")}
           </Timer>
-          ))
+        ))
         }
       </div>
       {selectedTimerType}

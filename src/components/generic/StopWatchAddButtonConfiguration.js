@@ -21,10 +21,14 @@ const StopWatchAddButtonConfiguration = () => {
     originalseconds,
     originalminutes,
     originalhours,
+    originalsecondsrest,
+    originalminutesrest,
+    originalhoursrest,
     originalrepeat,
     timers,
     setTimers,
-    addTimer
+    addTimer,
+    setFastForward,
   } = useContext(TimerContext);
   console.log("ttt");
 
@@ -38,9 +42,9 @@ const StopWatchAddButtonConfiguration = () => {
 
           ///******************************************************
           const saved_type = localStorage.getItem("stop_type");
-
+           setFastForward(()=> false)
          // addTimers({ saved_type, originalhours, originalminutes, originalseconds, originalrepeat });
-          addTimer({type:saved_type, originalhours, originalminutes, originalseconds, originalrepeat });
+          addTimer({type:saved_type, originalhours, originalminutes, originalseconds, originalrepeat,originalhoursrest, originalminutesrest, originalsecondsrest, });
           //***********************************************************
 
 

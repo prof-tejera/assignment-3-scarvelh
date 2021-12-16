@@ -107,7 +107,7 @@ export const different_timers = [
   {
     title: "Tabata",
     C: <Tabata />,
-    customStyling: { backgroundColor: "#FF7F7F", alignItems: "center", justifyItems: "center", cursor: "pointer" }
+    customStyling: { width: "auto", backgroundColor: "#FF7F7F", alignItems: "center", justifyItems: "center", cursor: "pointer" }
   }
 ];
 export default myColors;

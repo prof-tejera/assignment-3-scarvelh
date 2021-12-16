@@ -2,33 +2,34 @@ import { TimerDisplay } from "../generic/TimerDisplay";
 import { ThemeContext, ThemeProvider } from "../../mycontext/MyThemeContexts";
 import React from "react";
 import { Container } from "../../utils/helpers";
+import StopWatchRounds from "../generic/StopWatchRounds";
 //import ReactDOM from "react-dom";
 // align text in a grid
 const ButtonPosition = {
-    /* The size of the buttons passed */
-    fontSize: "20px",
-    borderRadius: "20%"
+  /* The size of the buttons passed */
+  fontSize: "20px",
+  borderRadius: "20%"
 
 };
 
 function App() {
 // get the themes from Theme context
-    const {themestopwatch} = React.useContext(ThemeContext)
+  const { themestopwatch } = React.useContext(ThemeContext);
 
-    return (
+  return (
 
 
-            <ThemeProvider>
-                <Container style={themestopwatch}>
+    <ThemeProvider>
+      <Container style={themestopwatch}>
 
-                    <TimerDisplay/>
+        <TimerDisplay />
+        <StopWatchRounds />
+        <hr />
+      </Container>
+    </ThemeProvider>
 
-                </Container>
-            </ThemeProvider>
-
-    );
+  );
 };
-
 
 
 export default App;
