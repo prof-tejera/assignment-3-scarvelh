@@ -59,105 +59,116 @@ export const StopWatchButtonsTimers = () => {
     const [paused, setPaused] = useState(false);
     const [intervalId, setIntervalId] = useState(0);
     const toddleworkout = workoutperiod === "Workout" ? "Resting" : "Workout";
-
+//***************** Only for stopwatch *********************************
     useEffect(() => {
 
       console.log("Current Index <><>" + currentbuttonindex);
       if (currentbuttonindex < timers.length) {
-        //***************** Only for stopwatch *********************************
+
         if (timers[currentbuttonindex].type === "Stopwatch") {
           if (!onstart) {
             setSeconds(() => 0);
             setMinutes(() => 0);
             setHours(() => 0);
             setOnStart(() => true);
-          }
-          if (hours >= timers[currentbuttonindex].originalhours && minutes >= timers[currentbuttonindex].originalminutes && seconds >= timers[currentbuttonindex].originalseconds) {
 
-            if (onstart && hours === timers[currentbuttonindex].originalhours && minutes === timers[currentbuttonindex].originalminutes && seconds === timers[currentbuttonindex].originalseconds) {
-              setSeconds(() => 0);
-              setMinutes(() => 0);
-              setHours(() => 0);
-              setFastForward(() => true);
-              clearInterval(intervalId);
-              setIntervalId((intervalId) => null);
-              //setOnStart(() => true);
-              //setCurrentButtonIndex((currentbuttonindex) => 0)
-            }
+          }
+
+
+          if (onstart && hours >= timers[currentbuttonindex].originalhours && minutes >= timers[currentbuttonindex].originalminutes && seconds >= timers[currentbuttonindex].originalseconds) {
+
+            //setCurrentButtonIndex((currentbuttonindex) => 0)
             if (currentbuttonindex < timers.length) {
               setCurrentButtonIndex((currentbuttonindex) => parseInt(currentbuttonindex + 1));
               setOnStart(() => false);
-              setStartTimer(() => true);
+              //setStartTimer(() => true);
             }
 
+            if ((currentbuttonindex + 1) >= timers.length) {
 
+              setFastForward(() => true);
+              clearInterval(intervalId);
+              setIntervalId(() => null);
+              setStartTimer(() => true);
+
+            }
+            if ((currentbuttonindex + 1) === timers.length) {
+              setFastForward(() => true);
+              setSeconds((() => 0));
+              setMinutes(() => 0);
+              setHours(() => 0);
+
+              clearInterval(intervalId);
+              setIntervalId(() => null);
+              setStartTimer(true);
+            }
           }
-          // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
-          /* if (hours === timers[currentbuttonindex].originalhours && minutes === timers[currentbuttonindex].originalminutes && seconds === timers[currentbuttonindex].originalseconds) {
-
-             /// removeTimer(0);
-             //  if (timers.length > 1) {
-             if (currentbuttonindex < timers.length) {
-               setCurrentButtonIndex((currentbuttonindex) => parseInt(currentbuttonindex + 1));
-
-               setIntervalId(() => null);
-             }
-           }*/
 
         }
-        //***************** Only for Countdown and XY *********************************
-        else if (timers[currentbuttonindex].type === "Countdown" || timers[currentbuttonindex].type === "XY") {
+      }
+    }, [setIntervalId, currentbuttonindex, timers, onstart, hours, minutes, seconds, setSeconds, setMinutes, setHours, setOnStart, setCurrentButtonIndex, setFastForward, intervalId, setStartTimer]);
+
+//***************** Only for Countdown and XY *********************************
+    useEffect(() => {
+      if (currentbuttonindex < timers.length) {
+        if (timers[currentbuttonindex].type === "Countdown" || timers[currentbuttonindex].type === "XY") {
           if (!onstart) {
-            setSeconds(() => timers[currentbuttonindex].originalseconds);
-            setMinutes(() => timers[currentbuttonindex].originalminutes);
-            setHours(() => timers[currentbuttonindex].originalhours);
+            setSeconds(() => parseInt(timers[currentbuttonindex].originalseconds));
+            setMinutes(() => parseInt(timers[currentbuttonindex].originalminutes));
+            setHours(() => parseInt(timers[currentbuttonindex].originalhours));
             if (timers[currentbuttonindex].type === "XY") {
-              setOriginalRepeat(() => timers[currentbuttonindex].originalrepeat);
+              setOriginalRepeat(() => parseInt(timers[currentbuttonindex].originalrepeat));
 
             }
             setOnStart(() => true);
+
+            console.log("rttt" + intervalId);
+
           }
 
-          // useEffect(() => {
 
           if (onstart && hours >= timers[currentbuttonindex].originalhours && minutes >= timers[currentbuttonindex].originalminutes && seconds >= timers[currentbuttonindex].originalseconds && originalrepeat >= repeat) {
 
             if (currentbuttonindex < timers.length && currentbuttonindex !== 0) {
               if (timers[currentbuttonindex].type === "Countdown") {
-               // setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
+
 
                 setFastForward(() => true);
                 clearInterval(intervalId);
-                setIntervalId((intervalId) => null);
-                setStartTimer(()=>true)
+                setIntervalId(() => null);
+
               }
               // handles XY Timer
               else {
 
-                /*  if (repeat < timers[currentbuttonindex].originalrepeat) {
-                    setRepeat((repeat) => parseInt(repeat + 1));
-                    setOnStart(() => false);
-                  } else {
-                    setCurrentButtonIndex((currentbuttonindex) => parseInt(currentbuttonindex + 1));
-                    setOnStart(() => false);
-                    setFastForward(() => true);
-                  }*/
+                /* if (repeat < timers[currentbuttonindex].originalrepeat) {
+                   setRepeat((repeat) => parseInt(repeat + 1));
+                   setOnStart(() => false);
+                 } else {
+                   setCurrentButtonIndex((currentbuttonindex) => parseInt(currentbuttonindex + 1));
+                   setOnStart(() => false);
+                   setFastForward(() => true);
+                 }*/
 
               }
             }
+
           }
-
-
           // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
           if (hours === 0 && minutes === 0 && seconds === 0 && originalrepeat >= repeat && onstart) {
 
-            /// removeTimer(0);
+
             if (currentbuttonindex < timers.length) {
               if (timers[currentbuttonindex].type === "Countdown") {
                 setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
-
                 setOnStart(() => false);
-                setStartTimer(()=>true);
+                if (currentbuttonindex >= timers.length) {
+                  setFastForward(() => true);
+                  clearInterval(intervalId);
+                  setIntervalId(() => null);
+                  setStartTimer(() => true);
+                }
+                setStartTimer(() => true);
               }
               //handle XY Timer
               else {
@@ -170,8 +181,7 @@ export const StopWatchButtonsTimers = () => {
 
                   setOnStart(() => false);
                   setFastForward(() => true);
-                  clearInterval(intervalId);
-                  setIntervalId((intervalId) => null);
+
                 }
 
 
@@ -181,19 +191,25 @@ export const StopWatchButtonsTimers = () => {
 
 
         }
+      }
+    }, [currentbuttonindex, timers, onstart, hours, minutes, seconds, originalrepeat, repeat, setSeconds, setMinutes, setHours, setOnStart, setOriginalRepeat, setFastForward, intervalId, setStartTimer, setCurrentButtonIndex, setRepeat]);
+    //});
 //***************** Only for Tabata *********************************
-        else if (timers[currentbuttonindex].type === "Tabata") {
+    useEffect(() => {
+      if (currentbuttonindex < timers.length) {
+        if (timers[currentbuttonindex].type === "Tabata") {
           if (!onstart) {
             setSeconds(() => timers[currentbuttonindex].originalseconds);
             setMinutes(() => timers[currentbuttonindex].originalminutes);
             setHours(() => timers[currentbuttonindex].originalhours);
             setWorkOutPeriod(() => "Workout");
-            setWorkoutController(() => true);
+
             setOnStart(() => true);
+
           }
 
 
-          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && timers[currentbuttonindex].originalrepeat > repeat) {
+          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && timers[currentbuttonindex].originalrepeat >= repeat) {
 
             if (toddleworkout === "Resting") {
               setSeconds(() => parseInt(timers[currentbuttonindex].originalsecondsrest));
@@ -217,20 +233,49 @@ export const StopWatchButtonsTimers = () => {
 
 
           }
-          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && repeat < timers[currentbuttonindex].originalrepeat && currentbuttonindex > timers.length) {
+          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && repeat < originalrepeat && currentbuttonindex >= timers.length) {
             setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
             setRepeat(() => 1);
             setFastForward(() => true);
             setWorkOutPeriod(() => "Workout");
             setCurrentButtonIndex(() => 0);
-            clearInterval(intervalId);
-            setIntervalId((intervalId) => null);
+            //clearInterval(intervalId);
+            //setIntervalId(() => null);
+            setOnStart(() => false);
+          }
+          if (currentbuttonindex < timers.length) {
+
+            if (currentbuttonindex >= timers.length) {
+              setFastForward(() => true);
+              clearInterval(intervalId);
+              setIntervalId(() => null);
+              setStartTimer(() => true);
+            }
+            //setStartTimer(() => true);
+
+          }
+          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && currentbuttonindex < timers.length && repeat === timers[currentbuttonindex].originalrepeat) {
+            setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
+            setOnStart(() => false);
+            setRepeat(() => 1);
+
+
+            if ((currentbuttonindex + 1) >= timers.length) {
+
+              setFastForward(() => true);
+              clearInterval(intervalId);
+              //setIntervalId(() => null);
+              //setStartTimer(() => true);
+
+            }
+
           }
 
-        }
-      }
 
-    }, [setStartTimer,intervalId,currentbuttonindex, timers, hours, minutes, seconds, setSeconds, setMinutes, setHours, setCurrentButtonIndex, setFastForward, onstart, originalrepeat, repeat, setOnStart, setOriginalRepeat, setRepeat, setWorkOutPeriod, setWorkoutController, toddleworkout]);
+        }
+
+      }
+    }, [setStartTimer, intervalId, currentbuttonindex, timers, hours, minutes, seconds, setSeconds, setMinutes, setHours, setCurrentButtonIndex, setFastForward, onstart, originalrepeat, repeat, setOnStart, setOriginalRepeat, setRepeat, setWorkOutPeriod, setWorkoutController, toddleworkout]);
 
 
     useEffect(() => {
@@ -244,7 +289,7 @@ export const StopWatchButtonsTimers = () => {
           if (currentbuttonindex > timers.length) {
             setCurrentButtonIndex(() => 0);
           }
-          if (currentbuttonindex <= timers.length) {
+          if (currentbuttonindex < timers.length) {
             if (timers[currentbuttonindex].type === "Stopwatch") {
               setSeconds((seconds) => parseInt(seconds + 1));
             } else {
@@ -338,11 +383,11 @@ export const StopWatchButtonsTimers = () => {
             setWorkOutPeriod(() => "Workout");
             setPaused(() => false);
             clearInterval(intervalId);
-            setIntervalId((intervalId) => null);
-            setOnStart(()=> false);
+            setIntervalId(() => null);
+            setOnStart(() => false);
             setHours(() => 0);
-            setMinutes(()=> 0);
-            setSeconds(()=> 0)
+            setMinutes(() => 0);
+            setSeconds(() => 0);
 
           }} style={roundedbuttons} />
         </div>
