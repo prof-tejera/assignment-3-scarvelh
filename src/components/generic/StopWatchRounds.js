@@ -48,24 +48,22 @@ export function StopWatchRoundsTabata() {
         repeat,
         setRepeat,
         originalrepeat,
-
+        timers,
+        currentbuttonindex,
         workoutperiod,
 
     } = useContext(TimerContext)
-    // had some sync issues this fixes it.
-    if (repeat <= 0) {
-        repeat = 0;
-    }
+
 // had some sync issues this fixes it.
     if (repeat > originalrepeat) {
 
-        setRepeat(repeat => originalrepeat)
+        setRepeat(repeat => timers[currentbuttonindex].originalrepeat)
     }
 
     return (
 
         <div>
-            <p>Rounds {parseInt(repeat)} of {originalrepeat}</p>
+            <p>Rounds {parseInt(repeat)} of {timers[currentbuttonindex].originalrepeat}</p>
             <p>{workoutperiod}</p>
         </div>
     );

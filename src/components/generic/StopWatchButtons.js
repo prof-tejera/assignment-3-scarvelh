@@ -70,8 +70,9 @@ export const StopWatchButtonsTimers = () => {
             setSeconds(() => 0);
             setMinutes(() => 0);
             setHours(() => 0);
-            setOnStart(() => true);
 
+            setOriginalRepeat(() => parseInt(timers[currentbuttonindex].originalrepeat));
+            setOnStart(() => true);
           }
 
 
@@ -91,10 +92,11 @@ export const StopWatchButtonsTimers = () => {
               setSeconds((() => 0));
               setMinutes(() => 0);
               setHours(() => 0);
-
-              clearInterval(intervalId);
-              setIntervalId(() => null);
-
+              setOriginalRepeat(() => parseInt(timers[currentbuttonindex].originalrepeat));
+              if (currentbuttonindex === timers.length - 1 && repeat === originalrepeat) {
+                clearInterval(intervalId);
+                setIntervalId(() => null);
+              }
             }
           }
 
@@ -284,17 +286,12 @@ export const StopWatchButtonsTimers = () => {
 
         console.log(seconds);
         setIntervalId(setInterval(() => {
-          if (currentbuttonindex > timers.length) {
-            setCurrentButtonIndex(() => 0);
-          }
-          if (currentbuttonindex < timers.length) {
             if (timers[currentbuttonindex].type === "Stopwatch") {
               setSeconds((seconds) => parseInt(seconds + 1));
             } else {
               setSeconds((seconds) => parseInt(seconds - 1));
             }
-          }
-          console.log("My seconds" + seconds);
+      //console.log("My seconds" + seconds);
 
         }, 1000));
 
@@ -334,6 +331,7 @@ export const StopWatchButtonsTimers = () => {
                 setSeconds(() => 0);
                 setHours(() => 0);
                 setMinutes(() => 0);
+                setRepeat(() => 0);
               } else {
                 setSeconds(() => parseInt(timers[currentbuttonindex].originalseconds));
                 setHours(() => parseInt(timers[currentbuttonindex].originalhours));
