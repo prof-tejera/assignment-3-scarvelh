@@ -9,21 +9,14 @@ import React, { useContext } from "react";
  */
 function StopWatchRounds() {
     // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
- let {
+ const {
 
         repeat,
         setRepeat,
         originalrepeat,
  } = useContext(TimerContext)
-    // had some sync issues this fixes it.
-    if (repeat <= 0) {
-        repeat = 0;
-    }
-    // had some sync issues this fixes it.
-    if (repeat > originalrepeat) {
 
-        setRepeat(repeat => originalrepeat)
-    }
+
     // return the number of rounds output
     return (
 
@@ -43,7 +36,7 @@ function StopWatchRounds() {
  */
 export function StopWatchRoundsTabata() {
     // Get the countdown Tabata context
-    let {
+    const {
 
         repeat,
         setRepeat,

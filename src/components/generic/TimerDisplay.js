@@ -80,7 +80,9 @@ export function TimerDisplay() {
     name.style.backgroundColor = counterdisplay;
   }
   // change the number display to congratulation
-  if (fastforward && convertSeconds.seconds === 0 && convertSeconds.minutes === 0 && convertSeconds.seconds === 0 && currentbuttonindex >= timers.length - 1) {
+  if (fastforward && (convertSeconds.hours === 0 || convertSeconds.hours === parseInt(timers[currentbuttonindex].originalhours)) &&
+    (convertSeconds.minutes === 0 || convertSeconds.minutes === parseInt(timers[currentbuttonindex].originalminutes)) &&
+    (convertSeconds.seconds === 0 || convertSeconds.seconds === parseInt(timers[currentbuttonindex].originalseconds)) && currentbuttonindex >= timers.length -1) {
     // ****************Continue to the  next timer *******************
 
     return (
