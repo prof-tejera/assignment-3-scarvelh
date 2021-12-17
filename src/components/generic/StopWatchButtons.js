@@ -77,22 +77,16 @@ export const StopWatchButtonsTimers = () => {
 
           if (onstart && hours >= timers[currentbuttonindex].originalhours && minutes >= timers[currentbuttonindex].originalminutes && seconds >= timers[currentbuttonindex].originalseconds) {
 
-            //setCurrentButtonIndex((currentbuttonindex) => 0)
-            if (currentbuttonindex < timers.length) {
-              setCurrentButtonIndex((currentbuttonindex) => parseInt(currentbuttonindex + 1));
+
+            if (currentbuttonindex < timers.length - 1) {
+              setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
               setOnStart(() => false);
-              //setStartTimer(() => true);
-            }
-
-            if ((currentbuttonindex + 1) >= timers.length) {
-
-              setFastForward(() => true);
-              clearInterval(intervalId);
-              setIntervalId(() => null);
-              setStartTimer(() => true);
 
             }
-            if ((currentbuttonindex + 1) === timers.length) {
+
+
+
+            if (currentbuttonindex === timers.length - 1) {
               setFastForward(() => true);
               setSeconds((() => 0));
               setMinutes(() => 0);
@@ -100,7 +94,7 @@ export const StopWatchButtonsTimers = () => {
 
               clearInterval(intervalId);
               setIntervalId(() => null);
-              setStartTimer(true);
+
             }
           }
 
@@ -120,6 +114,7 @@ export const StopWatchButtonsTimers = () => {
               setOriginalRepeat(() => parseInt(timers[currentbuttonindex].originalrepeat));
 
             }
+            // setRepeat(()=>1)
             setOnStart(() => true);
 
             console.log("rttt" + intervalId);
@@ -129,7 +124,7 @@ export const StopWatchButtonsTimers = () => {
 
           if (onstart && hours >= timers[currentbuttonindex].originalhours && minutes >= timers[currentbuttonindex].originalminutes && seconds >= timers[currentbuttonindex].originalseconds && originalrepeat >= repeat) {
 
-            if (currentbuttonindex < timers.length && currentbuttonindex !== 0) {
+            if (currentbuttonindex < timers.length - 1 && currentbuttonindex !== 0) {
               if (timers[currentbuttonindex].type === "Countdown") {
 
 
@@ -141,14 +136,19 @@ export const StopWatchButtonsTimers = () => {
               // handles XY Timer
               else {
 
-                /* if (repeat < timers[currentbuttonindex].originalrepeat) {
-                   setRepeat((repeat) => parseInt(repeat + 1));
-                   setOnStart(() => false);
-                 } else {
-                   setCurrentButtonIndex((currentbuttonindex) => parseInt(currentbuttonindex + 1));
-                   setOnStart(() => false);
-                   setFastForward(() => true);
-                 }*/
+                if (repeat < timers[currentbuttonindex].originalrepeat) {
+                  setRepeat(() => parseInt(repeat + 1));
+                  setOnStart(() => false);
+                } else {
+                  setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
+                  setRepeat(() => 1);
+                  setOnStart(() => false);
+                  setFastForward(() => true);
+                  if (currentbuttonindex === timers.length - 1 && repeat === originalrepeat) {
+                    clearInterval(intervalId);
+                    setIntervalId(() => null);
+                  }
+                }
 
               }
             }
@@ -158,17 +158,17 @@ export const StopWatchButtonsTimers = () => {
           if (hours === 0 && minutes === 0 && seconds === 0 && originalrepeat >= repeat && onstart) {
 
 
-            if (currentbuttonindex < timers.length) {
+            if (currentbuttonindex <= timers.length - 1) {
               if (timers[currentbuttonindex].type === "Countdown") {
                 setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
                 setOnStart(() => false);
-                if (currentbuttonindex >= timers.length) {
+                if (currentbuttonindex === timers.length - 1) {
                   setFastForward(() => true);
                   clearInterval(intervalId);
                   setIntervalId(() => null);
-                  setStartTimer(() => true);
+
                 }
-                setStartTimer(() => true);
+
               }
               //handle XY Timer
               else {
@@ -176,12 +176,16 @@ export const StopWatchButtonsTimers = () => {
                 if (repeat < timers[currentbuttonindex].originalrepeat) {
                   setRepeat(() => parseInt(repeat + 1));
                   setOnStart(() => false);
+
                 } else {
                   setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
-
+                  setRepeat(() => 1);
                   setOnStart(() => false);
-                  setFastForward(() => true);
-
+                  if (currentbuttonindex === timers.length - 1 && repeat === originalrepeat) {
+                    setFastForward(() => true);
+                    clearInterval(intervalId);
+                    setIntervalId(() => null);
+                  }
                 }
 
 
@@ -202,14 +206,15 @@ export const StopWatchButtonsTimers = () => {
             setSeconds(() => timers[currentbuttonindex].originalseconds);
             setMinutes(() => timers[currentbuttonindex].originalminutes);
             setHours(() => timers[currentbuttonindex].originalhours);
+            setOriginalRepeat(() => parseInt(timers[currentbuttonindex].originalrepeat));
             setWorkOutPeriod(() => "Workout");
-
+            setRepeat(() => 1);
             setOnStart(() => true);
 
           }
 
 
-          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && timers[currentbuttonindex].originalrepeat >= repeat) {
+          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && originalrepeat >= repeat) {
 
             if (toddleworkout === "Resting") {
               setSeconds(() => parseInt(timers[currentbuttonindex].originalsecondsrest));
@@ -233,42 +238,35 @@ export const StopWatchButtonsTimers = () => {
 
 
           }
-          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && repeat < originalrepeat && currentbuttonindex >= timers.length) {
-            setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
-            setRepeat(() => 1);
-            setFastForward(() => true);
-            setWorkOutPeriod(() => "Workout");
-            setCurrentButtonIndex(() => 0);
-            //clearInterval(intervalId);
-            //setIntervalId(() => null);
-            setOnStart(() => false);
-          }
-          if (currentbuttonindex < timers.length) {
+          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && repeat >= originalrepeat && currentbuttonindex <= timers.length - 1) {
 
-            if (currentbuttonindex >= timers.length) {
-              setFastForward(() => true);
-              clearInterval(intervalId);
-              setIntervalId(() => null);
-              setStartTimer(() => true);
-            }
-            //setStartTimer(() => true);
-
-          }
-          if (hours === 0 && minutes === 0 && seconds === 0 && onstart && currentbuttonindex < timers.length && repeat === timers[currentbuttonindex].originalrepeat) {
-            setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
-            setOnStart(() => false);
-            setRepeat(() => 1);
-
-
-            if ((currentbuttonindex + 1) >= timers.length) {
-
-              setFastForward(() => true);
-              clearInterval(intervalId);
-              //setIntervalId(() => null);
-              //setStartTimer(() => true);
+            if (hours === 0 && minutes === 0 && seconds === 0 && onstart && repeat <= originalrepeat && currentbuttonindex < timers.length - 1) {
+              setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
+              setRepeat(() => 1);
+              setOnStart(() => false);
 
             }
 
+            if (repeat <= timers[currentbuttonindex].originalrepeat) {
+              setRepeat(() => parseInt(repeat + 1));
+              setOnStart(() => false);
+
+            } else {
+
+
+              setFastForward(() => true);
+
+            }
+            if (currentbuttonindex <= timers.length - 1) {
+
+              if (currentbuttonindex === timers.length - 1 && repeat === originalrepeat) {
+                setFastForward(() => true);
+                clearInterval(intervalId);
+                setIntervalId(() => null);
+              }
+
+
+            }
           }
 
 

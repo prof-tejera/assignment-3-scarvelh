@@ -47,13 +47,9 @@ export function TimerDisplay() {
     hours,
     minutes,
     seconds,
-
     reset,
-
     fastforward,
     timers,
-
-
     currentbuttonindex
 
   } = useContext(TimerContext);
@@ -84,7 +80,7 @@ export function TimerDisplay() {
     name.style.backgroundColor = counterdisplay;
   }
   // change the number display to congratulation
-  if (fastforward && convertSeconds.seconds === 0 && convertSeconds.minutes === 0 && convertSeconds.seconds === 0 && currentbuttonindex >= timers.length) {
+  if (fastforward && convertSeconds.seconds === 0 && convertSeconds.minutes === 0 && convertSeconds.seconds === 0 && currentbuttonindex >= timers.length - 1) {
     // ****************Continue to the  next timer *******************
 
     return (
