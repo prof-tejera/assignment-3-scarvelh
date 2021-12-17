@@ -63,7 +63,7 @@ export const StopWatchButtonsTimers = () => {
 //***************** Only for stopwatch *********************************
     useEffect(() => {
 
-      console.log("Current Index <><>" + currentbuttonindex);
+
       if (currentbuttonindex < timers.length) {
 
         if (timers[currentbuttonindex].type === "Stopwatch") {
@@ -76,20 +76,14 @@ export const StopWatchButtonsTimers = () => {
             setOnStart(() => true);
           }
 
-
           if (onstart && hours === parseInt(timers[currentbuttonindex].originalhours) && minutes === parseInt(timers[currentbuttonindex].originalminutes) && seconds === parseInt(timers[currentbuttonindex].originalseconds)) {
 
-
             if (currentbuttonindex === timers.length - 1) {
-
               setFastForward(() => true);
-
-              //  if (currentbuttonindex === timers.length - 1 && repeat === originalrepeat) {
               clearInterval(intervalId);
-              setIntervalId(() => null);
-              // }
+              setIntervalId(() => 0);
             }
-            if (currentbuttonindex < timers.length-1) {
+            if (currentbuttonindex < timers.length - 1) {
               setCurrentButtonIndex(() => parseInt(currentbuttonindex + 1));
               setOnStart(() => false);
 
@@ -98,7 +92,7 @@ export const StopWatchButtonsTimers = () => {
 
         }
       }
-    }, [setIntervalId, currentbuttonindex, timers, onstart, hours, minutes, seconds, setSeconds, setMinutes, setHours, setOnStart, setCurrentButtonIndex, setFastForward, intervalId, setStartTimer]);
+    }, [setOriginalRepeat,setIntervalId, currentbuttonindex, timers, onstart, hours, minutes, seconds, setSeconds, setMinutes, setHours, setOnStart, setCurrentButtonIndex, setFastForward, intervalId, setStartTimer]);
 
 //***************** Only for Countdown and XY *********************************
     useEffect(() => {
@@ -108,17 +102,15 @@ export const StopWatchButtonsTimers = () => {
             setSeconds(() => parseInt(timers[currentbuttonindex].originalseconds));
             setMinutes(() => parseInt(timers[currentbuttonindex].originalminutes));
             setHours(() => parseInt(timers[currentbuttonindex].originalhours));
-           // if (timers[currentbuttonindex].type === "XY") {
-              setOriginalRepeat(() => parseInt(timers[currentbuttonindex].originalrepeat));
 
-            //}
-            // setRepeat(()=>1)
+            setOriginalRepeat(() => parseInt(timers[currentbuttonindex].originalrepeat));
+
+
+
             clearInterval(intervalId);
-            setIntervalId(() => null);
-            setStartTimer(()=>true);
+            setIntervalId(() => 0);
+            setStartTimer(() => true);
             setOnStart(() => true);
-
-            console.log("rttt" + intervalId);
 
           }
 
@@ -131,7 +123,7 @@ export const StopWatchButtonsTimers = () => {
 
                 setFastForward(() => true);
                 clearInterval(intervalId);
-                setIntervalId(() => null);
+                setIntervalId(() => 0);
 
               }
               // handles XY Timer
@@ -147,7 +139,7 @@ export const StopWatchButtonsTimers = () => {
                   setFastForward(() => true);
                   if (currentbuttonindex === timers.length - 1 && repeat === originalrepeat) {
                     clearInterval(intervalId);
-                    setIntervalId(() => null);
+                    setIntervalId(() => 0);
                   }
                 }
 
@@ -166,7 +158,7 @@ export const StopWatchButtonsTimers = () => {
                 if (currentbuttonindex === timers.length - 1) {
                   setFastForward(() => true);
                   clearInterval(intervalId);
-                  setIntervalId(() => null);
+                  setIntervalId(() => 0);
 
                 }
 
@@ -185,7 +177,7 @@ export const StopWatchButtonsTimers = () => {
                   if (currentbuttonindex === timers.length - 1 && repeat === originalrepeat) {
                     setFastForward(() => true);
                     clearInterval(intervalId);
-                    setIntervalId(() => null);
+                    setIntervalId(() => 0);
                   }
                 }
 
@@ -211,8 +203,8 @@ export const StopWatchButtonsTimers = () => {
             setWorkOutPeriod(() => "Workout");
             setRepeat(() => 1);
             clearInterval(intervalId);
-            setIntervalId(() => null);
-            setStartTimer(()=>true)
+            setIntervalId(() => 0);
+            setStartTimer(() => true);
             setOnStart(() => true);
 
           }
@@ -266,7 +258,7 @@ export const StopWatchButtonsTimers = () => {
               if (currentbuttonindex === timers.length - 1 && repeat === originalrepeat) {
                 setFastForward(() => true);
                 clearInterval(intervalId);
-                setIntervalId(() => null);
+                setIntervalId(() => 0);
               }
 
 
@@ -286,20 +278,18 @@ export const StopWatchButtonsTimers = () => {
       //************************************************************
       if (starttimer) {
 
-        //console.log("Type" + timers[currentbuttonindex].type);
+
         setIntervalId(setInterval(() => {
           if (timers[currentbuttonindex].type === "Stopwatch") {
             setSeconds((seconds) => parseInt(seconds + 1));
-            //setStartTimer(() => false);
+
           } else {
             setSeconds((seconds) => parseInt(seconds - 1));
-            //setStartTimer(() => false);
+
           }
-          //console.log("My seconds" + seconds);
+
 
         }, 1000));
-
-
 
 
         setStartTimer(() => false);
@@ -319,7 +309,7 @@ export const StopWatchButtonsTimers = () => {
 
             setFastForward(() => true);
 
-            setIntervalId(() => null);
+            setIntervalId(() => 0);
 
           }
           }
@@ -367,7 +357,7 @@ export const StopWatchButtonsTimers = () => {
             setPreviousHours(() => hours);
 
             clearInterval(intervalId);
-            setIntervalId(() => null);
+            setIntervalId(() => 0);
 
 
             let changeText = document.getElementById("idStopWatchTabataButton");
@@ -386,7 +376,7 @@ export const StopWatchButtonsTimers = () => {
             setWorkOutPeriod(() => "Workout");
             setPaused(() => false);
             clearInterval(intervalId);
-            setIntervalId(() => null);
+            setIntervalId(() => 0);
             setOnStart(() => false);
             setHours(() => 0);
             setMinutes(() => 0);

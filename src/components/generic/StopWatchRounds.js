@@ -8,23 +8,21 @@ import React, { useContext } from "react";
  * @constructor
  */
 function StopWatchRounds() {
-    // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
- const {
-
-        repeat,
-        setRepeat,
-        originalrepeat,
- } = useContext(TimerContext)
+  // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
+  const {
+    repeat,
+    originalrepeat
+  } = useContext(TimerContext);
 
 
-    // return the number of rounds output
-    return (
+  // return the number of rounds output
+  return (
 
-        <div>
-            <p>Rounds {parseInt(repeat)} of {originalrepeat}</p>
+    <div>
+      <p>Rounds {parseInt(repeat)} of {originalrepeat}</p>
 
-        </div>
-    );
+    </div>
+  );
 }
 
 /**
@@ -35,31 +33,31 @@ function StopWatchRounds() {
  * @constructor
  */
 export function StopWatchRoundsTabata() {
-    // Get the countdown Tabata context
-    const {
+  // Get the countdown Tabata context
+  const {
 
-        repeat,
-        setRepeat,
-        originalrepeat,
-        timers,
-        currentbuttonindex,
-        workoutperiod,
+    repeat,
+    setRepeat,
+    originalrepeat,
+    timers,
+    currentbuttonindex,
+    workoutperiod
 
-    } = useContext(TimerContext)
+  } = useContext(TimerContext);
 
 // had some sync issues this fixes it.
-    if (repeat > originalrepeat) {
+  if (repeat > originalrepeat) {
 
-        setRepeat(repeat => timers[currentbuttonindex].originalrepeat)
-    }
+    setRepeat(() => timers[currentbuttonindex].originalrepeat);
+  }
 
-    return (
+  return (
 
-        <div>
-            <p>Rounds {parseInt(repeat)} of {timers[currentbuttonindex].originalrepeat}</p>
-            <p>{workoutperiod}</p>
-        </div>
-    );
+    <div>
+      <p>Rounds {parseInt(repeat)} of {timers[currentbuttonindex].originalrepeat}</p>
+      <p>{workoutperiod}</p>
+    </div>
+  );
 }
 
 export default StopWatchRounds;

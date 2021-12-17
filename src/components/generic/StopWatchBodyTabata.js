@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { TimerContext } from "../../mycontext/MyContexts";
 
 
-
 const AlignGrid = {
 
     //display: "flex",

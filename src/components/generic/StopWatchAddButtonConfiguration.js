@@ -30,8 +30,6 @@ const StopWatchAddButtonConfiguration = () => {
     addTimer,
     setFastForward
   } = useContext(TimerContext);
-  console.log("ttt");
-
 
   return (
 

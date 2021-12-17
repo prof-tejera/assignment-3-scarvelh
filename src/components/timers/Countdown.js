@@ -5,7 +5,6 @@ import { ThemeContext, ThemeProvider } from "../../mycontext/MyThemeContexts";
 import StopWatchRounds from "../generic/StopWatchRounds";
 
 
-
 export const customStyleInput = {
   borderRadius: "15%",
   //fontSize: "15px"

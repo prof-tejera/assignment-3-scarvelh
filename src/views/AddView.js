@@ -32,7 +32,7 @@ export const backColor = {
 const AddView = () => {
   //const saved_type = localStorage.getItem("stop_type");
   const [stopwatch, StopWatchDropdown] = useDropdown("Stopwatch Configuration", stopwatch_types, true);
-  console.log("xxx" + stopwatch);
+
   let selectedTimerType;
 
 
