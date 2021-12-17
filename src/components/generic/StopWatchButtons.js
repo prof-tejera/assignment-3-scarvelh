@@ -113,6 +113,9 @@ export const StopWatchButtonsTimers = () => {
 
             //}
             // setRepeat(()=>1)
+            clearInterval(intervalId);
+            setIntervalId(() => null);
+            setStartTimer(()=>true);
             setOnStart(() => true);
 
             console.log("rttt" + intervalId);
@@ -207,6 +210,9 @@ export const StopWatchButtonsTimers = () => {
             setOriginalRepeat(() => parseInt(timers[currentbuttonindex].originalrepeat));
             setWorkOutPeriod(() => "Workout");
             setRepeat(() => 1);
+            clearInterval(intervalId);
+            setIntervalId(() => null);
+            setStartTimer(()=>true)
             setOnStart(() => true);
 
           }
@@ -280,7 +286,7 @@ export const StopWatchButtonsTimers = () => {
       //************************************************************
       if (starttimer) {
 
-        console.log(seconds);
+        //console.log("Type" + timers[currentbuttonindex].type);
         setIntervalId(setInterval(() => {
           if (timers[currentbuttonindex].type === "Stopwatch") {
             setSeconds((seconds) => parseInt(seconds + 1));
@@ -292,6 +298,9 @@ export const StopWatchButtonsTimers = () => {
           //console.log("My seconds" + seconds);
 
         }, 1000));
+
+
+
 
         setStartTimer(() => false);
 
