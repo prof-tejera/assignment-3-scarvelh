@@ -12,11 +12,9 @@ const positionButtons = {
   //float: "right",
   fontSize: "20px",
   paddingLeft: "5px",
-  justifyItems: "center"
-
+  justifyItems: "center",
 };
 const StopWatchAddButtonConfiguration = () => {
-
   const {
     originalseconds,
     originalminutes,
@@ -25,38 +23,36 @@ const StopWatchAddButtonConfiguration = () => {
     originalminutesrest,
     originalhoursrest,
     originalrepeat,
-    setCurrentButtonIndex,
+    setActiveTimerIndex,
 
     addTimer,
-    setFastForward
+    setFastForward,
   } = useContext(TimerContext);
 
   return (
-
-
     <>
       <div style={positionButtons}>
-        <Button text={"Add"} onClick={() => {
-
-          ///******************************************************
-          const saved_type = localStorage.getItem("stop_type");
-          setFastForward(() => false);
-          setCurrentButtonIndex(() => 0);
-          addTimer({
-            type: saved_type,
-            originalhours,
-            originalminutes,
-            originalseconds,
-            originalrepeat,
-            originalhoursrest,
-            originalminutesrest,
-            originalsecondsrest
-          });
-          //***********************************************************
-
-
-        }
-        } disabled={true} />
+        <Button
+          text={"Add"}
+          onClick={() => {
+            ///******************************************************
+            const saved_type = localStorage.getItem("stop_type");
+            setFastForward(() => false);
+            setActiveTimerIndex(() => 0);
+            addTimer({
+              type: saved_type,
+              originalhours,
+              originalminutes,
+              originalseconds,
+              originalrepeat,
+              originalhoursrest,
+              originalminutesrest,
+              originalsecondsrest,
+            });
+            //***********************************************************
+          }}
+          disabled={true}
+        />
       </div>
     </>
   );

@@ -5,7 +5,6 @@ import { TimerContext } from "../../mycontext/MyContexts";
 import { ThemeContext } from "../../mycontext/MyThemeContexts";
 import styled, { keyframes } from "styled-components";
 
-
 const timerFormat = {
   margin: "20px",
   display: "flex",
@@ -20,7 +19,7 @@ const timerFormat = {
   borderRadius: "20%",
   //make display float right
   float: "right",
-  border: "1px solid black"
+  border: "1px solid black",
 };
 
 // function handle blinking effect
@@ -32,13 +31,10 @@ function blinkingEffect() {
   `;
 }
 
-
 // handle the blink animation
 const AnimatedComponent = styled.div`
   animation: ${{ blinkingEffect }} 1s linear infinite;
-
 `;
-
 
 ///===================================================CountDown and XY Timer Display=================================================
 export function TimerDisplay() {
@@ -50,8 +46,7 @@ export function TimerDisplay() {
 
     fastforward,
     timers,
-    currentbuttonindex
-
+    activeTimerIndex,
   } = useContext(TimerContext);
   // get display theme from theme context
   const { counterdisplay, setCounterDisplay } = React.useContext(ThemeContext);
@@ -59,10 +54,14 @@ export function TimerDisplay() {
   const calcsecs = convertToSeconds(hours, minutes, seconds);
   // convert the number of seconds to  hour and minutes and seconds for the display
   let convertSeconds = secondsToTime(calcsecs);
-console.log("seconds")
+  console.log("seconds");
   // set the second minutes and hours if it goes into negative values set the values back to '0'
   useEffect(() => {
-    if ((parseInt(convertSeconds.seconds) < 0 || parseInt(convertSeconds.minutes) < 0 || parseInt(convertSeconds.hours) < 0) /*&& !onstart*/) {
+    if (
+      parseInt(convertSeconds.seconds) < 0 ||
+      parseInt(convertSeconds.minutes) < 0 ||
+      parseInt(convertSeconds.hours) < 0 /*&& !onstart*/
+    ) {
       convertSeconds.seconds = 0;
       convertSeconds.minutes = 0;
       convertSeconds.hours = 0;
@@ -70,7 +69,6 @@ console.log("seconds")
       //setMinutes(()=> 0);
       //setHours(()=>0);
       setCounterDisplay(() => myColors["eggshell-white"]);
-
     }
     // set values to '0' wired timing issue
     if (seconds !== 0 && hours !== 0 && minutes !== 0) {
@@ -80,18 +78,34 @@ console.log("seconds")
     }
     //  change color of timer display
     if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
-
       let name = document.getElementById("timerCountDownID");
       name.style.backgroundColor = counterdisplay;
     }
-
-  }, [convertSeconds.hours, convertSeconds.minutes, convertSeconds.seconds, counterdisplay, hours, minutes, seconds, setCounterDisplay]);
+  }, [
+    convertSeconds.hours,
+    convertSeconds.minutes,
+    convertSeconds.seconds,
+    counterdisplay,
+    hours,
+    minutes,
+    seconds,
+    setCounterDisplay,
+  ]);
 
   // change the number display to congratulation
-  if (fastforward &&
-    (convertSeconds.hours === 0 || convertSeconds.hours === parseInt(timers[currentbuttonindex].originalhours)) &&
-    (convertSeconds.minutes === 0 || convertSeconds.minutes === parseInt(timers[currentbuttonindex].originalminutes)) &&
-    (convertSeconds.seconds === 0 || convertSeconds.seconds === parseInt(timers[currentbuttonindex].originalseconds)) && currentbuttonindex >= timers.length - 1) {
+  if (
+    fastforward &&
+    (convertSeconds.hours === 0 ||
+      convertSeconds.hours ===
+        parseInt(timers[activeTimerIndex].originalhours)) &&
+    (convertSeconds.minutes === 0 ||
+      convertSeconds.minutes ===
+        parseInt(timers[activeTimerIndex].originalminutes)) &&
+    (convertSeconds.seconds === 0 ||
+      convertSeconds.seconds ===
+        parseInt(timers[activeTimerIndex].originalseconds)) &&
+    activeTimerIndex >= timers.length - 1
+  ) {
     // ****************Continue to the  next timer *******************
 
     return (
@@ -99,39 +113,30 @@ console.log("seconds")
         <h1 style={{ color: "red" }}> Congratulations workout completed!</h1>
       </AnimatedComponent>
     );
-
   } else {
-
-
     return (
-
       <div style={timerFormat} id="timerCountDownID">
-      <span className="hours">
-        {("0" + convertSeconds.hours).slice(-2)}:
-      </span>
+        <span className="hours">{("0" + convertSeconds.hours).slice(-2)}:</span>
         <span className="minutes">
-        {("0" + convertSeconds.minutes).slice(-2)}:
-      </span>
+          {("0" + convertSeconds.minutes).slice(-2)}:
+        </span>
         <span className="seconds">
-        {("0" + convertSeconds.seconds).slice(-2)}
-      </span>
+          {("0" + convertSeconds.seconds).slice(-2)}
+        </span>
       </div>
-
     );
-
   }
 }
 
 ///===================================================Tabata Timer Display=================================================
 export function TimerDisplayTabata() {
-// get information from provider context for the Tabata display
+  // get information from provider context for the Tabata display
   let {
     hours,
     minutes,
     seconds,
 
-    fastforward
-
+    fastforward,
   } = useContext(TimerContext);
   // get information from theme context
   let { counterdisplay, setCounterDisplay } = React.useContext(ThemeContext);
@@ -140,14 +145,17 @@ export function TimerDisplayTabata() {
   // convert seconds in hour minutes seconds  for the stopwatch display.
   const convertSeconds = secondsToTime(calcsecs);
 
-  if ((convertSeconds.seconds < 0 || convertSeconds.minutes < 0 || convertSeconds.hours < 0)) {
+  if (
+    convertSeconds.seconds < 0 ||
+    convertSeconds.minutes < 0 ||
+    convertSeconds.hours < 0
+  ) {
     convertSeconds.seconds = 0;
     convertSeconds.minutes = 0;
     convertSeconds.hours = 0;
     setCounterDisplay(() => myColors["eggshell-white"]);
   }
   if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
-
     let name = document.getElementById("timerTabataID");
     name.style.backgroundColor = counterdisplay;
   }
@@ -158,27 +166,20 @@ export function TimerDisplayTabata() {
         <h1 style={{ color: "red" }}> Congratulations workout completed!</h1>
       </AnimatedComponent>
     );
-
   } else {
     // display the regular
     return (
-
       <div style={timerFormat} id="timerTabataID">
-      <span className="hours">
-        {("0" + convertSeconds.hours).slice(-2)}:
-      </span>
+        <span className="hours">{("0" + convertSeconds.hours).slice(-2)}:</span>
         <span className="minutes">
-        {("0" + convertSeconds.minutes).slice(-2)}:
-      </span>
+          {("0" + convertSeconds.minutes).slice(-2)}:
+        </span>
         <span className="seconds">
-        {("0" + convertSeconds.seconds).slice(-2)}
-      </span>
+          {("0" + convertSeconds.seconds).slice(-2)}
+        </span>
       </div>
-
-
     );
   }
 }
-
 
 export default TimerDisplay;
