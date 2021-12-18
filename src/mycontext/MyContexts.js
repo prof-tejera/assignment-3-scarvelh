@@ -36,7 +36,7 @@ export function StopWatchProvider({ children }) {
   const [timers, setTimers] = useState([]);
   const [starttimer, setStartTimer] = useState(false);
 
-  //const [intervalId, setIntervalId] = useState(0);
+
 
 
   const addTimer = (config) => {
@@ -101,7 +101,7 @@ export function StopWatchProvider({ children }) {
       workoutcontroller, setWorkoutController,
       restingcontroller, setRestingController,
 
-     // intervalId, setIntervalId,
+
 
 
     }}>{children}</TimerContext.Provider>;

@@ -67,3 +67,5 @@ For other ways to deploy see https://github.com/prof-tejera/react-deployment-cod
 ## Bonus
 
 - Add full test coverage using Cypress.io. This will require that you get your tests running locally and then add a new Github action that will run the tests every time you commit to GitHub. Note that the Cypress setup is not part of this project and must be configured by you (max 8 points)
+## ------------------------Added By Scarvel Harris-----------------------------------------
+All in all the program seem to be working. I had the bug where the when the I choose the stopwatch timer

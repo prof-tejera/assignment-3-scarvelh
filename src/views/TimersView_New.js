@@ -141,6 +141,11 @@ export const StopWatchDisplayTypes = () => {
           </Timer>
         ))
         }
+
+
+
+
+
       </div>
       {selectedTimerType}
 
