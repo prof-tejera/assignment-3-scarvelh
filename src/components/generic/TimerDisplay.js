@@ -19,7 +19,7 @@ const timerFormat = {
   borderRadius: "20%",
   //make display float right
   float: "right",
-  border: "1px solid black",
+  border: "1px solid black"
 };
 
 // function handle blinking effect
@@ -43,13 +43,16 @@ export function TimerDisplay() {
     hours,
     minutes,
     seconds,
-
+    setSeconds,
     fastforward,
     timers,
-    activeTimerIndex,
+    activeTimerIndex
   } = useContext(TimerContext);
   // get display theme from theme context
   const { counterdisplay, setCounterDisplay } = React.useContext(ThemeContext);
+  if (seconds == undefined) {
+    setSeconds(timers[activeTimerIndex].originalseconds);
+  }
   // convert hour + minutes + seconds
   const calcsecs = convertToSeconds(hours, minutes, seconds);
   // convert the number of seconds to  hour and minutes and seconds for the display
@@ -89,7 +92,7 @@ export function TimerDisplay() {
     hours,
     minutes,
     seconds,
-    setCounterDisplay,
+    setCounterDisplay
   ]);
 
   // change the number display to congratulation
@@ -97,13 +100,13 @@ export function TimerDisplay() {
     fastforward &&
     (convertSeconds.hours === 0 ||
       convertSeconds.hours ===
-        parseInt(timers[activeTimerIndex].originalhours)) &&
+      parseInt(timers[activeTimerIndex].originalhours)) &&
     (convertSeconds.minutes === 0 ||
       convertSeconds.minutes ===
-        parseInt(timers[activeTimerIndex].originalminutes)) &&
+      parseInt(timers[activeTimerIndex].originalminutes)) &&
     (convertSeconds.seconds === 0 ||
       convertSeconds.seconds ===
-        parseInt(timers[activeTimerIndex].originalseconds)) &&
+      parseInt(timers[activeTimerIndex].originalseconds)) &&
     activeTimerIndex >= timers.length - 1
   ) {
     // ****************Continue to the  next timer *******************
@@ -136,7 +139,7 @@ export function TimerDisplayTabata() {
     minutes,
     seconds,
 
-    fastforward,
+    fastforward
   } = useContext(TimerContext);
   // get information from theme context
   let { counterdisplay, setCounterDisplay } = React.useContext(ThemeContext);
