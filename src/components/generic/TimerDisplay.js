@@ -138,9 +138,14 @@ export function TimerDisplayTabata() {
     hours,
     minutes,
     seconds,
-
+    timers,
+    activeTimerIndex,
+    setSeconds,
     fastforward
   } = useContext(TimerContext);
+  if (seconds == undefined) {
+    setSeconds(timers[activeTimerIndex].originalseconds);
+  }
   // get information from theme context
   let { counterdisplay, setCounterDisplay } = React.useContext(ThemeContext);
   // convert hour+minutes+ seconds  to seconds

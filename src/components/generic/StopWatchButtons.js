@@ -24,6 +24,8 @@ export const StopWatchButtonsTimers = () => {
     const {
       seconds,
       setSeconds,
+      setMinutes,setHours,
+      setWorkOutPeriod,workoutperiod,
       timers,
       activeTimerIndex,
       setActiveTimerIndex,
@@ -34,7 +36,7 @@ export const StopWatchButtonsTimers = () => {
       setRepeat,
       repeat
     } = useContext(TimerContext);
-
+  const toddleworkout = workoutperiod === "Workout" ? "Resting" : "Workout";
     useEffect(() => {
       let timerId;
       let currentTimer = timers[activeTimerIndex];
@@ -117,11 +119,59 @@ export const StopWatchButtonsTimers = () => {
 
             } else if (currentTimer.type === "Tabata") {
               // we have reached the end
+
+              //-----NEW STUFFF-------------------
+              console.log(seconds);
+              // we have reached the end
               if (seconds === 0) {
-                moveToNextTimer();
+
+                if (repeat < timers[activeTimerIndex].originalrepeat) {
+
+                  //setActiveTimerIndex(0);
+                  //setSeconds(currentTimer.originalsecond);
+                  //setRepeat(repeat + 1);
+                  // currentTimer = timers[activeTimerIndex];
+                  if (toddleworkout === "Resting") {
+                    setSeconds(() => parseInt(timers[activeTimerIndex].originalsecondsrest));
+                    setMinutes(() => parseInt(timers[activeTimerIndex].originalminutesrest));
+                    setHours(() => parseInt(timers[activeTimerIndex].originalhoursrest));
+                    setWorkOutPeriod(() => "Resting");
+
+
+                  }
+
+
+                  if (toddleworkout === "Workout") {
+                    setSeconds(() => parseInt(timers[activeTimerIndex].originalseconds));
+                    setMinutes(() => parseInt(timers[activeTimerIndex].originalminutes));
+                    setHours(() => parseInt(timers[activeTimerIndex].originalhours));
+                    setWorkOutPeriod(() => "Workout");
+                    setRepeat(() => repeat + 1);
+
+
+                  }
+
+
+                } else {
+
+                  if (activeTimerIndex === timers.length - 1) {
+                    setFastForward(true);
+                  } else {
+                    setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
+                    setRepeat(1);
+                    moveToNextTimer();
+                  }
+
+                }
               } else {
                 setSeconds(seconds - 1);
+                //setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
+
+
               }
+
+
+             //-------NEW STUFF------------------
             }
 
 

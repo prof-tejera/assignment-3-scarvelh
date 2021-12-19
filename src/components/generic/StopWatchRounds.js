@@ -30,15 +30,18 @@ function StopWatchRounds() {
  */
 export function StopWatchRoundsTabata() {
   // Get the countdown Tabata context
-  const {
+  let {
     repeat,
     setRepeat,
     originalrepeat,
+
     timers,
     activeTimerIndex,
-    workoutperiod,
+    workoutperiod
   } = useContext(TimerContext);
-
+  if (activeTimerIndex === null) {
+    activeTimerIndex = 0;
+  }
   // had some sync issues this fixes it.
   if (repeat > originalrepeat) {
     setRepeat(() => timers[activeTimerIndex].originalrepeat);

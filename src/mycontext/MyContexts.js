@@ -62,7 +62,7 @@ export function StopWatchProvider({ children }) {
       originalhoursrest: 0,
       originalminutesrest: 0,
       originalsecondsrest: 0,
-    },*/
+    },
     {
       type: "XY",
       originalhours: 0,
@@ -72,18 +72,27 @@ export function StopWatchProvider({ children }) {
       originalhoursrest: 0,
       originalminutesrest: 0,
       originalsecondsrest: 0,
-    },
-    /*{
+    },*/
+    {
       type: "Tabata",
       originalhours: 0,
       originalminutes: 0,
       originalseconds: 7,
+      originalrepeat: 3,
+      originalhoursrest: 0,
+      originalminutesrest: 0,
+      originalsecondsrest: 11,
+    },
+    {
+      type: "Tabata",
+      originalhours: 0,
+      originalminutes: 0,
+      originalseconds: 15,
       originalrepeat: 2,
       originalhoursrest: 0,
       originalminutesrest: 0,
-      originalsecondsrest: 4,
-    },*/
-
+      originalsecondsrest: 5,
+    },
   ]);
   const [isRunning, setIsRunning] = useState(false);
   const [activeTimerIndex, setActiveTimerIndex] = useState(null);
