@@ -25,7 +25,7 @@ const Container = styled.div`
 // align text in a grid
 const AlignGrid = {
   margin: "30px",
-  alignItems: "center",
+  alignItems: "center"
 };
 
 const ButtonPosition = {
@@ -34,19 +34,19 @@ const ButtonPosition = {
   alignItems: "right",
   //border: ".1rem red solid",
   borderRadius: "20%",
-  float: "left",
+  float: "left"
 };
 const myStyle = {
   backgroundColor: "#add8e6",
   alignItems: "center",
-  cursor: "pointer",
+  cursor: "pointer"
 };
 
 export const StopWatchDisplayTypes = () => {
   const create_timers = [];
   const [setType] = useState("Stopwatch");
 
-  const { timers, setStopwatchtype, activeTimerIndex } =
+  let { timers, setStopwatchtype, activeTimerIndex } =
     useContext(TimerContext);
 
   //***********************************************************
@@ -60,7 +60,7 @@ export const StopWatchDisplayTypes = () => {
     n.set("C", <Countdown />);
     n.set(
       "customStyling",
-      '{ backgroundColor: "#ffffe0", alignItems: "center", cursor: "pointer" }'
+      "{ backgroundColor: \"#ffffe0\", alignItems: \"center\", cursor: \"pointer\" }"
     );
     create_timers.push(n);
     return n;
@@ -78,10 +78,13 @@ export const StopWatchDisplayTypes = () => {
     setType(() => timerType);
   }
 
+  if (activeTimerIndex === null) {
+    activeTimerIndex = 0;
+  }
   let selectedTimerType;
   if (create_timers.length > 0) {
-    let t = context.timers[0].type;
-
+    // change the different timer display
+    let t = context.timers[activeTimerIndex].type;
     switch (t) {
       case "Stopwatch":
         selectedTimerType = <Stopwatch style={myStyle} />;
@@ -121,7 +124,7 @@ export const StopWatchDisplayTypes = () => {
             secsrest={timers[i].originalsecondsrest}
             rounds={timers[i].originalrepeat}
             style={{
-              backgroundColor: i === activeTimerIndex ? "#958f46" : "lightgrey",
+              backgroundColor: i === activeTimerIndex ? "#958f46" : "lightgrey"
             }}
           >
             <TimerTitle>{c_timer.get("title")}</TimerTitle>

@@ -66,11 +66,12 @@ export const StopWatchButtonsTimers = () => {
             if (currentTimer.type === "Stopwatch") {
               // we have reached the end
               if (seconds === currentTimer.originalseconds) {
-                if (activeTimerIndex === timers.length - 1 && repeat === currentTimer.originalrepeat) {
+                if (activeTimerIndex === timers.length - 1 /*&& repeat === currentTimer.originalrepeat*/) {
                   setFastForward(true);
                 }
-
-                moveToNextTimer();
+                else {
+                  moveToNextTimer();
+                }
 
               } else {
                 setSeconds(seconds + 1);
@@ -78,12 +79,13 @@ export const StopWatchButtonsTimers = () => {
             } else if (currentTimer.type === "Countdown") {
               // we have reached the end
               if (seconds === 0) {
-                if (activeTimerIndex === timers.length - 1 && repeat === currentTimer.originalrepeat) {
+                if (activeTimerIndex === timers.length - 1 /*&& repeat === currentTimer.originalrepeat*/) {
 
                   setFastForward(true);
-                }
+                }else {
 
-                moveToNextTimer();
+                  moveToNextTimer();
+                }
               } else {
                 setSeconds(seconds - 1);
               }
@@ -165,7 +167,7 @@ export const StopWatchButtonsTimers = () => {
                 }
               } else {
                 setSeconds(seconds - 1);
-                //setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
+
 
 
               }

@@ -43,11 +43,11 @@ export function StopWatchProvider({ children }) {
   };
 
   const [timers, setTimers] = useState([
-   /* {
+    /*{
       type: "Stopwatch",
       originalhours: 0,
       originalminutes: 0,
-      originalseconds: 2,
+      originalseconds: 4,
       originalrepeat: 0,
       originalhoursrest: 0,
       originalminutesrest: 0,
@@ -72,7 +72,7 @@ export function StopWatchProvider({ children }) {
       originalhoursrest: 0,
       originalminutesrest: 0,
       originalsecondsrest: 0,
-    },*/
+    },
     {
       type: "Tabata",
       originalhours: 0,
@@ -82,17 +82,37 @@ export function StopWatchProvider({ children }) {
       originalhoursrest: 0,
       originalminutesrest: 0,
       originalsecondsrest: 11,
-    },
+    },*/
     {
-      type: "Tabata",
+      type: "Countdown",
       originalhours: 0,
       originalminutes: 0,
-      originalseconds: 15,
-      originalrepeat: 2,
+      originalseconds: 5,
+      originalrepeat: 0,
       originalhoursrest: 0,
       originalminutesrest: 0,
-      originalsecondsrest: 5,
+      originalsecondsrest: 0,
     },
+    {
+      type: "Stopwatch",
+      originalhours: 0,
+      originalminutes: 0,
+      originalseconds: 4,
+      originalrepeat: 0,
+      originalhoursrest: 0,
+      originalminutesrest: 0,
+      originalsecondsrest: 0,
+    },
+    {
+      type: "Stopwatch",
+      originalhours: 0,
+      originalminutes: 0,
+      originalseconds: 8,
+      originalrepeat: 0,
+      originalhoursrest: 0,
+      originalminutesrest: 0,
+      originalsecondsrest: 0,
+    }
   ]);
   const [isRunning, setIsRunning] = useState(false);
   const [activeTimerIndex, setActiveTimerIndex] = useState(null);
