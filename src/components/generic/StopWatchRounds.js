@@ -1,5 +1,5 @@
 import { TimerContext } from "../../mycontext/MyContexts";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 /**
  * Let the user know the round that they are on
@@ -9,7 +9,20 @@ import React, { useContext } from "react";
  */
 function StopWatchRounds() {
   // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
-  const { repeat, originalrepeat } = useContext(TimerContext);
+  let { repeat, originalrepeat, activeTimerIndex, setRepeat, timers } = useContext(TimerContext);
+  useEffect(() => {
+    if (activeTimerIndex === null) {
+      activeTimerIndex = 0;
+    }
+    // had some sync issues this fixes it.
+    if (repeat > originalrepeat) {
+      setRepeat(() => timers[activeTimerIndex].originalrepeat);
+    }
+    if (timers[activeTimerIndex].type === "XY" && repeat === 0) {
+
+      repeat = 1;
+    }
+  });
 
   // return the number of rounds output
   return (
@@ -39,13 +52,19 @@ export function StopWatchRoundsTabata() {
     activeTimerIndex,
     workoutperiod
   } = useContext(TimerContext);
-  if (activeTimerIndex === null) {
-    activeTimerIndex = 0;
-  }
-  // had some sync issues this fixes it.
-  if (repeat > originalrepeat) {
-    setRepeat(() => timers[activeTimerIndex].originalrepeat);
-  }
+  useEffect(() => {
+    if (activeTimerIndex === null) {
+      activeTimerIndex = 0;
+    }
+    // had some sync issues this fixes it.
+    if (repeat > originalrepeat) {
+      setRepeat(() => timers[activeTimerIndex].originalrepeat);
+    }
+    if ((timers[activeTimerIndex].type === "Tabata" || timers[activeTimerIndex].type === "XY") && repeat === 0) {
+      setRepeat(1);
+      repeat = 1;
+    }
+  });
 
   return (
     <div>

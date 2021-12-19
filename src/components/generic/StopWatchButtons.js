@@ -24,8 +24,8 @@ export const StopWatchButtonsTimers = () => {
     const {
       seconds,
       setSeconds,
-      setMinutes,setHours,
-      setWorkOutPeriod,workoutperiod,
+      setMinutes, setHours,
+      setWorkOutPeriod, workoutperiod,
       timers,
       activeTimerIndex,
       setActiveTimerIndex,
@@ -34,9 +34,11 @@ export const StopWatchButtonsTimers = () => {
       setOriginalRepeat,
       setFastForward,
       setRepeat,
-      repeat
+      repeat,
+
     } = useContext(TimerContext);
-  const toddleworkout = workoutperiod === "Workout" ? "Resting" : "Workout";
+    const toddleworkout = workoutperiod === "Workout" ? "Resting" : "Workout";
+    console.log(toddleworkout);
     useEffect(() => {
       let timerId;
       let currentTimer = timers[activeTimerIndex];
@@ -58,62 +60,77 @@ export const StopWatchButtonsTimers = () => {
           }
 
           setActiveTimerIndex(activeTimerIndex + 1);
+          setRepeat(0);
         }
       };
 
       if (isRunning && currentTimer) {
+
         timerId = setInterval(() => {
+
+
             if (currentTimer.type === "Stopwatch") {
               // we have reached the end
               if (seconds === currentTimer.originalseconds) {
-                if (activeTimerIndex === timers.length - 1 /*&& repeat === currentTimer.originalrepeat*/) {
+                if (activeTimerIndex === timers.length - 1) {
                   setFastForward(true);
-                }
-                else {
+                  setIsRunning(false);
+                } else {
                   moveToNextTimer();
+                  setRepeat(0);
+                  setOriginalRepeat(0);
                 }
 
               } else {
                 setSeconds(seconds + 1);
               }
+              //setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
+              setRepeat(0);
             } else if (currentTimer.type === "Countdown") {
               // we have reached the end
               if (seconds === 0) {
-                if (activeTimerIndex === timers.length - 1 /*&& repeat === currentTimer.originalrepeat*/) {
+                if (activeTimerIndex === timers.length - 1) {
 
                   setFastForward(true);
-                }else {
+                  setIsRunning(false);
+                } else {
 
                   moveToNextTimer();
+                  setRepeat(0);
+                  // setOriginalRepeat( timers[activeTimerIndex].originalrepeat);
                 }
               } else {
                 setSeconds(seconds - 1);
               }
+              setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
+              setRepeat(0);
             } else if (currentTimer.type === "XY") {
               console.log(seconds);
               // we have reached the end
               if (seconds === 0) {
-
+                setRepeat(repeat + 1);
                 if (repeat < timers[activeTimerIndex].originalrepeat) {
 
-                  //setActiveTimerIndex(0);
+
                   setSeconds(currentTimer.originalsecond);
                   setRepeat(repeat + 1);
-                  // currentTimer = timers[activeTimerIndex];
+
                 } else {
 
                   if (activeTimerIndex === timers.length - 1) {
                     setFastForward(true);
+                    setIsRunning(false);
                   } else {
                     setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
-                    setRepeat(1);
+
                     moveToNextTimer();
+                   // setRepeat(1);
                   }
 
                 }
               } else {
                 setSeconds(seconds - 1);
-                //setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
+                setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
 
 
               }
@@ -129,10 +146,6 @@ export const StopWatchButtonsTimers = () => {
 
                 if (repeat < timers[activeTimerIndex].originalrepeat) {
 
-                  //setActiveTimerIndex(0);
-                  //setSeconds(currentTimer.originalsecond);
-                  //setRepeat(repeat + 1);
-                  // currentTimer = timers[activeTimerIndex];
                   if (toddleworkout === "Resting") {
                     setSeconds(() => parseInt(timers[activeTimerIndex].originalsecondsrest));
                     setMinutes(() => parseInt(timers[activeTimerIndex].originalminutesrest));
@@ -144,13 +157,14 @@ export const StopWatchButtonsTimers = () => {
 
 
                   if (toddleworkout === "Workout") {
+
                     setSeconds(() => parseInt(timers[activeTimerIndex].originalseconds));
                     setMinutes(() => parseInt(timers[activeTimerIndex].originalminutes));
                     setHours(() => parseInt(timers[activeTimerIndex].originalhours));
+
+
                     setWorkOutPeriod(() => "Workout");
-                    setRepeat(() => repeat + 1);
-
-
+                    setRepeat(repeat + 1);
                   }
 
 
@@ -158,22 +172,25 @@ export const StopWatchButtonsTimers = () => {
 
                   if (activeTimerIndex === timers.length - 1) {
                     setFastForward(true);
+                    setIsRunning(false);
                   } else {
-                    setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
-                    setRepeat(1);
+                    //  setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
+
                     moveToNextTimer();
+                    //  setRepeat(1);
                   }
 
                 }
               } else {
-                setSeconds(seconds - 1);
 
+                //setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
+                setSeconds(seconds - 1);
 
 
               }
 
 
-             //-------NEW STUFF------------------
+              //-------NEW STUFF------------------
             }
 
 
@@ -186,7 +203,7 @@ export const StopWatchButtonsTimers = () => {
       return () => {
         clearInterval(timerId);
       };
-    }, [activeTimerIndex, isRunning, seconds, setSeconds, timers, repeat, setActiveTimerIndex, setIsRunning, setOriginalRepeat, setRepeat])
+    }, [activeTimerIndex, isRunning, seconds, setSeconds, timers, repeat, setActiveTimerIndex, setIsRunning, setOriginalRepeat, setRepeat,setFastForward,setHours,setMinutes,setWorkOutPeriod,toddleworkout,])
     ;
 
     const onStart = () => {
@@ -212,16 +229,16 @@ export const StopWatchButtonsTimers = () => {
       setIsRunning(false);
       setFastForward(false);
       setSeconds(0);
-   //   clearInterval(timerId);
+      //   clearInterval(timerId);
     };
-  const onDone = () => {
-    setActiveTimerIndex(0);
-    setRepeat(0);
-    setIsRunning(false);
-    setFastForward(true);
-    setSeconds(0);
-    //   clearInterval(timerId);
-  };
+    const onDone = () => {
+      setActiveTimerIndex(0);
+      setRepeat(0);
+      setIsRunning(false);
+      setFastForward(true);
+      setSeconds(0);
+      //   clearInterval(timerId);
+    };
     return (
       <Container>
         <div style={positionButtons}>
@@ -230,7 +247,7 @@ export const StopWatchButtonsTimers = () => {
 
           <Button text="Stop" onClick={onPause} />
 
-          <Button text="Reset" onClick={onReset}/>
+          <Button text="Reset" onClick={onReset} />
         </div>
       </Container>
     );

@@ -46,7 +46,7 @@ export const StopWatchDisplayTypes = () => {
   const create_timers = [];
   const [setType] = useState("Stopwatch");
 
-  let { timers, setStopwatchtype, activeTimerIndex } =
+  let { timers, setStopwatchtype, activeTimerIndex} =
     useContext(TimerContext);
 
   //***********************************************************
@@ -97,6 +97,7 @@ export const StopWatchDisplayTypes = () => {
         break;
       case "Tabata":
         selectedTimerType = <Tabata style={myStyle} />;
+        //setRepeat(1);
         break;
 
       default:

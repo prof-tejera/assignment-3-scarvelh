@@ -50,9 +50,11 @@ export function TimerDisplay() {
   } = useContext(TimerContext);
   // get display theme from theme context
   const { counterdisplay, setCounterDisplay } = React.useContext(ThemeContext);
-  if (seconds == undefined) {
-    setSeconds(timers[activeTimerIndex].originalseconds);
-  }
+  useEffect(() => {
+    if (seconds === undefined) {
+      setSeconds(timers[activeTimerIndex].originalseconds);
+    }
+  });
   // convert hour + minutes + seconds
   const calcsecs = convertToSeconds(hours, minutes, seconds);
   // convert the number of seconds to  hour and minutes and seconds for the display
@@ -138,35 +140,49 @@ export function TimerDisplayTabata() {
     hours,
     minutes,
     seconds,
-    timers,
-    activeTimerIndex,
+
     setSeconds,
     fastforward
   } = useContext(TimerContext);
-  if (seconds == undefined) {
-    setSeconds(timers[activeTimerIndex].originalseconds);
-  }
-  // get information from theme context
   let { counterdisplay, setCounterDisplay } = React.useContext(ThemeContext);
-  // convert hour+minutes+ seconds  to seconds
-  const calcsecs = convertToSeconds(hours, minutes, seconds);
-  // convert seconds in hour minutes seconds  for the stopwatch display.
-  const convertSeconds = secondsToTime(calcsecs);
+  useEffect(() => {
+    if (seconds === undefined) {
 
-  if (
-    convertSeconds.seconds < 0 ||
-    convertSeconds.minutes < 0 ||
-    convertSeconds.hours < 0
-  ) {
-    convertSeconds.seconds = 0;
-    convertSeconds.minutes = 0;
-    convertSeconds.hours = 0;
-    setCounterDisplay(() => myColors["eggshell-white"]);
-  }
-  if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
-    let name = document.getElementById("timerTabataID");
-    name.style.backgroundColor = counterdisplay;
-  }
+      setSeconds(0);
+    }
+  });
+    // get information from theme context
+
+    // convert hour+minutes+ seconds  to seconds
+    const calcsecs = convertToSeconds(hours, minutes, seconds);
+    // convert seconds in hour minutes seconds  for the stopwatch display.
+    const convertSeconds = secondsToTime(calcsecs);
+  useEffect(() => {
+    if (
+      convertSeconds.seconds < 0 ||
+      convertSeconds.minutes < 0 ||
+      convertSeconds.hours < 0
+    ) {
+      convertSeconds.seconds = 0;
+      convertSeconds.minutes = 0;
+      convertSeconds.hours = 0;
+      setCounterDisplay(() => myColors["eggshell-white"]);
+    }
+    if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
+      let name = document.getElementById("timerTabataID");
+      name.style.backgroundColor = counterdisplay;
+    }
+
+  },[convertSeconds.hours,
+    convertSeconds.minutes,
+    convertSeconds.seconds,
+    counterdisplay,
+    hours,
+    minutes,
+    seconds,
+    setCounterDisplay]);
+
+
   // fast forward display congratulation message
   if (fastforward) {
     return (
