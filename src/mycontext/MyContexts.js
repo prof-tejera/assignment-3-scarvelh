@@ -43,7 +43,7 @@ export function StopWatchProvider({ children }) {
   };
 
   const [timers, setTimers] = useState([
-    /*{
+   /* {
       type: "Stopwatch",
       originalhours: 0,
       originalminutes: 0,
@@ -73,16 +73,16 @@ export function StopWatchProvider({ children }) {
       originalminutesrest: 0,
       originalsecondsrest: 0,
     },
-    {
-      type: "XY",
+    /*{
+      type: "Tabata",
       originalhours: 0,
       originalminutes: 0,
       originalseconds: 7,
-      originalrepeat: 1,
+      originalrepeat: 2,
       originalhoursrest: 0,
       originalminutesrest: 0,
-      originalsecondsrest: 0,
-    },
+      originalsecondsrest: 4,
+    },*/
 
   ]);
   const [isRunning, setIsRunning] = useState(false);

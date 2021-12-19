@@ -97,17 +97,19 @@ export const StopWatchButtonsTimers = () => {
                   setRepeat(repeat + 1);
                   // currentTimer = timers[activeTimerIndex];
                 } else {
-                  moveToNextTimer();
-                  if (activeTimerIndex === timers.length - 1 && repeat === timers[activeTimerIndex.originalrepeat]) {
+
+                  if (activeTimerIndex === timers.length - 1) {
                     setFastForward(true);
-                  }
+                  } else {
                     setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
                     setRepeat(1);
+                    moveToNextTimer();
+                  }
 
                 }
               } else {
                 setSeconds(seconds - 1);
-                setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
+                //setOriginalRepeat(timers[activeTimerIndex].originalrepeat);
 
 
               }
@@ -149,22 +151,34 @@ export const StopWatchButtonsTimers = () => {
         setSeconds(0);
       }
     };
-
     const onPause = () => {
       setIsRunning(false);
     };
-
+    const onReset = () => {
+      setActiveTimerIndex(0);
+      setRepeat(0);
+      setIsRunning(false);
+      setFastForward(false);
+      setSeconds(0);
+   //   clearInterval(timerId);
+    };
+  const onDone = () => {
+    setActiveTimerIndex(0);
+    setRepeat(0);
+    setIsRunning(false);
+    setFastForward(true);
+    setSeconds(0);
+    //   clearInterval(timerId);
+  };
     return (
       <Container>
         <div style={positionButtons}>
-          <Button text="Done" onClick={() => {
-          }} />
+          <Button text="Done" onClick={onDone} />
           <Button text="Start" onClick={onStart} />
 
           <Button text="Stop" onClick={onPause} />
 
-          <Button text="Reset" onClick={() => {
-          }} />
+          <Button text="Reset" onClick={onReset}/>
         </div>
       </Container>
     );
