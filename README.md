@@ -74,7 +74,7 @@ Source code have been checked in to the homework site._**
 Open [http://74.208.183.29:3000](http://74.208.183.29:3000)
 
 I did not have time to update the documentation from assignment. I had to redesign the code for the list of timer to run in
-sync after one another. With a lot of help from Brandon I was able to complete the redesign and submit the code on time. I
+sync after one another. With a lot of help from Brandon I was able to complete the redesign and submit the code before the Sunday night deadline. I
 also wish I had time to do some of the extra credit but I ran out of time. Assignment 3 was a lot more work than I had
 anticipated.
 
