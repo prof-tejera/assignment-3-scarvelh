@@ -52,15 +52,16 @@ export function StopWatchRoundsTabata() {
     activeTimerIndex,
     workoutperiod
   } = useContext(TimerContext);
-  useEffect(() => {
+
     if (activeTimerIndex === null) {
       activeTimerIndex = 0;
     }
+  useEffect(() => {
     // had some sync issues this fixes it.
     if (repeat > originalrepeat) {
       setRepeat(() => timers[activeTimerIndex].originalrepeat);
     }
-    if ((timers[activeTimerIndex].type === "Tabata" || timers[activeTimerIndex].type === "XY") && repeat === 0) {
+    if (timers[activeTimerIndex].type === "Tabata" && repeat === 0) {
       setRepeat(1);
       repeat = 1;
     }

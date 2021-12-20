@@ -39,42 +39,65 @@ const AnimatedComponent = styled.div`
 ///===================================================CountDown and XY Timer Display=================================================
 export function TimerDisplay() {
   // get information from context storage
-  const {
+  let {
     hours,
     minutes,
     seconds,
     setSeconds,
+    setHours,
+    setMinutes,
     fastforward,
     timers,
     activeTimerIndex
   } = useContext(TimerContext);
   // get display theme from theme context
   const { counterdisplay, setCounterDisplay } = React.useContext(ThemeContext);
+  if(activeTimerIndex === null){
+    activeTimerIndex=0;
+  }
   useEffect(() => {
     if (seconds === undefined) {
       setSeconds(timers[activeTimerIndex].originalseconds);
     }
+
   });
   // convert hour + minutes + seconds
   const calcsecs = convertToSeconds(hours, minutes, seconds);
+  const total_orig_secs = convertToSeconds(timers[activeTimerIndex].originalhours, timers[activeTimerIndex].originalminutes, timers[activeTimerIndex].originalseconds);
+
   // convert the number of seconds to  hour and minutes and seconds for the display
   let convertSeconds = secondsToTime(calcsecs);
-  console.log("seconds");
+
   // set the second minutes and hours if it goes into negative values set the values back to '0'
   useEffect(() => {
     if (
       parseInt(convertSeconds.seconds) < 0 ||
+
       parseInt(convertSeconds.minutes) < 0 ||
       parseInt(convertSeconds.hours) < 0 /*&& !onstart*/
     ) {
       convertSeconds.seconds = 0;
       convertSeconds.minutes = 0;
       convertSeconds.hours = 0;
-      //setSeconds(()=>0);
-      //setMinutes(()=> 0);
-      //setHours(()=>0);
+      setSeconds(() => 0);
+      setMinutes(() => 0);
+      setHours(() => 0);
       setCounterDisplay(() => myColors["eggshell-white"]);
     }
+    if (timers[activeTimerIndex].type === "Stopwatch") {
+      if (calcsecs >= total_orig_secs) {
+        convertSeconds.seconds = 0;
+        convertSeconds.minutes = 0;
+        convertSeconds.hours = 0;
+        setSeconds(() => timers[activeTimerIndex].originalseconds);
+        setMinutes(() => timers[activeTimerIndex].originalminutes);
+        setHours(() => timers[activeTimerIndex].originalhours);
+
+        setCounterDisplay(() => myColors["eggshell-white"]);
+      }
+    }
+
+
     // set values to '0' wired timing issue
     if (seconds !== 0 && hours !== 0 && minutes !== 0) {
       convertSeconds.seconds = 0;
@@ -94,7 +117,14 @@ export function TimerDisplay() {
     hours,
     minutes,
     seconds,
-    setCounterDisplay
+    setCounterDisplay,
+    setHours,
+    setMinutes,
+    setSeconds,
+    timers,
+    activeTimerIndex,
+    calcsecs,
+    total_orig_secs
   ]);
 
   // change the number display to congratulation
@@ -140,23 +170,26 @@ export function TimerDisplayTabata() {
     hours,
     minutes,
     seconds,
-
+    setMinutes,
+    setHours,
     setSeconds,
     fastforward
   } = useContext(TimerContext);
   let { counterdisplay, setCounterDisplay } = React.useContext(ThemeContext);
   useEffect(() => {
-    if (seconds === undefined) {
+    if (seconds === undefined || hours === undefined || minutes === undefined) {
 
       setSeconds(0);
+      setHours(0);
+      setMinutes(0);
     }
   });
-    // get information from theme context
+  // get information from theme context
 
-    // convert hour+minutes+ seconds  to seconds
-    const calcsecs = convertToSeconds(hours, minutes, seconds);
-    // convert seconds in hour minutes seconds  for the stopwatch display.
-    const convertSeconds = secondsToTime(calcsecs);
+  // convert hour+minutes+ seconds  to seconds
+  const calcsecs = convertToSeconds(hours, minutes, seconds);
+  // convert seconds in hour minutes seconds  for the stopwatch display.
+  const convertSeconds = secondsToTime(calcsecs);
   useEffect(() => {
     if (
       convertSeconds.seconds < 0 ||
@@ -166,6 +199,9 @@ export function TimerDisplayTabata() {
       convertSeconds.seconds = 0;
       convertSeconds.minutes = 0;
       convertSeconds.hours = 0;
+      setSeconds(() => 0);
+      setMinutes(() => 0);
+      setHours(() => 0);
       setCounterDisplay(() => myColors["eggshell-white"]);
     }
     if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
@@ -173,14 +209,18 @@ export function TimerDisplayTabata() {
       name.style.backgroundColor = counterdisplay;
     }
 
-  },[convertSeconds.hours,
+  }, [convertSeconds.hours,
     convertSeconds.minutes,
     convertSeconds.seconds,
     counterdisplay,
     hours,
     minutes,
     seconds,
-    setCounterDisplay]);
+    setCounterDisplay,
+    setMinutes,
+    setSeconds,
+    setHours
+  ]);
 
 
   // fast forward display congratulation message
