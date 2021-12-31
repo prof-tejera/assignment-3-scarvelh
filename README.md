@@ -67,3 +67,22 @@ For other ways to deploy see https://github.com/prof-tejera/react-deployment-cod
 ## Bonus
 
 - Add full test coverage using Cypress.io. This will require that you get your tests running locally and then add a new Github action that will run the tests every time you commit to GitHub. Note that the Cypress setup is not part of this project and must be configured by you (max 8 points)
+## ------------------------Added By Scarvel Harris-----------------------------------------
+I have not moved the code to my test server. I will move the code tomorrow.
+**_Please Note: The stopwatch applications are running in a docker environment on one of my test servers.
+Source code have been checked in to the homework site._**
+Open [http://74.208.183.29:3000](http://74.208.183.29:3000)
+
+I did not have time to update the documentation from assignment. I had to redesign the code for the list of timer to run in
+sync after one another. With a lot of help from Brandon I was able to complete the redesign and submit the code before the Sunday night deadline. I
+also wish I had time to do some of the extra credit but I ran out of time. Assignment 3 was a lot more work than I had
+anticipated.
+
+All in all the program seem to be working. I had the bug where the when the I choose the stopwatch timer
+The program works for all different timers. There is a couple of places where the update happens after the process begins. I could not figure out some of the timing issues. I don’t seem to be able to fix this problem.
+
+When the program starts, there are three links at the top of the program
+Timer - List the timers that you have chosen. If no timers are chosen, only the stopwatch button is listed.
+Documentation - This is still the same as assignment 2; I did not have time to add any new documentation.
+NEW LINK(Add/Configuration) - This is where you add new timers. Click dropdown ‘Stopwatch Configuration’ when you click on the stopwatch, the body of the stopwatch comes up, and you configure the times. To add the stopwatch, you click on the add button, and the list of timers you have selected appears at the bottom below the button.
+To delete a stopwatch, there is a button next to each timer ‘Delete’ For some reason, sometimes it deletes right away, and sometimes once you click away and go back, it’s gone.

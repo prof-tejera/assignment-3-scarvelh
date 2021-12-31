@@ -1,0 +1,42 @@
+{
+  "name": "assignment-2",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "prop-type": "^0.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "^3.4.4",
+    "start": "^5.1.0",
+    "styled-components": "^5.3.3",
+    "web-vitals": "^1.0.1",
+    "yarn": "^1.22.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@use-it/interval": "^1.0.0"
+  }
+}
